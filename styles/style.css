@@ -1,0 +1,52 @@
+body{
+	overflow: hidden;
+	background-image: url("../assets/pahawang.jpg")
+}
+
+.menu{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0px;
+	left: -150%;
+	z-index: 0;
+}
+
+#header{
+	z-index: 99;
+}
+
+.menu--on{
+	left: 0%;
+	transition: all 300ms ease-in-out;
+	z-index: 1;
+}
+
+.menu--off{
+	left: 150%;
+	transition: all 600ms ease-in-out;
+}
+
+.navbar-brand{
+	color: white;
+}
+
+.home{
+	
+}
+
+.campaign{
+	
+}
+
+.peringkat{
+	
+}
+
+.reg{
+	
+}
+
+.cafe{
+	
+}
