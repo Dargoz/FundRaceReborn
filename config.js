@@ -38,11 +38,12 @@ function nextPage(){
 		}
 	}
 	NxtIndex = CurrIndex+1;
+	NxtIndex %= items.length;	
 
 	var curr = document.getElementsByClassName(currMenu)[0];
-	var nxt = document.getElementsByClassName(names[(CurrIndex+1)%items.length])[0];
+	var nxt = document.getElementsByClassName(names[NxtIndex])[0];
 
-	doChange(curr, nxt, CurrIndex, NxtIndex, names[(CurrIndex+1)%items.length]);
+	doChange(curr, nxt, CurrIndex, NxtIndex, names[NxtIndex]);
 }
 
 function prevPage(){
