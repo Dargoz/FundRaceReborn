@@ -5,12 +5,11 @@ var items = [];
 
 function init(){
 	items = document.getElementsByClassName('nav-link');
-
+	
 	for(var i = 0; i<items.length; i++){
 		names[i] = items[i].name;
 		console.log(names[i]);
 	}
-
 
 	items[0].addEventListener('click', function(event){
 		changeMenu(names[0]);
@@ -27,6 +26,38 @@ function init(){
 	items[4].addEventListener('click', function(event){
 		changeMenu(names[4]);
 	});
+}
+
+function nextPage(){
+	var NxtIndex = 0;
+	var CurrIndex = 0;
+	for (var i = 0; i<names.length; i++){
+		if(currMenu == names[i]) {
+			CurrIndex = i;
+		}
+	}
+	NxtIndex = CurrIndex+1;
+
+	var curr = document.getElementsByClassName(currMenu)[0];
+	var nxt = document.getElementsByClassName(names[(CurrIndex+1)%items.length])[0];
+
+	doChange(curr, nxt, CurrIndex, NxtIndex, names[(CurrIndex+1)%items.length]);
+}
+
+function prevPage(){
+	var NxtIndex = 0;
+	var CurrIndex = 0;
+	for (var i = 0; i<names.length; i++){
+		if(currMenu == names[i]) {
+			CurrIndex = i;
+		}
+	}
+	NxtIndex = CurrIndex+1;
+
+	var curr = document.getElementsByClassName(currMenu)[0];
+	var nxt = document.getElementsByClassName(names[(CurrIndex-1)%items.length])[0];
+
+	doChange(curr, nxt, CurrIndex, NxtIndex, names[(CurrIndex-1)%items.length]);
 }
 
 
@@ -50,6 +81,10 @@ function changeMenu(menuName){
 	var curr = document.getElementsByClassName(currMenu)[0];
 	var nxt = document.getElementsByClassName(menuName)[0];
 
+	doChange(curr, nxt, CurrIndex, NxtIndex, menuName);
+}
+
+function doChange(curr, nxt, CurrIndex, NxtIndex, menuName){
 	curr.classList.toggle('menu--off');
 	nxt.classList.toggle('menu--on');
 	curr.classList.remove('menu--on');

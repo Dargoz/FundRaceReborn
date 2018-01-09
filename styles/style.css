@@ -1,6 +1,6 @@
 body{
 	overflow: hidden;
-	background-image: url("../assets/pahawang.jpg")
+	background: url("../assets/pahawang.jpg") no-repeat fixed center;
 }
 
 .menu{
@@ -27,26 +27,14 @@ body{
 	transition: all 600ms ease-in-out;
 }
 
-.navbar-brand{
+.navbar-brand, .page-header{
 	color: white;
 }
 
-.home{
-	
+.carousel-control-prev, .carousel-control-next{
+	z-index: 99;
 }
 
-.campaign{
-	
-}
-
-.peringkat{
-	
-}
-
-.reg{
-	
-}
-
-.cafe{
-	
+label{
+	color: white;
 }
