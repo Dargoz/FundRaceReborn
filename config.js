@@ -54,7 +54,7 @@ function prevPage(){
 		}
 	}
 	NxtIndex = CurrIndex-1;
-	NxtIndex %= items.length;	
+	if (NxtIndex < 0) NxtIndex += items.length;
 
 	var curr = document.getElementsByClassName(currMenu)[0];
 	var nxt = document.getElementsByClassName(names[NxtIndex])[0];
