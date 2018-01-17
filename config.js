@@ -1,11 +1,15 @@
-var currMenu = "home";
 
+var currMenu = "home";
 var names = [];
 var items = [];
 
+
 function init(){
 	items = document.getElementsByClassName('nav-link');
-	
+
+	// Leave out Storagef
+	//require("firebase/storage");
+
 	for(var i = 0; i<items.length; i++){
 		names[i] = items[i].name;
 		console.log(names[i]);
