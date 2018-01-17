@@ -1,4 +1,4 @@
-(function(){
+
 var config = {
 	apiKey: "AIzaSyD_0MubOduGW0MGGtVn2HMeBN0e4vmc2vU",
 	authDomain: "fundrace-46c75.firebaseapp.com",
@@ -8,8 +8,6 @@ var config = {
 	messagingSenderId: "505786262262"
 };
 firebase.initializeApp(config);
-
-var database = firebase.database().ref();
 
 firebase.auth().signInAnonymously().catch(function(error) {
 	// Handle Errors here.
@@ -32,16 +30,36 @@ firebase.auth().signInAnonymously().catch(function(error) {
   });
  // console.log(uid);
 
-
-
 //Get element
 const preObject = document.getElementById('users');
 
 //Create-References
-const dbRefOject = firebase.database().ref().child('users');
+const dbRefOject = firebase.database().ref().child('users').child('user1');
+
 
 //Sync object changes
-dbRefOject.on('value', snap => console.log(snap.val()));
+dbRefOject.on('child_added', snap => console.log(snap.val()));
 
 
-}());
+
+
+function writeUserData(userId, userName, email, pass) {
+  firebase.database().ref('users/' + userId).set({
+		username: userName,
+		email: email,
+    password: pass
+  });
+}
+
+function validate(){
+	console.log("Jalan");
+	var tempUserName = document.getElementById('input-username').value;
+	var tempEmail = document.getElementById('input-email').value;
+	var tempPass = document.getElementById('input-password').value;
+	console.log(tempUserName);
+	console.log(tempEmail);
+	console.log(tempPass);
+
+	//writeUserData("user3",tempUserName,"coba");
+}
+
