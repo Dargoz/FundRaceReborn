@@ -1,27 +1,15 @@
-var currMenu = "home";
 
+var currMenu = "home";
 var names = [];
 var items = [];
-var firebase = require("firebase/app");
-require("firebase/auth");
-require("firebase/database");
-
-// Leave out Storage
-//require("firebase/storage");
-var database = firebase.database();
-
-var config = {
-	apiKey: "apiKey",
-    authDomain: "fundrace-46c75.firebaseapp.com",
-    databaseURL: "https://fundrace-46c75.firebaseio.com",
-    storageBucket: "fundrace-46c75.appspot.com"
-};
-firebase.initializeApp(config);
 
 
 function init(){
 	items = document.getElementsByClassName('nav-link');
-	
+
+	// Leave out Storagef
+	//require("firebase/storage");
+
 	for(var i = 0; i<items.length; i++){
 		names[i] = items[i].name;
 		console.log(names[i]);
