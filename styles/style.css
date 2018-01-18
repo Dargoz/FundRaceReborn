@@ -16,6 +16,14 @@ a{
 	z-index: 0;
 }
 
+.ready--prev{
+	left: 150%;
+}
+
+.ready--next{
+	left: -150%;
+}
+
 #header{
 	z-index: 99;
 }
@@ -26,8 +34,13 @@ a{
 	z-index: 1;
 }
 
-.menu--off{
+.menu--off--next{
 	left: 150%;
+	transition: all 600ms ease-in-out;
+}
+
+.menu--off--prev{
+	left: -150%;
 	transition: all 600ms ease-in-out;
 }
 

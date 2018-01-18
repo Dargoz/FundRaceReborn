@@ -46,7 +46,7 @@ function nextPage(){
 	var curr = document.getElementsByClassName(currMenu)[0];
 	var nxt = document.getElementsByClassName(names[NxtIndex])[0];
 
-	doChange(curr, nxt, CurrIndex, NxtIndex, names[NxtIndex]);
+	doChange(curr, nxt, CurrIndex, NxtIndex, names[NxtIndex], 'next');
 }
 
 function prevPage(){
@@ -63,7 +63,7 @@ function prevPage(){
 	var curr = document.getElementsByClassName(currMenu)[0];
 	var nxt = document.getElementsByClassName(names[NxtIndex])[0];
 
-	doChange(curr, nxt, CurrIndex, NxtIndex, names[NxtIndex]);
+	doChange(curr, nxt, CurrIndex, NxtIndex, names[NxtIndex], 'prev');
 }
 
 
@@ -87,18 +87,22 @@ function changeMenu(menuName){
 	var curr = document.getElementsByClassName(currMenu)[0];
 	var nxt = document.getElementsByClassName(menuName)[0];
 
-	doChange(curr, nxt, CurrIndex, NxtIndex, menuName);
+	doChange(curr, nxt, CurrIndex, NxtIndex, menuName, 'next');
 }
 
-function doChange(curr, nxt, CurrIndex, NxtIndex, menuName){
-	curr.classList.toggle('menu--off');
-	nxt.classList.toggle('menu--on');
-	curr.classList.remove('menu--on');
+function doChange(curr, nxt, CurrIndex, NxtIndex, menuName, to){
+	nxt.classList.toggle('ready--' + to);
+	curr.classList.toggle('menu--off--' + to);
+	window.setTimeout(function(){
+		nxt.classList.toggle('ready--' + to);
+		nxt.classList.toggle('menu--on');	
+	}, 100);
+	curr.classList.toggle('menu--on');
 	items[CurrIndex].classList.remove('active');
 	items[NxtIndex].classList.toggle('active');
 
 	window.setTimeout(function(){
-		curr.classList.remove('menu--off');
+		curr.classList.toggle('menu--off--' + to);
 	}, 500);
 
 	currMenu = menuName;
