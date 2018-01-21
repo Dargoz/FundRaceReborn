@@ -72,16 +72,16 @@
 	<div class="login menu">
 		<div id="container-login">
 			<h2 class="page-header">Login</h2>
-			<form (submit)="onLoginSubmit()">
+			<form method="get" name="form">
 				<div class="form-group">
 					<label>Username</label>
-					<input type="text" class="form-control" [(ngModel)]="username" name="username">
+					<input type="text" class="form-control" id="login-username">
 				</div>
 				<div class="form-group">
 					<label>Password</label>
-					<input type="password" class="form-control" [(ngModel)]="password" name="password">
+					<input type="password" class="form-control" id="login-pass">
 				</div>
-				<input type="submit" class="btn btn-primary" value="Login">
+				<button id="btn-login" class="btn btn-action">Log In</button>
 			</form>
 	</div>
 	</div>
