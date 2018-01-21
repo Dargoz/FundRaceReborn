@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/Dargoz/FundRaceReborn#readme",
   "dependencies": {
-    "firebase": "^4.8.2"
+    "firebase": "^4.9.0"
   }
 }
