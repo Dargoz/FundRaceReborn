@@ -3,10 +3,6 @@ body{
 	background: url("../assets/pahawang.jpg") no-repeat fixed center;
 }
 
-a{
-	cursor: active;
-}
-
 p{
 	margin-bottom: 0;
 }
@@ -46,10 +42,6 @@ p{
 .menu--off--next{
 	left: -150%;
 	transition: all 600ms ease-in-out;
-}
-
-.navbar-brand, .page-header{
-	color: white;
 }
 
 .carousel-control-prev, .carousel-control-next{

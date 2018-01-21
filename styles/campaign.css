@@ -1,5 +1,6 @@
 .campaign{
 	display: flex;
+	overflow: hidden;
 }
 
 .left, .right{
@@ -22,6 +23,19 @@
 .camp-nav{
 	height: 20pt;
 	width: 100%;
+	text-align: center;
+}
+
+.campaign-placeholder{
+	position: relative;
+}
+
+.hadiah{
+	margin-top: 15pt;
+}
+
+.row{
+	margin-top: 15pt;
 }
 
 .right{
@@ -59,7 +73,6 @@
 
 .main-desc{
 	margin-top: 7pt;
-	text-align: center;
 	font-size: 15pt;
 }
 
