@@ -13,12 +13,14 @@
 }
 
 .left{
-	width: 70%;
+	width: 58%;
+	margin-left: 10%;
 }
 
 .title{
 	margin: 10pt;
 }
+
 
 .camp-nav{
 	height: 20pt;
@@ -27,7 +29,25 @@
 }
 
 .campaign-placeholder{
+	height: 100%;
 	position: relative;
+}
+
+.tentang-img{
+	margin-top: 15pt;
+	width: 70%;
+	margin-left: 15%;
+}
+
+.tentang--isi{
+	overflow-y: scroll;
+	height: 80%;
+}
+
+.table-hadiah{
+	width: 100%;
+	height: 70%;
+	overflow-y: scroll;
 }
 
 .hadiah{
@@ -36,6 +56,7 @@
 
 .row{
 	margin-top: 15pt;
+	width: 100%;
 }
 
 .right{
