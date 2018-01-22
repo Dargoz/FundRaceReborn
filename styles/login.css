@@ -78,3 +78,8 @@ input[type="text"],input[type="password"]{
 form {
     margin-top: 50px;
 }
+
+.login-link {
+    margin-left: 2em;
+    padding-top: 1em;
+}
