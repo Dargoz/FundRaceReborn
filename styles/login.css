@@ -1,8 +1,8 @@
 #container-login {
     height: 50%;
-    margin-top: 90px;
-    margin-left: 15em;
-    margin-right: 15em;
+    margin-top: 150px;
+    margin-left: 25em;
+    margin-right: 25em;
     margin-bottom: 2em;
     background-color: rgba(0, 0, 0, 0.5);
 }
@@ -10,23 +10,71 @@
 .form-group {
     margin-left: 2em;
     margin-right: 2em;
+    
 }
 
 input[type=submit] {
     margin-top: 1em;
     margin-left: 2em;
     margin-right: 2em;
+    float: right;
 }
 
 #anonymBtn{
     margin-left: 0;
+    margin-right: 0;
 }
 
 #loginBtn{
-    margin-right: 0;
+    margin-right: 2em;
+    margin-left: 0.5em;
 }
 
 .page-header {
     text-align: center;
+    color: white;
+    padding-top: 10px;
 }
 
+input[type="text"],input[type="password"]{
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.design-form {
+    display: flex;
+    width: 100%;
+}
+
+.icon {
+    width: 7%;
+    border:solid #ced4da;
+    border-width: 1px 0 1px 1px;
+    border-radius: .25rem 0 0 .25rem;
+}
+
+.input-text {
+    width: 93%;
+}
+
+.form-control {
+    border-radius: 0 .25rem .25rem 0;
+}
+
+.fa, .material-icons {
+    width: 100%;
+    height: 100%;
+    padding-top: 2px;
+    text-align: center
+}
+
+#full-name-form{
+    padding-top: 5px;
+}
+
+.material-icons{
+    padding-top: 5px;
+}
+
+form {
+    margin-top: 50px;
+}
