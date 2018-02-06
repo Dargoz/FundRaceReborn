@@ -1,0 +1,108 @@
+.header-cafe{
+    height: 15%;
+    width: 80%;
+    position: relative;
+    padding-left: 5%;
+    padding-top: 1%;
+    margin: auto;
+    margin-top: 5%;
+}
+
+.center{
+    height: 65%;
+    width: 80%;
+    padding-left: 0;
+    display: flex;
+    overflow: hidden;
+}
+
+.leaderboard, .right-side{
+    height: 100%;
+    width: 50%;
+    position: relative;
+    margin-top: 1%;
+}
+
+.leaderboard, .chat{
+    padding-top: 2%;
+    padding-left: 1%;
+}
+
+.leaderboard{
+    text-align: center;
+    overflow-y: scroll;
+}
+
+.table-content{
+    margin-left: 4%;
+    width: 90%;
+    height: 25%;
+    display: flex;
+    border-bottom: 1px solid;
+    border-color: white;
+}
+
+.no{
+    margin-left: 5%;
+}
+
+.no, .jml-donasi, .team-name{
+    margin-top: 8%;
+    text-align: center;
+}
+
+.no{
+    margin-top: 4%;
+}
+
+.no, .jml-donasi{
+    width: 25%;
+}
+
+.team-name{
+    width: 40%;
+}
+
+.right-side{
+    left: 1.4%;
+}
+
+.chat{    
+    height: 65%;
+    margin-left: 0;
+}
+
+.prize{ 
+    position: relative;   
+    top: 3%;
+    height: 30%;
+}
+
+.prize-header{
+    padding-top: 2%;
+    padding-left: 4%;
+}
+
+.list-prize{
+    margin-top: 2%;
+    padding-left: 5%;
+    height: 54%;
+    width: 100%;
+    display: flex;
+}
+
+.prize-content{
+    display: flex;
+    width: 40%;
+}
+
+.prize-thumb{
+    background-color: red;
+    border-radius: 50%;
+    height: 70px;
+    width: 70px;
+}
+
+.prize-desc{
+    margin: auto;
+}
