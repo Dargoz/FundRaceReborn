@@ -17,12 +17,41 @@
 html, body {
   font-family: 'Roboto', 'Helvetica', sans-serif;
 }
+
+header{
+  height: 20%;
+}
+
+#header-content{
+  display: flex;
+  height: 100%;
+}
+
+#inner-header-content {
+  width: 50%;
+}
+
+#chit-chat{
+  width: 90%;
+  height: 90%;
+  margin: auto;
+
+}
+
+#chat-icon{
+  width: inherit;
+}
 main, #messages-card {
   height: 100%;
+  width: 100%;
   padding-bottom: 0;
 }
+
+main{
+  height: 80%;
+}
 #messages-card-container {
-  height: calc(100% - 150px);
+  height: calc(100% - 60px);
   padding-bottom: 0;
 }
 #messages-card {
@@ -53,8 +82,9 @@ main, #messages-card {
 }
 #messages {
   overflow-y: auto;
-  margin-bottom: 10px;
-  height: calc(100% - 80px);
+  /* margin-bottom: 10px; */
+  height: calc(100% - 20px);
+  color: black;
 }
 #message-filler {
   flex-grow: 1;
@@ -104,19 +134,20 @@ main, #messages-card {
   flex-direction: row;
   width: calc(100% - 48px);
   float: left;
+  margin-top: 45px;
 }
 #image-form {
   display: flex;
   flex-direction: row;
-  width: 48px;
+  height: 35px;
   float: right;
+  margin-top: 45px;
 }
 #message-form .mdl-textfield {
   width: calc(100% - 100px);
 }
 #message-form button, #image-form button {
   width: 100px;
-  margin: 15px 0 0 10px;
 }
 .mdl-card {
   min-height: 0;
@@ -126,15 +157,15 @@ main, #messages-card {
   justify-content: space-between;
 }
 #user-container {
-  position: absolute;
+  /* position: absolute; */
   display: flex;
   flex-direction: row;
-  top: 22px;
-  width: 100%;
+  /* top: 22px; */
+  width: 50%;
   right: 0;
   padding-left: 10px;
   justify-content: flex-end;
-  padding-right: 10px;
+  /* padding-right: 10px; */
 }
 #user-container #user-pic {
   top: -3px;
@@ -153,6 +184,7 @@ main, #messages-card {
   padding-right: 10px;
   padding-left: 20px;
 }
+
 #image-form #submitImage {
   width: auto;
   padding: 0 6px 0 1px;
@@ -179,6 +211,7 @@ main, #messages-card {
     height: 38px;
     padding-top: 3px;
     padding-right: 2px;
+    
   }
   #user-container #user-pic {
     top: 2px;
