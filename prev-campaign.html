@@ -1,0 +1,112 @@
+<head>
+	<title>FundRace</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="styles/boot.css">
+	<link rel="stylesheet" type="text/css" href="styles/style.css">
+	<link rel="stylesheet" type="text/css" href="styles/navbar.css">
+	<link rel="stylesheet" type="text/css" href="styles/footer.css">
+	<link rel="stylesheet" type="text/css" href="styles/prev-campaign.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+
+	<!--<script type="text/javascript" src="require.js"></script>
+	-->
+
+</head>
+<body>
+	<nav class="navbar navbar-dark navbar-expand-lg" id="navbar">
+	  <a class="navbar-brand" href="#">FundRace</a>
+	  <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+	    <ul class="navbar-nav justify-content-end">
+	      <li class="nav-item">
+	        <a class="nav-link" name="home">Home</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" name="login">Login</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" name="reg">Register</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" name="campaign">Campaign</a>
+	      </li> 
+	      <li class="nav-item">
+	        <a class="nav-link" name="cafe">FundRacer's Cafe</a>
+	      </li>
+	    </ul>
+	  </div>
+    </nav>
+
+    <div class="prev-campaign menu menu--on">
+        <div class="header">
+            <h1>Campaign Terdahulu</h1>
+            <p>Berikut adalah beberapa campaign yang difasilitasi oleh FundRace berikut hasil dari campaign tersebut</p>
+            <p>2017 | 2018</p>
+        </div>
+        <div class="content shade">
+            <div class="flex content-top">
+                <div class="wrap">
+                    <div class="title">
+                        <h1>Semangkuk untuk Malang</h1>
+                    </div>
+                    <div class="event-info">
+                        <p class="cyan">Periode: 12/12/2017 ~ 24/12/2017</p>
+                        <p class="cyan">Tempat: Malang, Jawa Timur</p>
+                        <p class="cyan">Total Donasi Diperoleh:  Rp. 15000.000,00</p>
+                        <p class="yellow">FundRace dimenangkan oleh: TeamFT1</p>
+                    </div>
+                </div>
+                <div class="img-thumb"></div>
+            </div>
+            <div class="event-desc">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae repellendus recusandae temporibus dignissimos sapiente architecto veritatis fugiat accusantium eaque pariatur consequuntur incidunt, illo velit perferendis enim voluptatem ipsa numquam laboriosam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo, recusandae mollitia. Nostrum aut magni optio accusantium laborum autem possimus esse, et, assumenda nobis voluptatum dignissimos. Tenetur, dolorem assumenda? Sint, eaque. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi iusto, nostrum necessitatibus optio tenetur eius illum pariatur, numquam omnis rerum quae cum debitis, impedit veritatis suscipit voluptatum! Corporis, voluptates dolore. Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore necessitatibus repellendus vero sint perferendis. Quae, dolor! Excepturi, non, dignissimos cupiditate vitae fugiat velit quae nobis veritatis cumque, atque ea dicta.</p>
+            </div>
+        </div>
+    </div>
+    
+	<!-- FOOTER -->
+	<nav class="navbar navbar-default" id="footer">
+		<div class="container-fluid">
+			<div class="navbar-header">
+
+				<a class="navbar-brand" class="link-color">K3 ARMOUR PPTI 4 BCA © 2017-2018</a>
+			</div>
+
+			<ul class="nav navbar-nav navbar-right">
+				<div>
+					<a class="link-color">Hubungi kami &nbsp;</a>
+					<b> | </b>
+					<a class="link-color">&nbsp; Tentang kami &nbsp;</a>
+					<b> | </b>
+					<a class="link-color">&nbsp; Sosial media &nbsp;</a>
+					<b> | </b>
+					<a class="link-color">&nbsp; Ketentuan penggunaan</a>
+				</div>
+			</ul>
+
+		</div>
+	</nav>
+
+	<!-- 	<div class="page-control">
+		<div class="page-control-prev">
+			<img src="assets/arrow-left.png">
+		</div>
+		<div class="page-control-next">
+			<img src="assets/arrow-right.png">
+		</div>
+	</div> -->
+
+	<div class="carousel-control-prev">
+		<button class="carousel-control-prev-icon" aria-hidden="true" onclick="prevPage()">
+			</span>
+			<span class="sr-only">Previous</span>
+	</div>
+	<div class="carousel-control-next">
+		<button class="carousel-control-next-icon control" aria-hidden="true" onclick="nextPage()">
+			</span>
+			<span class="sr-only">Next</span>
+	</div>
+</body>
+</html>

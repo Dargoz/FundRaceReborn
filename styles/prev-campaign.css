@@ -1,0 +1,38 @@
+body{
+    background-image: url("../assets/img-info.jpg");
+}
+
+.prev-campaign{
+    height: 100%;
+    width: 100%;
+}
+
+.header{
+    margin-top: 5%;
+    text-align: center;
+    color: white;
+}
+
+.content{
+    padding-top: 2%;
+    padding-left: 2%;
+    padding-right: 2%;
+    margin: auto;
+    width: 70%;
+    height: 65%;
+}
+
+.wrap{
+    width: 70%;
+}
+
+.content-top{
+    width: 100%;
+    margin-bottom: 5%;
+}
+
+.img-thumb{
+    width: 30%;
+    background: url("../assets/Armour.jpg") center no-repeat;
+    background-size: contain;
+}

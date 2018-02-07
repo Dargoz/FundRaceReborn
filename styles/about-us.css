@@ -1,0 +1,32 @@
+body{
+    background-image: url("../assets/img-info.jpg");
+}
+
+.about-us{
+    height: 100%;
+    width: 100%;
+    margin-top: 8%;
+    margin-left: 10%;
+    color: white;
+}
+
+.content{
+    height: 65%;
+    width: 80%;
+}
+
+.about-us-text{
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 2%;
+    width: 60%;
+    height: 100%;
+}
+
+.img-thumb{
+    height: 100%;
+    width: 40%;
+    background: url("../assets/Armour.jpg") center no-repeat;
+    background-size: contain;
+    margin: auto;
+}
