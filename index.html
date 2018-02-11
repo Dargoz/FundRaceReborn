@@ -108,7 +108,7 @@
 					</div>
 					
 				</div>
-				<!-- <button id="btn-login" class="btn btn-action">Log In</button> -->
+				<!-- <button id="btn-login" class="btn btn-action" onclick="loginAuth()">Log In</button> -->
 				<input type="submit" class="btn btn-primary" value="Masuk" id="loginBtn">
 				<!-- <input type="submit" class="btn btn-secondary" value="Sign In Anonymously" id="anonymBtn"> -->
 				<p class="login-link" style="color:white">belum tergabung sebagai FundRacer? <a href="" style="color:yellow">daftar sekarang.</a></p>
@@ -126,7 +126,7 @@
 							<i class="fa fa-address-card" style="font-size:20px;color:white" id="full-name-form"></i>
 						</div>
 						<div class="input-text">
-							<input type="text" [(ngModel)]="name" name="name" class="form-control" placeholder="Full Name">
+							<input type="text" class="form-control" id="input-name" placeholder="Full Name">
 						</div>
 					</div>
 
@@ -312,7 +312,7 @@
 						</div>
 						<div class="table-content">
 							<div class="no"><h1>1</h1></div>
-							<div class="team-name">Boedihardja</div>
+							<div class="team-name" id="apa">Boedihardja</div>
 							<div class="jml-donasi">10,9K</div>
 						</div>
 						<div class="table-content">

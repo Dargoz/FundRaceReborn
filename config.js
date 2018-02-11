@@ -238,6 +238,8 @@ FriendlyChat.prototype.saveImageMessage = function(event) {
   }
 };
 
+
+
 // Signs-in Friendly Chat.
 FriendlyChat.prototype.signIn = function() {
   // Sign in Firebase using popup auth and Google as the identity provider.

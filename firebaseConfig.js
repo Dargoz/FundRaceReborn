@@ -1,18 +1,20 @@
 
-  var config = {
-    apiKey: "AIzaSyD_0MubOduGW0MGGtVn2HMeBN0e4vmc2vU",
-    authDomain: "fundrace-46c75.firebaseapp.com",
-    databaseURL: "https://fundrace-46c75.firebaseio.com",
-    projectId: "fundrace-46c75",
-    storageBucket: "fundrace-46c75.appspot.com",
-    messagingSenderId: "505786262262"
-  };
-  firebase.initializeApp(config);
+
+
+var config = {
+	apiKey: "AIzaSyD_0MubOduGW0MGGtVn2HMeBN0e4vmc2vU",
+	authDomain: "fundrace-46c75.firebaseapp.com",
+	databaseURL: "https://fundrace-46c75.firebaseio.com",
+	projectId: "fundrace-46c75",
+	storageBucket: "fundrace-46c75.appspot.com",
+	messagingSenderId: "505786262262"
+};
+firebase.initializeApp(config);
 
 
 
 //Get element
-const preObject = document.getElementById('users'); 
+const preObject = document.getElementById('users');
 const btnLogin = document.getElementById('btn-login');
 const getUsername = document.getElementById('login-username');
 const getPass = document.getElementById('login-pass');
@@ -24,47 +26,89 @@ const dbRefOject = firebase.database().ref().child('users');
 //Sync object changes
 
 const messaging = firebase.messaging();
-var experiment ="";
+var experiment = "";
 var userList = [];
 var usernameList = [];
+var nameList = [];
 var emailList = [];
+var userLvl = [];
+var userTier = [];
+var userExp = [];
 var passwordList = [];
+var userDonationTotal = [];
+var userPoint = [];
+
 
 messaging.requestPermission()
-.then(function() {
-  console.log('Notification permission granted.');
-  // TODO(developer): Retrieve an Instance ID token for use with FCM.
-  // ...
-})
-.catch(function(err) {
-  console.log('Unable to get permission to notify.', err);
-});
-
-  // Get Instance ID token. Initially this makes a network call, once retrieved
-  // subsequent calls to getToken will return from cache.
-
-
-
-firebase.database().ref().child('users').once('value', function(snapshot) {
-  snapshot.forEach(function(childSnapshot) {
-		var childKey = childSnapshot.key;
-    // var childData = childSnapshot.val();
-		firebase.database().ref('/users/' + childKey).once('value', function(snapshot){
-			var readUsername = snapshot.child('username').val();
-			var readPass = snapshot.child('password').val();
-			this.usernameList.push(readUsername);
-			this.passwordList.push(readPass);
-			
-	 });
+	.then(function () {
+		console.log('Notification permission granted.');
+		// TODO(developer): Retrieve an Instance ID token for use with FCM.
+		// ...
+	})
+	.catch(function (err) {
+		console.log('Unable to get permission to notify.', err);
 	});
-	console.log("total user: " + usernameList.length);
-});
 
-function writeUserData(userId, userName, pass) {
-  firebase.database().ref('users/' + userId).set({
+// Get Instance ID token. Initially this makes a network call, once retrieved
+// subsequent calls to getToken will return from cache.
+
+
+function readData(userEmail){
+	firebase.database().ref().child('users').once('value', function (snapshot) {
+		snapshot.forEach(function (childSnapshot) {
+			var childKey = childSnapshot.key;
+			this.userList.push(childKey);
+			// var childData = childSnapshot.val();
+			firebase.database().ref('/users/' + childKey).once('value', function (snapshot) {
+				var readUsername = snapshot.child('username').val();
+				var readName = snapshot.child('name').val();
+				var readPass = snapshot.child('password').val();
+				var readLvl = snapshot.child('level').val();
+				var readEmail = snapshot.child('email').val();
+				var readTier = snapshot.child('tier').val();
+				var readEXP = snapshot.child('exp').val();
+				var readPoint = snapshot.child('point').val();
+				var readDonationTotal = snapshot.child('donationTotal').val();
+				if(userEmail == readEmail){
+					//alert("Ada Cuuuii");
+					document.getElementById("apa").innerHTML = readName;
+				}
+				// this.usernameList.push(readUsername);
+				// this.nameList.push(readName);
+				// this.passwordList.push(readPass);
+				// this.emailList.push(readEmail);
+				// this.userLvl.push(readLvl);
+				// this.userTier.push(readTier);
+				// this.userExp.push(readEXP);
+				// this.userDonationTotal.push(readDonationTotal);
+				// this.userPoint.push(readPoint);
+			});	
+		});
+	});
+
+}
+
+
+function writeUserData(userId, userName, pass, name, email) {
+	firebase.database().ref('users/' + userId).set({
 		username: userName,
-    password: pass
-  });
+		password: pass,
+		name: name,
+		email: email,
+		level: 1,
+		exp: 0,
+		point: 0,
+		tier: "Bronze",
+		teamID: "null",
+		donationTotal: 0
+
+	});
+}
+
+function updateUser(userId) {
+	firebase.database().ref('users/' + userId).update({
+		EXP: 100
+	});
 }
 
 // firebase.auth().signInAnonymously().catch(function(error) {
@@ -73,101 +117,97 @@ function writeUserData(userId, userName, pass) {
 // 	var errorMessage = error.message;
 // 	// ...
 // 	});
-//firebase.auth().signInWithEmailAndPassword("davinreinaldogozali@gmail.com","Tsuchikage123");
-//console.log("usernya :" + firebase.auth().currentUser.uid);
-
-// const promise = firebase.auth().signInWithEmailAndPassword("davinreinaldogozali@gmail.com","Tsuchikage123");
-// console.log(promise);
-//auth.signOut();
-
-// btnLogin.addEventListener('click', e => {
-// 	const email = getUsername.value;
-// 	const pass = getPass.value;
-
-// 	console.log(email);
-// 	console.log(pass);
-// 	//Sign in
-// 	result = auth.signInWithEmailAndPassword(email, pass);
-
-// 	// const promise = auth.signInWithEmailAndPassword(email,pass);
-// 	// promise.catch(e => console.log(e.message));
-// });
 
 
-// auth.onAuthStateChanged(user => {
-	
-// 	if (user) {
-// 		console.log(user.uid);
-// 	} else {
-// 		console.log("not logged in");
-// 	}
-// });
+firebase.auth().onAuthStateChanged(function (user) {
+	if (user) {
+		// User is signed in.
+		var check = 0;
+		console.log("user masuk boss");
+		var id = user.uid;
+		var userIndex;
+		console.log(id);
+		readData(user.email);
+		// console.log("total user: " + userList.length);
+		// for(var i=0; i< userList.length ; i++){
+		// 	if (emailList[i] == user.email){
+		// 		check = 1;
+		// 		userIndex = i;
+		// 		console.log("DB : " + emailList[i]);
+		// 		console.log("user : " + user.email);
+		// 	}
+		// }
+
+		// if(check == 1) {
+		// 	document.getElementById("apa").innerHTML = nameList[userIndex];
+		// }
+		// else{
+		// 	alert("error");
+		// }
+		
+	} else {
+		// No user is signed in.
+		console.log("user ga masuk bos");
+	}
+});
 
 
-function validate(){
+
+function validate() {
 
 	console.log("Jalan");
+	var tempName = document.getElementById('input-name').value;
 	var tempUserName = document.getElementById('input-username').value;
 	var tempEmail = document.getElementById('input-email').value;
 	var tempPass = document.getElementById('input-password').value;
 	console.log(tempUserName);
 	console.log(tempEmail);
 	console.log(tempPass);
-	// firebase.auth().createUserWithEmailAndPassword(tempEmail, tempPass).catch(function(error) {
-	// 	// Handle Errors here.
-	// 	var errorCode = error.code;
-	// 	var errorMessage = error.message;
-	// 	// ...
-	// });
+	var generateID = "user" + (userList.length + 1);
+	if (tempEmail == "" || tempName == "" || tempPass == "" || tempUserName == "") {
+		alert("filled the blank");
+	}
+	else {
+		firebase.auth().createUserWithEmailAndPassword(tempEmail, tempPass).catch(function (error) {
+			// Handle Errors here.
+			var errorCode = error.code;
+			var errorMessage = error.message;
+			// ...
+		});
 
-	writeUserData("user4",tempUserName,tempPass);
-
+	  
+	writeUserData(generateID, tempUserName, tempPass, tempName, tempEmail);
+	}
 }
 
-function loginAuth(){
-	console.log("ini login Auth");
-	console.log("==============:");
-	console.log("bnyk user: " + usernameList.length);
-	// for(var i=0; i<usernameList.length; i++){
-	// 	console.log("username: " + usernameList[i] + "\n" + "password: " + passwordList[i]);
-	// }
-	var index;
-	var check = false;
+
+function loginAuth() {
+	// 	console.log("ini login Auth");
+	// 	console.log("==============:");
+	// 	console.log("bnyk user: " + usernameList.length);
+	// 	var index;
+	// 	var check = false;
 	var getUsername = document.getElementById('login-username').value;
 	var getPass = document.getElementById('login-pass').value;
-	for(var i=0;i<usernameList.length;i++){
-		if(getUsername == usernameList[i] && getPass == passwordList[i]){
-			console.log("usernya ada")
-			check = true;
-			index = i;
-		}
-	}
+	// 	for (var i = 0; i < usernameList.length; i++) {
+	// 		if (getUsername == usernameList[i] && getPass == passwordList[i]) {
+	// 			console.log("usernya ada")
+	// 			check = true;
+	// 			index = i;
+	// 		}
+	// 	}
 
-	const email = getUsername;
-	const pass = getPass;
+	// 	if (check == true) {
+	// 		alert("login success");
+	// 	} else {
+	// 		alert("login failed");
+	// 	}
 
-	console.log(email);
-	console.log(pass);
-	//Sign in
-	//auth.signInWithEmailAndPassword(email, pass);
-
-	// firebase.auth().signInAnonymously().catch(function(error) {
-	// // Handle Errors here.
-	// var errorCode = error.code;
-	// var errorMessage = error.message;
-	// // ...
-	// });
-	// firebase.auth().signOut().then(function() {
-	// 	// Sign-out successful.
-	// }).catch(function(error) {
-	// 	// An error happened.
-	// });
-
-	if(check == true){
-		alert("login success");
-	}else{
-		alert("login failed");
-	}
-
+	firebase.auth().signInWithEmailAndPassword(getUsername, getPass).catch(function (error) {
+		console.log(error.code);
+		console.log(error.message);
+		alert("login failed, try again");
+	});
+	alert("asda");
 }
 
