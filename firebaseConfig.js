@@ -1,6 +1,4 @@
 
-
-
 var config = {
 	apiKey: "AIzaSyD_0MubOduGW0MGGtVn2HMeBN0e4vmc2vU",
 	authDomain: "fundrace-46c75.firebaseapp.com",
@@ -11,8 +9,6 @@ var config = {
 };
 firebase.initializeApp(config);
 
-
-
 //Get element
 const preObject = document.getElementById('users');
 const btnLogin = document.getElementById('btn-login');
@@ -22,7 +18,6 @@ const getPass = document.getElementById('login-pass');
 //Create-References
 const dbRefOject = firebase.database().ref().child('users');
 
-//firebase.auth().signOut();
 //Sync object changes
 
 const messaging = firebase.messaging();
@@ -53,7 +48,7 @@ messaging.requestPermission()
 // subsequent calls to getToken will return from cache.
 
 
-function readData(userEmail){
+function readData(userEmail) {
 	firebase.database().ref().child('users').once('value', function (snapshot) {
 		snapshot.forEach(function (childSnapshot) {
 			var childKey = childSnapshot.key;
@@ -69,7 +64,7 @@ function readData(userEmail){
 				var readEXP = snapshot.child('exp').val();
 				var readPoint = snapshot.child('point').val();
 				var readDonationTotal = snapshot.child('donationTotal').val();
-				if(userEmail == readEmail){
+				if (userEmail == readEmail) {
 					//alert("Ada Cuuuii");
 					document.getElementById("apa").innerHTML = readName;
 				}
@@ -82,7 +77,7 @@ function readData(userEmail){
 				// this.userExp.push(readEXP);
 				// this.userDonationTotal.push(readDonationTotal);
 				// this.userPoint.push(readPoint);
-			});	
+			});
 		});
 	});
 
@@ -128,23 +123,6 @@ firebase.auth().onAuthStateChanged(function (user) {
 		var userIndex;
 		console.log(id);
 		readData(user.email);
-		// console.log("total user: " + userList.length);
-		// for(var i=0; i< userList.length ; i++){
-		// 	if (emailList[i] == user.email){
-		// 		check = 1;
-		// 		userIndex = i;
-		// 		console.log("DB : " + emailList[i]);
-		// 		console.log("user : " + user.email);
-		// 	}
-		// }
-
-		// if(check == 1) {
-		// 	document.getElementById("apa").innerHTML = nameList[userIndex];
-		// }
-		// else{
-		// 	alert("error");
-		// }
-		
 	} else {
 		// No user is signed in.
 		console.log("user ga masuk bos");
@@ -175,8 +153,8 @@ function validate() {
 			// ...
 		});
 
-	  
-	writeUserData(generateID, tempUserName, tempPass, tempName, tempEmail);
+
+		writeUserData(generateID, tempUserName, tempPass, tempName, tempEmail);
 	}
 }
 
@@ -185,23 +163,9 @@ function loginAuth() {
 	// 	console.log("ini login Auth");
 	// 	console.log("==============:");
 	// 	console.log("bnyk user: " + usernameList.length);
-	// 	var index;
-	// 	var check = false;
+
 	var getUsername = document.getElementById('login-username').value;
 	var getPass = document.getElementById('login-pass').value;
-	// 	for (var i = 0; i < usernameList.length; i++) {
-	// 		if (getUsername == usernameList[i] && getPass == passwordList[i]) {
-	// 			console.log("usernya ada")
-	// 			check = true;
-	// 			index = i;
-	// 		}
-	// 	}
-
-	// 	if (check == true) {
-	// 		alert("login success");
-	// 	} else {
-	// 		alert("login failed");
-	// 	}
 
 	firebase.auth().signInWithEmailAndPassword(getUsername, getPass).catch(function (error) {
 		console.log(error.code);

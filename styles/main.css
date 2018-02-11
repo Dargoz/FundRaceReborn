@@ -79,12 +79,17 @@ main{
   height: 100%;
   padding-top: 0;
   padding-bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8)
 }
 #messages {
   overflow-y: auto;
   /* margin-bottom: 10px; */
   height: calc(100% - 20px);
-  color: black;
+  color: white;
+}
+
+#message{
+  color: white;
 }
 #message-filler {
   flex-grow: 1;
