@@ -2,6 +2,10 @@ var currMenu = "home";
 var names = [];
 var items = [];
 
+var currGMenu = "tentang";
+var gNames = [];
+var gItems = [];
+
 var swappable = [];
 var bypass = 'login'
 
@@ -22,11 +26,12 @@ function init(){
   swappable.push(document.getElementById('profile'));
 	window.friendlyChat = new FriendlyChat();
 	items = document.getElementsByClassName('nav-link');
+  gItems = document.getElementsByClassName('galery-link');
 
 
   for(var i = 0; i<items.length; i++){
     names[i] = items[i].name;
-    console.log(names[i]);
+    gNames[i] = gItems[i].name;
   }
 
 	// Leave out Storagef
@@ -49,6 +54,23 @@ function init(){
   });
   items[5].addEventListener('click', function(event){
     changeMenu(names[5]);
+  });
+
+
+  gItems[0].addEventListener('click', function(event){
+    changeGMenu(gNames[0]);
+  });
+  gItems[1].addEventListener('click', function(event){
+    changeGMenu(gNames[1]);
+  });
+  gItems[2].addEventListener('click', function(event){
+    changeGMenu(gNames[2]);
+  });
+  gItems[3].addEventListener('click', function(event){
+    changeGMenu(gNames[3]);
+  });
+  gItems[4].addEventListener('click', function(event){
+    changeGMenu(gNames[4]);
   });
 }
 
@@ -110,6 +132,25 @@ function prevPage(){
   doChange(curr, nxt, CurrIndex, NxtIndex, names[NxtIndex], 'prev');
 }
 
+
+function changeGMenu(menuName){
+  console.log(menuName);
+  if (currGMenu == menuName) return;
+
+  var NxtIndex = 0;
+  var CurrIndex = 0;
+
+  for (var i = 0; i<gNames.length; i++){
+    if(menuName == gNames[i]) {
+      NxtIndex = i;
+    }
+  }
+
+  var curr = document.getElementsByClassName(currMenu)[0];
+  var nxt = document.getElementsByClassName(menuName)[0];
+
+  doChangeG(curr, nxt, CurrIndex, NxtIndex, menuName, 'next');
+}
 
 function changeMenu(menuName){
   console.log(menuName);
@@ -304,7 +345,6 @@ FriendlyChat.prototype.signOut = function() {
 // Triggers when the auth state change for instance when the user signs-in or signs-out.
 FriendlyChat.prototype.onAuthStateChanged = function(user) {
   if (user) { 
-
     bypass = 'profile';
     changeMenu(bypass);
     for(var i = 0; i<swappable.length; i++){
@@ -337,6 +377,15 @@ FriendlyChat.prototype.onAuthStateChanged = function(user) {
     this.saveMessagingDeviceToken();
   } else { // User is signed out!
     // Hide user's profile and sign-out button.
+    bypass = 'login';
+    changeMenu('home');
+    for(var i = 0; i<swappable.length; i++){
+      swappable[i].classList.add('hide');
+      if(swappable[i].name == bypass){
+        swappable[i].classList.remove('hide');
+      }
+    }
+
     this.userName.setAttribute('hidden', 'true');
     this.userPic.setAttribute('hidden', 'true');
     this.signOutButton.setAttribute('hidden', 'true');
