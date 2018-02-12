@@ -17,10 +17,11 @@ function changeVal(byVal){
 }
 
 function init(){
+  window.friendlyChat = new FriendlyChat();
   swappable.push(document.getElementById('login'));
   swappable.push(document.getElementById('reg'));
   swappable.push(document.getElementById('profile'));
-	window.friendlyChat = new FriendlyChat();
+	
 	items = document.getElementsByClassName('nav-link');
 
 
