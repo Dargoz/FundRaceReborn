@@ -171,7 +171,7 @@ main{
   top: -3px;
   position: relative;
   display: inline-block;
-  background-image: url('/images/profile_placeholder.png');
+  background-image: url('/assets/profile_placeholder.png');
   background-repeat: no-repeat;
   width: 40px;
   height: 40px;
