@@ -2,10 +2,6 @@ var currMenu = "home";
 var names = [];
 var items = [];
 
-var currGMenu = "tentang";
-var gNames = [];
-var gItems = [];
-
 var swappable = [];
 var bypass = 'login'
 
@@ -26,12 +22,10 @@ function init(){
   swappable.push(document.getElementById('profile'));
 	window.friendlyChat = new FriendlyChat();
 	items = document.getElementsByClassName('nav-link');
-  gItems = document.getElementsByClassName('galery-link');
 
 
   for(var i = 0; i<items.length; i++){
     names[i] = items[i].name;
-    gNames[i] = gItems[i].name;
   }
 
 	// Leave out Storagef
@@ -56,22 +50,6 @@ function init(){
     changeMenu(names[5]);
   });
 
-
-  gItems[0].addEventListener('click', function(event){
-    changeGMenu(gNames[0]);
-  });
-  gItems[1].addEventListener('click', function(event){
-    changeGMenu(gNames[1]);
-  });
-  gItems[2].addEventListener('click', function(event){
-    changeGMenu(gNames[2]);
-  });
-  gItems[3].addEventListener('click', function(event){
-    changeGMenu(gNames[3]);
-  });
-  gItems[4].addEventListener('click', function(event){
-    changeGMenu(gNames[4]);
-  });
 }
 
 function nextPage(){
@@ -130,26 +108,6 @@ function prevPage(){
   var nxt = document.getElementsByClassName(names[NxtIndex])[0];
 
   doChange(curr, nxt, CurrIndex, NxtIndex, names[NxtIndex], 'prev');
-}
-
-
-function changeGMenu(menuName){
-  console.log(menuName);
-  if (currGMenu == menuName) return;
-
-  var NxtIndex = 0;
-  var CurrIndex = 0;
-
-  for (var i = 0; i<gNames.length; i++){
-    if(menuName == gNames[i]) {
-      NxtIndex = i;
-    }
-  }
-
-  var curr = document.getElementsByClassName(currMenu)[0];
-  var nxt = document.getElementsByClassName(menuName)[0];
-
-  doChangeG(curr, nxt, CurrIndex, NxtIndex, menuName, 'next');
 }
 
 function changeMenu(menuName){
