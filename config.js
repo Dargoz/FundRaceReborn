@@ -16,14 +16,19 @@ function changeVal(byVal){
   }
 }
 
+
+// var header = document.getElementsByClassName('header-profile');
+// for (var i = 0; i < header.length; i++) {
+//   header[i].classList.toggle('hide')
+// }
+
 function init(){
   window.friendlyChat = new FriendlyChat();
   swappable.push(document.getElementById('login'));
   swappable.push(document.getElementById('reg'));
   swappable.push(document.getElementById('profile'));
-	
-	items = document.getElementsByClassName('nav-link');
 
+	items = document.getElementsByClassName('nav-link');
 
   for(var i = 0; i<items.length; i++){
     names[i] = items[i].name;
