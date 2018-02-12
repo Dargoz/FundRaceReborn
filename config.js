@@ -1,20 +1,36 @@
-
 var currMenu = "home";
 var names = [];
 var items = [];
 
+var swappable = [];
+var bypass = 'login'
+
+function changeVal(byVal){
+  bypass = byVal;
+  changeMenu(bypass);
+  for(var i = 0; i<swappable.length; i++){
+    swappable[i].classList.add('hide');
+    if(swappable[i].name == bypass){
+      swappable[i].classList.remove('hide');
+    }
+  }
+}
 
 function init(){
+  swappable.push(document.getElementById('login'));
+  swappable.push(document.getElementById('reg'));
+  swappable.push(document.getElementById('profile'));
 	window.friendlyChat = new FriendlyChat();
 	items = document.getElementsByClassName('nav-link');
 
+
+  for(var i = 0; i<items.length; i++){
+    names[i] = items[i].name;
+    console.log(names[i]);
+  }
+
 	// Leave out Storagef
 	//require("firebase/storage");
-
-	for(var i = 0; i<items.length; i++){
-		names[i] = items[i].name;
-		console.log(names[i]);
-	}
 
 	items[0].addEventListener('click', function(event){
 		changeMenu(names[0]);
@@ -28,85 +44,117 @@ function init(){
 	items[3].addEventListener('click', function(event){
 		changeMenu(names[3]);
 	});
-	items[4].addEventListener('click', function(event){
-		changeMenu(names[4]);
-	});
+  items[4].addEventListener('click', function(event){
+    changeMenu(names[4]);
+  });
+  items[5].addEventListener('click', function(event){
+    changeMenu(names[5]);
+  });
 }
 
 function nextPage(){
-	var NxtIndex = 0;
-	var CurrIndex = 0;
-	for (var i = 0; i<names.length; i++){
-		if(currMenu == names[i]) {
-			CurrIndex = i;
-		}
-	}
-	NxtIndex = CurrIndex+1;
-	NxtIndex %= items.length;	
+  var NxtIndex = 0;
+  var CurrIndex = 0;
 
-	var curr = document.getElementsByClassName(currMenu)[0];
-	var nxt = document.getElementsByClassName(names[NxtIndex])[0];
+  if(currMenu == 'home'){
+    changeMenu(bypass);
+    return;
+  } else if(currMenu == bypass){
+    changeMenu('campaign');
+    return;
+  }
 
-	doChange(curr, nxt, CurrIndex, NxtIndex, names[NxtIndex], 'next');
+  for (var i = 0; i<names.length; i++){
+    if (currMenu == names[i]) {
+      CurrIndex = i;
+    }
+  }
+
+  NxtIndex = CurrIndex+1;
+  NxtIndex %= items.length; 
+
+  var curr = document.getElementsByClassName(currMenu)[0];
+  var nxt = document.getElementsByClassName(names[NxtIndex])[0];
+
+  console.log(names[NxtIndex]);
+
+  doChange(curr, nxt, CurrIndex, NxtIndex, names[NxtIndex], 'next');
 }
 
 function prevPage(){
-	var NxtIndex = 0;
-	var CurrIndex = 0;
-	for (var i = 0; i<names.length; i++){
-		if(currMenu == names[i]) {
-			CurrIndex = i;
-		}
-	}
-	NxtIndex = CurrIndex-1;
-	if (NxtIndex < 0) NxtIndex += items.length;
+  var NxtIndex = 0;
+  var CurrIndex = 0;
 
-	var curr = document.getElementsByClassName(currMenu)[0];
-	var nxt = document.getElementsByClassName(names[NxtIndex])[0];
+  if(currMenu == 'campaign'){
+    changeMenu(bypass);
+    return;
+  } else if(currMenu == bypass){
+    changeMenu('home');
+    return;
+  }
 
-	doChange(curr, nxt, CurrIndex, NxtIndex, names[NxtIndex], 'prev');
+  for (var i = 0; i<names.length; i++){
+    if((currMenu == names[i] && names[i] == "login" && login) || (currMenu == names[i] && names[i-1] == "login" && !login)) {
+      CurrIndex = i-1;
+    }
+    else if (currMenu == names[i]) {
+      CurrIndex = i;
+    }
+  }
+  NxtIndex = CurrIndex-1;
+  if (NxtIndex < 0) NxtIndex += items.length;
+
+  var curr = document.getElementsByClassName(currMenu)[0];
+  var nxt = document.getElementsByClassName(names[NxtIndex])[0];
+
+  doChange(curr, nxt, CurrIndex, NxtIndex, names[NxtIndex], 'prev');
 }
 
 
 function changeMenu(menuName){
-	console.log(menuName);
-	if (currMenu == menuName) return;
+  console.log(menuName);
+  if (currMenu == menuName) return;
 
 
-	var NxtIndex = 0;
-	var CurrIndex = 0;
+  var NxtIndex = 0;
+  var CurrIndex = 0;
 
-	for (var i = 0; i<names.length; i++){
-		if(menuName == names[i]) {
-			NxtIndex = i;
-		}
-		if(currMenu == names[i]) {
-			CurrIndex = i;
-		}
-	}
+  for (var i = 0; i<names.length; i++){
+    if(menuName == names[i]) {
+      NxtIndex = i;
+    }
+    if(currMenu == names[i]) {
+      CurrIndex = i;
+    }
+  }
 
-	var curr = document.getElementsByClassName(currMenu)[0];
-	var nxt = document.getElementsByClassName(menuName)[0];
+  var curr = document.getElementsByClassName(currMenu)[0];
+  var nxt = document.getElementsByClassName(menuName)[0];
 
-	doChange(curr, nxt, CurrIndex, NxtIndex, menuName, 'next');
+  doChange(curr, nxt, CurrIndex, NxtIndex, menuName, 'next');
 }
 
 function doChange(curr, nxt, CurrIndex, NxtIndex, menuName, to){
-	nxt.classList.toggle('ready--' + to);
-	curr.classList.toggle('menu--off--' + to);
-	window.setTimeout(function(){
-		nxt.classList.toggle('ready--' + to);
-		nxt.classList.toggle('menu--on');	
-	}, 100);
-	curr.classList.toggle('menu--on');
-	items[CurrIndex].classList.remove('active');
-	items[NxtIndex].classList.toggle('active');
+  nxt.classList.toggle('ready--' + to);
+  curr.classList.toggle('menu--off--' + to);
+  window.setTimeout(function(){
+    nxt.classList.toggle('ready--' + to);
+    nxt.classList.toggle('menu--on'); 
+  }, 100);
+  curr.classList.toggle('menu--on');
 
-	window.setTimeout(function(){
-		curr.classList.toggle('menu--off--' + to);
-	}, 500);
+  console.log("Curr Class: " + CurrIndex);
 
-	currMenu = menuName;
+  for(var i = 0; i<items.length; i++){
+    items[i].classList.remove('active');
+  }
+  items[NxtIndex].classList.add('active');
+
+  window.setTimeout(function(){
+    curr.classList.toggle('menu--off--' + to);
+  }, 500);
+
+  currMenu = menuName;
 }
 
 'use strict';
@@ -255,7 +303,17 @@ FriendlyChat.prototype.signOut = function() {
 
 // Triggers when the auth state change for instance when the user signs-in or signs-out.
 FriendlyChat.prototype.onAuthStateChanged = function(user) {
-  if (user) { // User is signed in!
+  if (user) { 
+
+    bypass = 'profile';
+    changeMenu(bypass);
+    for(var i = 0; i<swappable.length; i++){
+      swappable[i].classList.add('hide');
+      if(swappable[i].name == bypass){
+        swappable[i].classList.remove('hide');
+      }
+    }
+    // User is signed in!
     // Get profile pic and user's name from the Firebase user object.
     var profilePicUrl = user.photoURL; // Only change these two lines!
     var userName = user.displayName;   // Only change these two lines!

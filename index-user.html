@@ -21,7 +21,6 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
 	<script type="text/javascript" src="modal.js"></script>
-	<script type="text/javascript" src="config.js"></script>
 	<link rel="manifest" href="/manifest.json">
 
 	<!--<script type="text/javascript" src="require.js"></script>
@@ -33,6 +32,7 @@
 	<!-- NAVBAR -->
 
 	<pre id="object"></pre>
+	<script type="text/javascript" src="config.js"></script>
 	<nav class="navbar navbar-dark navbar-expand-lg" id="navbar">
 		<a class="navbar-brand" href="#">FundRace</a>
 		<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
@@ -41,13 +41,7 @@
 					<a class="nav-link active" name="home">Home</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" id="login" name="login">Login</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link hide" id="reg" name="reg">Register</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link hide" id="profile" name="profile">Profile</a>
+					<a class="nav-link" name="user">User</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" name="campaign">Campaign</a>
@@ -87,169 +81,7 @@
 			</h2>
 		</div>
 	</div>
-	<div class="login menu">
-		<div id="container-login">
-			<h2 class="page-header">Masuk sebagai FundRacer</h2>
-			<form method="get" name="form" onsubmit="return loginAuth()">
-				<div class="form-group">
-
-					<div class="design-form">
-						<div class="icon">
-							<i class="fa fa-user" style="font-size:30px;color:white"></i>
-						</div>
-						<div class="input-text">
-							<input type="text" class="form-control" id="login-username" placeholder="Username / email">
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-
-					<div class="design-form">
-						<div class="icon">
-							<i class="fa fa-lock" style="font-size:30px;color:white"></i>
-						</div>
-						<div class="input-text">
-							<input type="password" class="form-control" id="login-pass" placeholder="Password">
-						</div>
-					</div>
-
-				</div>
-				<!-- <button id="btn-login" class="btn btn-action" onclick="loginAuth()">Log In</button> -->
-				<input type="submit" class="btn btn-primary" value="Masuk" id="loginBtn" onclick="changeVal('profile')">
-				<!-- <input type="submit" class="btn btn-secondary" value="Sign In Anonymously" id="anonymBtn"> -->
-				<p class="login-link" style="color:white">belum tergabung sebagai FundRacer?
-					<a style="color:yellow" onclick="changeVal('reg')">daftar sekarang.</a>
-				</p>
-				<p class="login-link" style="color:white">atau
-					<a href="" style="color:aqua">masuk sebagai penyelenggara campaign.</a>
-				</p>
-			</form>
-		</div>
-	</div>
-	<div class="reg menu">
-		<div id="container-register">
-			<h2 class="page-header">Register</h2>
-			<form method="get" name="form" onsubmit="return validate()">
-				<div class="form-group">
-					<div class="design-form">
-						<div class="icon">
-							<i class="fa fa-address-card" style="font-size:20px;color:white" id="full-name-form"></i>
-						</div>
-						<div class="input-text">
-							<input type="text" class="form-control" id="input-name" placeholder="Full Name">
-						</div>
-					</div>
-
-				</div>
-				<div class="form-group">
-					<div class="design-form">
-						<div class="icon">
-							<i class="fa fa-user" style="font-size:30px;color:white"></i>
-						</div>
-						<div class="input-text">
-							<input type="text" class="form-control" id="input-username" placeholder="Username">
-						</div>
-					</div>
-
-				</div>
-				<div class="form-group">
-					<div class="design-form">
-						<div class="icon">
-							<i class="material-icons" style="font-size:25px;color:white">email</i>
-						</div>
-						<div class="input-text">
-							<input type="text" class="form-control" id="input-email" placeholder="example@gmail.com">
-						</div>
-					</div>
-
-				</div>
-				<div class="form-group">
-					<div class="design-form">
-						<div class="icon">
-							<i class="fa fa-lock" style="font-size:30px;color:white"></i>
-						</div>
-						<div class="input-text">
-							<input type="password" class="form-control" id="input-password" placeholder="Password">
-						</div>
-					</div>
-				</div>
-				<p style="color: white;margin-left: 30px">Sudah punya akun? <a style="color: yellow" onclick="changeVal('login')">Masuk Sekarang</a></p>
-				<input type="submit" class="btn btn-primary" value="Sign Up" onclick="changeVal('profile')">
-			</form>
-		</div>
-	</div>
-	<div class="profile menu flex">
-		<div class="left-user shade">
-			<h3 class="about-auth">USER</br>PROFILE</h3>
-			<div class="img-placeholder">
-				<img src="assets/Armour.jpg" class="profile-pict">
-			</div>
-			<div class="profile-desc">
-				<div class="main-desc">
-					<p id="user-name">Benyamin Budiharja</p>
-					<p id="user-lv">Lv. 5</p>
-					<p id="user-tier">Bronze Tier</p>
-					<p id="user-team">Team [Team F1]</p>					
-				</div>
-				<div class="sec-desc">
-					<p class="info-pribadi">Informasi Pribadi:</p>
-					<p>Lahir: 23-01-1998</p>
-					<p>7230101577 (BCA)</p>
-				</div>
-				<div class="tri-desc">
-					<p>(+62)81316016073</p>
-					<p id="user-email">benybudi.bb@gmail.com</p>
-				</div>
-				<p class="edit">Edit...</p>
-			</div>
-		</div>
-		<div class="right-user shade">
-			<div class="exp">
-				<h1 class="exp-text">EXP</h1>
-				<div class="progress">
-					<div class="progress-bar bg-warning" style="width:70%"></div>
-				</div>
-				<div class="info flex"> <p>51 / 100 - </p> <p class="cyan">&nbsp49 poin untuk ke level berikutnya!</p> </div>
-			</div>
-			<div class="point">
-				<h1>Points</h1>
-				<div class="sec-desc">
-					<p>Anda memiliki 500 poin.</p>
-					<p>Terdapat 2 buah hadiah yang dapat anda tukarkan</p>
-					<p>Pergi ke penukaran poin</p>
-				</div>
-			</div>
-
-			<div class="riwayat-donasi">
-				<h1>Riwayat Donasi</h1>
-				<div class="header-table flex yellow">
-					<div class="column-name">Tanggal</div>
-					<div class="column-name">Jumlah</div>
-					<div class="column-name">EXP</div>
-					<div class="column-name">Poin</div>
-				</div>
-				<div class="table-content flex">
-					<div class="column-name">[Tanggal]</div>
-					<div class="column-name">[Jumlah]</div>
-					<div class="column-name">[EXP]</div>
-					<div class="column-name">[Poin]</div>
-				</div>
-				<div class="table-content flex">
-					<div class="column-name">[Tanggal]</div>
-					<div class="column-name">[Jumlah]</div>
-					<div class="column-name">[EXP]</div>
-					<div class="column-name">[Poin]</div>
-				</div>
-				<div class="table-content flex">
-					<div class="column-name">[Tanggal]</div>
-					<div class="column-name">[Jumlah]</div>
-					<div class="column-name">[EXP]</div>
-					<div class="column-name">[Poin]</div>
-				</div>
-				<div class="download-rec cyan">Unduh riwayat donasi selengkapnya</div>
-			</div>
-		</div>
-	</div>
+	
 	<div class="campaign menu">
 		<div class="left">
 			<h1 class="title">BAKTI SOSIAL PPA/PPTI BCA 2017</h1>
