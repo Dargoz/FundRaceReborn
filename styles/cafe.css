@@ -1,9 +1,9 @@
 .header-cafe{
-    height: 15%;
+    height: 16%;
     width: 80%;
     position: relative;
     padding-left: 5%;
-    padding-top: 1%;
+    padding-top: 0.3%;
     margin: auto;
     margin-top: 5%;
 }
@@ -103,6 +103,24 @@
     width: 70px;
 }
 
+.user-dont-have-team{
+    height: 100%;
+    width: 100%;
+}
+
 .prize-desc{
     margin: auto;
+}
+
+.user-have-team>div{
+    width: 100%;
+}
+
+.user-have-team>div>div{
+    width: 100%;
+}
+
+.team-head{
+    margin: auto;
+    margin-left: 0;
 }

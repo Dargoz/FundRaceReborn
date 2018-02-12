@@ -1,4 +1,4 @@
-body{
+.user{
     background-image: url("../assets/img-user.jpg");
 }
 
@@ -8,11 +8,11 @@ body{
     width: 100%;
 }
 
-.left, .right{
+.left-user, .right-user{
     margin-top: 5%;
 }
 
-.left{
+.left-user{
     height: 80%;
     width: 20%;
     margin-left: 10%;
@@ -65,7 +65,7 @@ body{
     color: cyan;
 }
 
-.right{
+.right-user{
     width: 60%;
     height: 80%;
     margin-left: 0.5%;
