@@ -118,7 +118,7 @@
 				<input type="submit" class="btn btn-primary" value="Masuk" id="loginBtn">
 				<!-- <input type="submit" class="btn btn-secondary" value="Sign In Anonymously" id="anonymBtn"> -->
 				<p class="login-link" style="color:white">belum tergabung sebagai FundRacer?
-					<a style="color:yellow" onclick="changeVal('reg')">daftar sekarang.</a>
+					<a class="hover-active" style="color:yellow" onclick="changeVal('reg')">daftar sekarang.</a>
 				</p>
 				<p class="login-link" style="color:white">atau
 					<a href="" style="color:aqua">masuk sebagai penyelenggara campaign.</a>
@@ -173,7 +173,7 @@
 						</div>
 					</div>
 				</div>
-				<p style="color: white;margin-left: 30px">Sudah punya akun? <a style="color: yellow" onclick="changeVal('login')">Masuk Sekarang</a></p>
+				<p style="color: white;margin-left: 30px">Sudah punya akun? <a class="hover-active" style="color: yellow" onclick="changeVal('login')">Masuk Sekarang</a></p>
 				<input type="submit" class="btn btn-primary" value="Sign Up" onclick="changeVal('profile')">
 			</form>
 		</div>
@@ -369,13 +369,13 @@
 	</div>
 	<div class="cafe menu">
 		<div class="header-cafe shade" id="SearchTrigger" onclick="searchModalOn()">
-			<div class="user-dont-have-team flex hide">
+			<div class="header-profile user-dont-have-team flex">
 				<div class="team-head">
 					<p>FundRace Team anda:</p>
 					<h2>Bergabung dalam sebuah FundRace Team...</h2>
 				</div>
 			</div>
-			<div class="user-have-team">
+			<div class="header-profile user-have-team hide">
 				<div class="flex">
 					<div class="team-head">
 						<p>FundRace Team anda:</p>
