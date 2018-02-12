@@ -207,14 +207,14 @@
 			<div class="exp">
 				<h1 class="exp-text">EXP</h1>
 				<div class="progress">
-					<div class="progress-bar bg-warning" style="width:70%"></div>
+					<div class="progress-bar bg-warning" id="progressBar" style="width:70%"></div>
 				</div>
-				<div class="info flex"> <p>51 / 100 - </p> <p class="cyan">&nbsp49 poin untuk ke level berikutnya!</p> </div>
+				<div class="info flex"> <p id="expDescription">0 / 50.000 - </p> <p class="cyan" id="expRemain">&nbsp50.000 poin untuk ke level berikutnya!</p> </div>
 			</div>
 			<div class="point">
 				<h1>Points</h1>
 				<div class="sec-desc">
-					<p>Anda memiliki 500 poin.</p>
+					<p id="viewPoint">Anda memiliki 500 poin.</p>
 					<p>Terdapat 2 buah hadiah yang dapat anda tukarkan</p>
 					<p>Pergi ke penukaran poin</p>
 				</div>
@@ -222,30 +222,16 @@
 
 			<div class="riwayat-donasi">
 				<h1>Riwayat Donasi</h1>
-				<div class="header-table flex yellow">
-					<div class="column-name">Tanggal</div>
-					<div class="column-name">Jumlah</div>
-					<div class="column-name">EXP</div>
-					<div class="column-name">Poin</div>
+				<div id="riwayat-table" class="scrollbar-primary">
+					<div class="header-table flex yellow">
+						<div class="column-name">Tanggal</div>
+						<div class="column-name">Jumlah</div>
+						<div class="column-name">EXP</div>
+						<div class="column-name">Poin</div>
+					</div>
+					
 				</div>
-				<div class="table-content flex">
-					<div class="column-name">[Tanggal]</div>
-					<div class="column-name">[Jumlah]</div>
-					<div class="column-name">[EXP]</div>
-					<div class="column-name">[Poin]</div>
-				</div>
-				<div class="table-content flex">
-					<div class="column-name">[Tanggal]</div>
-					<div class="column-name">[Jumlah]</div>
-					<div class="column-name">[EXP]</div>
-					<div class="column-name">[Poin]</div>
-				</div>
-				<div class="table-content flex">
-					<div class="column-name">[Tanggal]</div>
-					<div class="column-name">[Jumlah]</div>
-					<div class="column-name">[EXP]</div>
-					<div class="column-name">[Poin]</div>
-				</div>
+				
 				<div class="download-rec cyan">Unduh riwayat donasi selengkapnya</div>
 			</div>
 		</div>

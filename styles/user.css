@@ -9,7 +9,7 @@
 }
 
 .left-user, .right-user{
-    margin-top: 5%;
+    margin-top: 65px;
 }
 
 .left-user{
@@ -45,7 +45,7 @@
 }
 
 .main-desc, .sec-desc, .tri-desc{
-	margin-top: 15pt;
+	margin-top: 6px;
 }
 
 .main-desc{
@@ -88,7 +88,8 @@
 }
 
 .header-table{
-    width: 100%;
+    margin-left: 4%;
+    width: 90%;
     height: 20%;
 }
 

@@ -33,6 +33,12 @@
     overflow-y: scroll;
 }
 
+#riwayat-table{
+    height: 95px;
+    overflow-y: scroll;
+}
+
+
 .table-content{
     margin-left: 4%;
     width: 90%;

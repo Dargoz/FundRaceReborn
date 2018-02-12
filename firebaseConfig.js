@@ -47,14 +47,40 @@ messaging.requestPermission()
 // Get Instance ID token. Initially this makes a network call, once retrieved
 // subsequent calls to getToken will return from cache.
 
+function addHistoryTable(readDate, readAmount, readHistExp, readPoint){
+	var riwayatTable = document.getElementById('riwayat-table');
+						var divTable = document.createElement("div");
+						divTable.className = "table-content";
+						divTable.id = "tableContent";
+						divTable.style.display = "flex";
+						var divColumn1 = document.createElement("div");
+						var divColumn2 = document.createElement("div");
+						var divColumn3 = document.createElement("div");
+						var divColumn4 = document.createElement("div");
+						divColumn1.className = "column-name";
+						divColumn2.className = "column-name";
+						divColumn3.className = "column-name";
+						divColumn4.className = "column-name";
+						divColumn1.textContent = readDate;
+						divColumn2.textContent = readAmount;
+						divColumn3.textContent = readHistExp;
+						divColumn4.textContent = readPoint;
+						divTable.appendChild(divColumn1);
+						divTable.appendChild(divColumn2);
+						divTable.appendChild(divColumn3);
+						divTable.appendChild(divColumn4);
+						riwayatTable.appendChild(divTable);
+}
+
+
 
 function readData(userEmail) {
-	firebase.database().ref().child('users').once('value', function (snapshot) {
+	firebase.database().ref().child('users').on('value', function (snapshot) {
 		snapshot.forEach(function (childSnapshot) {
 			var childKey = childSnapshot.key;
 			this.userList.push(childKey);
 			// var childData = childSnapshot.val();
-			firebase.database().ref('/users/' + childKey).once('value', function (snapshot) {
+			firebase.database().ref('/users/' + childKey).on('value', function (snapshot) {
 				var readUsername = snapshot.child('username').val();
 				var readName = snapshot.child('name').val();
 				var readPass = snapshot.child('password').val();
@@ -64,9 +90,61 @@ function readData(userEmail) {
 				var readEXP = snapshot.child('exp').val();
 				var readPoint = snapshot.child('point').val();
 				var readDonationTotal = snapshot.child('donationTotal').val();
+				var readTeamID = snapshot.child('teamID').val();
+				var readHistoryCount = snapshot.child('historyCount').val();
+				
 				if (userEmail == readEmail) {
 					//alert("Ada Cuuuii");
-					document.getElementById("apa").innerHTML = readName;
+					console.log(readName);
+					document.getElementById("user-name").innerHTML = readName;
+					document.getElementById("user-lv").innerHTML = "Lv. " + readLvl;
+					document.getElementById("user-tier").innerHTML = readTier;
+					document.getElementById("user-team").innerHTML = readTeamID;
+					var maxExp;
+					var persentExp;
+					var remainingExp;
+					if(readTier == "Bronze") {
+						maxExp = 50000;
+						persentExp = (readEXP/maxExp) * 100;
+						remainingExp = maxExp - readEXP;
+					}else if(readTier == "Silver"){
+						maxExp = 200000;
+						persentExp = (readEXP/maxExp) * 100;
+						remainingExp = maxExp - readEXP;
+					}else{
+						maxExp = 500000;
+						persentExp = (readEXP/maxExp) * 100;
+						remainingExp = maxExp - readEXP;
+					}
+					document.getElementById("viewPoint").innerHTML = "Anda memiliki "+ readPoint +" poin.";
+					document.getElementById("expDescription").innerHTML =  readEXP + " / " + maxExp + " - ";
+					document.getElementById("progressBar").style.width = persentExp+"%" ;
+					document.getElementById("expRemain").innerHTML = "&nbsp" + remainingExp + " poin untuk ke level berikutnya!";
+					if(readHistoryCount == 0){
+						
+
+					}
+					else{
+
+						firebase.database().ref('/users/' + childKey + "/historyDonation").on('value', function (snapshot) {
+							snapshot.forEach(function (childSnapshot) {
+								var childKunci =  childSnapshot.key;
+								firebase.database().ref('/users/' + childKey + "/historyDonation/" + childKunci).on('value', function (snapshot) {
+									var readDate = snapshot.child('date').val();
+									var readAmount = snapshot.child('amount').val();
+									var readHistExp = snapshot.child('exp').val();
+									var readPoint = snapshot.child('point').val();
+									console.log("date: "+readDate);
+									console.log("Amount: "+readAmount);
+									console.log("Exp: "+readHistExp);
+									console.log("Point: "+readPoint);
+									addHistoryTable(readDate, readAmount, readHistExp, readPoint);
+								});	
+							});
+						});
+						
+						
+					}
 				}
 				// this.usernameList.push(readUsername);
 				// this.nameList.push(readName);
@@ -95,7 +173,8 @@ function writeUserData(userId, userName, pass, name, email) {
 		point: 0,
 		tier: "Bronze",
 		teamID: "null",
-		donationTotal: 0
+		donationTotal: 0,
+		historyCount: 0
 
 	});
 }
@@ -126,6 +205,12 @@ firebase.auth().onAuthStateChanged(function (user) {
 	} else {
 		// No user is signed in.
 		console.log("user ga masuk bos");
+		var count = document.getElementById('riwayat-table').childElementCount;
+		var rTable = document.getElementById('riwayat-table');
+		for(var i=0; i<count-1;i++){
+			var divContent = document.getElementById('tableContent');
+			rTable.removeChild(divContent);
+		}
 	}
 });
 
