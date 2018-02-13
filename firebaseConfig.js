@@ -21,18 +21,6 @@ const dbRefOject = firebase.database().ref().child('users');
 //Sync object changes
 
 const messaging = firebase.messaging();
-var experiment = "";
-var userList = [];
-var usernameList = [];
-var nameList = [];
-var emailList = [];
-var userLvl = [];
-var userTier = [];
-var userExp = [];
-var passwordList = [];
-var userDonationTotal = [];
-var userPoint = [];
-
 
 messaging.requestPermission()
 	.then(function () {
@@ -44,8 +32,26 @@ messaging.requestPermission()
 		console.log('Unable to get permission to notify.', err);
 	});
 
+	var a = 702000.00;
+	var b = parseInt(a);
+	var c = b.toString();
+	var countNum = 0;
+	
 // Get Instance ID token. Initially this makes a network call, once retrieved
 // subsequent calls to getToken will return from cache.
+
+firebase.database().ref().child('users').on('value', function (snapshot) {
+	var allDonation = 0;
+	// console.log("jlan jlan jlan");
+	snapshot.forEach(function (childSnapshot) {
+		var childKey = childSnapshot.key;
+		firebase.database().ref('/users/' + childKey).once('value', function (snapshot) {
+			var readDonationTotal = snapshot.child('donationTotal').val();
+			allDonation += readDonationTotal;
+			document.getElementById("collected-donation").innerHTML = "Rp. "+ allDonation + ".00";
+		});
+	});
+});
 
 function addHistoryTable(readDate, readAmount, readHistExp, readPoint) {
 	var riwayatTable = document.getElementById('riwayat-table');
@@ -75,12 +81,15 @@ function addHistoryTable(readDate, readAmount, readHistExp, readPoint) {
 
 
 function readData(userEmail, uid, googleDisplayName) {
+	var read = 0;
+	
 	firebase.database().ref().child('users').on('value', function (snapshot) {
 		var flag = 0;
+		
 		snapshot.forEach(function (childSnapshot) {
 			var childKey = childSnapshot.key;
 			// var childData = childSnapshot.val();
-			firebase.database().ref('/users/' + childKey).on('value', function (snapshot) {
+			firebase.database().ref('/users/' + childKey).once('value', function (snapshot) {
 				var readUsername = snapshot.child('username').val();
 				var readName = snapshot.child('name').val();
 				var readPass = snapshot.child('password').val();
@@ -92,17 +101,29 @@ function readData(userEmail, uid, googleDisplayName) {
 				var readDonationTotal = snapshot.child('donationTotal').val();
 				var readTeamID = snapshot.child('teamID').val();
 				var readHistoryCount = snapshot.child('historyCount').val();
-
+				
 				if (userEmail == readEmail) {
 					//alert("Ada Cuuuii");
 					flag = 1;
+					if (read == 1) {
+						var count = document.getElementById('riwayat-table').childElementCount;
+						var rTable = document.getElementById('riwayat-table');
+						console.log("count riwayat:"+ count);
+						for (var i = 0; i < count - 1; i++) {
+							var divContent = document.getElementById('tableContent');
+							rTable.removeChild(divContent);
+							read = 0;
+						}
+					}
+
+					
 					console.log(readName);
 					document.getElementById("user-name").innerHTML = readName;
 					document.getElementById("user-lv").innerHTML = "Lv. " + readLvl;
 					document.getElementById("user-tier").innerHTML = readTier;
-					document.getElementById("user-team").innerHTML = readTeamID;
+					document.getElementById("user-team").innerHTML = "Team : " + readTeamID;
 					document.getElementById("user-email").innerHTML = readEmail;
-					
+
 					var maxExp;
 					var persentExp;
 					var remainingExp;
@@ -117,22 +138,22 @@ function readData(userEmail, uid, googleDisplayName) {
 					} else {
 						maxExp = 500000;
 						persentExp = (readEXP / maxExp) * 100;
-						remainingExp = maxExp - readEXP;
+						remainingExp = maxExp - readEXP; 
 					}
 					document.getElementById("viewPoint").innerHTML = "Anda memiliki " + readPoint + " poin.";
 					document.getElementById("expDescription").innerHTML = readEXP + " / " + maxExp + " - ";
 					document.getElementById("progressBar").style.width = persentExp + "%";
-					document.getElementById("expRemain").innerHTML = "&nbsp" + remainingExp + " poin untuk ke level berikutnya!";
+					document.getElementById("expRemain").innerHTML = "&nbsp" + remainingExp + " poin untuk ke tier berikutnya!";
 					if (readHistoryCount == 0) {
 
 
 					}
 					else {
-
-						firebase.database().ref('/users/' + childKey + "/historyDonation").on('value', function (snapshot) {
+						read = 1;
+						firebase.database().ref('/users/' + childKey + "/historyDonation").once('value', function (snapshot) {
 							snapshot.forEach(function (childSnapshot) {
 								var childKunci = childSnapshot.key;
-								firebase.database().ref('/users/' + childKey + "/historyDonation/" + childKunci).on('value', function (snapshot) {
+								firebase.database().ref('/users/' + childKey + "/historyDonation/" + childKunci).once('value', function (snapshot) {
 									var readDate = snapshot.child('date').val();
 									var readAmount = snapshot.child('amount').val();
 									var readHistExp = snapshot.child('exp').val();
@@ -152,6 +173,8 @@ function readData(userEmail, uid, googleDisplayName) {
 
 			});
 		});
+		
+		console.log("read:" + read);
 		if (flag == 0) {
 			console.log("firebase displayName: " + firebase.auth().currentUser.displayName);
 			writeUserDataForGoogleAccount(uid, googleDisplayName, userEmail);
@@ -197,37 +220,37 @@ function writeUserDataForGoogleAccount(userId, name, email) {
 
 function setDisplayName(userEmail) {
 	console.log("masuk sini lhoooooooooo");
-			var setMyDisplayName;
-			firebase.database().ref().child('users').on('value', function (snapshot) {
-				snapshot.forEach(function (childSnapshot) {
-					var childKey = childSnapshot.key;
-					// var childData = childSnapshot.val();
-					firebase.database().ref('/users/' + childKey).on('value', function (snapshot) {
-						var readName = snapshot.child('name').val();
-						var readEmail = snapshot.child('email').val();
+	var setMyDisplayName;
+	firebase.database().ref().child('users').once('value', function (snapshot) {
+		snapshot.forEach(function (childSnapshot) {
+			var childKey = childSnapshot.key;
+			// var childData = childSnapshot.val();
+			firebase.database().ref('/users/' + childKey).once('value', function (snapshot) {
+				var readName = snapshot.child('name').val();
+				var readEmail = snapshot.child('email').val();
 
-						if (userEmail == readEmail) {
-							setMyDisplayName = readName;
-							firebase.auth().currentUser.updateProfile({
-								displayName: setMyDisplayName,
-								photoURL: "/assets/profile_placeholder.png"
-							}).then(function () {
-								
-								// Profile updated successfully!
-								// "Jane Q. User"
-								console.log("Profile updated successfully");
-								var displayName = firebase.auth().currentUser.displayName;
-								console.log("yang terupdate: "+ displayName);
-								// "https://example.com/jane-q-user/profile.jpg"
-								//var photoURL = user.photoURL;
-							}, function (error) {
-								// An error happened.
-								console.log("error updated profile");
-							});
-						}
+				if (userEmail == readEmail) {
+					setMyDisplayName = readName;
+					firebase.auth().currentUser.updateProfile({
+						displayName: setMyDisplayName,
+						photoURL: "/assets/profile_placeholder.png"
+					}).then(function () {
+
+						// Profile updated successfully!
+						// "Jane Q. User"
+						console.log("Profile updated successfully");
+						var displayName = firebase.auth().currentUser.displayName;
+						console.log("yang terupdate: " + displayName);
+						// "https://example.com/jane-q-user/profile.jpg"
+						//var photoURL = user.photoURL;
+					}, function (error) {
+						// An error happened.
+						console.log("error updated profile");
 					});
-				});
+				}
 			});
+		});
+	});
 }
 // firebase.auth().signInAnonymously().catch(function(error) {
 // 	// Handle Errors here.

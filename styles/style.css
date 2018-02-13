@@ -94,6 +94,7 @@ p{
 
 .carousel-control-prev, .carousel-control-next{
 	z-index: 99;
+	width: 10%;
 }
 
 label{
