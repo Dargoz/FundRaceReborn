@@ -47,38 +47,38 @@ messaging.requestPermission()
 // Get Instance ID token. Initially this makes a network call, once retrieved
 // subsequent calls to getToken will return from cache.
 
-function addHistoryTable(readDate, readAmount, readHistExp, readPoint){
+function addHistoryTable(readDate, readAmount, readHistExp, readPoint) {
 	var riwayatTable = document.getElementById('riwayat-table');
-						var divTable = document.createElement("div");
-						divTable.className = "table-content";
-						divTable.id = "tableContent";
-						divTable.style.display = "flex";
-						var divColumn1 = document.createElement("div");
-						var divColumn2 = document.createElement("div");
-						var divColumn3 = document.createElement("div");
-						var divColumn4 = document.createElement("div");
-						divColumn1.className = "column-name";
-						divColumn2.className = "column-name";
-						divColumn3.className = "column-name";
-						divColumn4.className = "column-name";
-						divColumn1.textContent = readDate;
-						divColumn2.textContent = readAmount;
-						divColumn3.textContent = readHistExp;
-						divColumn4.textContent = readPoint;
-						divTable.appendChild(divColumn1);
-						divTable.appendChild(divColumn2);
-						divTable.appendChild(divColumn3);
-						divTable.appendChild(divColumn4);
-						riwayatTable.appendChild(divTable);
+	var divTable = document.createElement("div");
+	divTable.className = "table-content";
+	divTable.id = "tableContent";
+	divTable.style.display = "flex";
+	var divColumn1 = document.createElement("div");
+	var divColumn2 = document.createElement("div");
+	var divColumn3 = document.createElement("div");
+	var divColumn4 = document.createElement("div");
+	divColumn1.className = "column-name";
+	divColumn2.className = "column-name";
+	divColumn3.className = "column-name";
+	divColumn4.className = "column-name";
+	divColumn1.textContent = readDate;
+	divColumn2.textContent = readAmount;
+	divColumn3.textContent = readHistExp;
+	divColumn4.textContent = readPoint;
+	divTable.appendChild(divColumn1);
+	divTable.appendChild(divColumn2);
+	divTable.appendChild(divColumn3);
+	divTable.appendChild(divColumn4);
+	riwayatTable.appendChild(divTable);
 }
 
 
 
-function readData(userEmail) {
+function readData(userEmail, uid, googleDisplayName) {
 	firebase.database().ref().child('users').on('value', function (snapshot) {
+		var flag = 0;
 		snapshot.forEach(function (childSnapshot) {
 			var childKey = childSnapshot.key;
-			this.userList.push(childKey);
 			// var childData = childSnapshot.val();
 			firebase.database().ref('/users/' + childKey).on('value', function (snapshot) {
 				var readUsername = snapshot.child('username').val();
@@ -92,71 +92,70 @@ function readData(userEmail) {
 				var readDonationTotal = snapshot.child('donationTotal').val();
 				var readTeamID = snapshot.child('teamID').val();
 				var readHistoryCount = snapshot.child('historyCount').val();
-				
+
 				if (userEmail == readEmail) {
 					//alert("Ada Cuuuii");
+					flag = 1;
 					console.log(readName);
 					document.getElementById("user-name").innerHTML = readName;
 					document.getElementById("user-lv").innerHTML = "Lv. " + readLvl;
 					document.getElementById("user-tier").innerHTML = readTier;
 					document.getElementById("user-team").innerHTML = readTeamID;
+					document.getElementById("user-email").innerHTML = readEmail;
+					
 					var maxExp;
 					var persentExp;
 					var remainingExp;
-					if(readTier == "Bronze") {
+					if (readTier == "Bronze") {
 						maxExp = 50000;
-						persentExp = (readEXP/maxExp) * 100;
+						persentExp = (readEXP / maxExp) * 100;
 						remainingExp = maxExp - readEXP;
-					}else if(readTier == "Silver"){
+					} else if (readTier == "Silver") {
 						maxExp = 200000;
-						persentExp = (readEXP/maxExp) * 100;
+						persentExp = (readEXP / maxExp) * 100;
 						remainingExp = maxExp - readEXP;
-					}else{
+					} else {
 						maxExp = 500000;
-						persentExp = (readEXP/maxExp) * 100;
+						persentExp = (readEXP / maxExp) * 100;
 						remainingExp = maxExp - readEXP;
 					}
-					document.getElementById("viewPoint").innerHTML = "Anda memiliki "+ readPoint +" poin.";
-					document.getElementById("expDescription").innerHTML =  readEXP + " / " + maxExp + " - ";
-					document.getElementById("progressBar").style.width = persentExp+"%" ;
+					document.getElementById("viewPoint").innerHTML = "Anda memiliki " + readPoint + " poin.";
+					document.getElementById("expDescription").innerHTML = readEXP + " / " + maxExp + " - ";
+					document.getElementById("progressBar").style.width = persentExp + "%";
 					document.getElementById("expRemain").innerHTML = "&nbsp" + remainingExp + " poin untuk ke level berikutnya!";
-					if(readHistoryCount == 0){
-						
+					if (readHistoryCount == 0) {
+
 
 					}
-					else{
+					else {
 
 						firebase.database().ref('/users/' + childKey + "/historyDonation").on('value', function (snapshot) {
 							snapshot.forEach(function (childSnapshot) {
-								var childKunci =  childSnapshot.key;
+								var childKunci = childSnapshot.key;
 								firebase.database().ref('/users/' + childKey + "/historyDonation/" + childKunci).on('value', function (snapshot) {
 									var readDate = snapshot.child('date').val();
 									var readAmount = snapshot.child('amount').val();
 									var readHistExp = snapshot.child('exp').val();
 									var readPoint = snapshot.child('point').val();
-									console.log("date: "+readDate);
-									console.log("Amount: "+readAmount);
-									console.log("Exp: "+readHistExp);
-									console.log("Point: "+readPoint);
+									console.log("date: " + readDate);
+									console.log("Amount: " + readAmount);
+									console.log("Exp: " + readHistExp);
+									console.log("Point: " + readPoint);
 									addHistoryTable(readDate, readAmount, readHistExp, readPoint);
-								});	
+								});
 							});
 						});
-						
-						
+
+
 					}
 				}
-				// this.usernameList.push(readUsername);
-				// this.nameList.push(readName);
-				// this.passwordList.push(readPass);
-				// this.emailList.push(readEmail);
-				// this.userLvl.push(readLvl);
-				// this.userTier.push(readTier);
-				// this.userExp.push(readEXP);
-				// this.userDonationTotal.push(readDonationTotal);
-				// this.userPoint.push(readPoint);
+
 			});
 		});
+		if (flag == 0) {
+			console.log("firebase displayName: " + firebase.auth().currentUser.displayName);
+			writeUserDataForGoogleAccount(uid, googleDisplayName, userEmail);
+		}
 	});
 
 }
@@ -179,12 +178,57 @@ function writeUserData(userId, userName, pass, name, email) {
 	});
 }
 
-function updateUser(userId) {
-	firebase.database().ref('users/' + userId).update({
-		EXP: 100
+function writeUserDataForGoogleAccount(userId, name, email) {
+	firebase.database().ref('users/' + userId).set({
+		username: "unset",
+		password: "secret",
+		name: name,
+		email: email,
+		level: 1,
+		exp: 0,
+		point: 0,
+		tier: "Bronze",
+		teamID: "null",
+		donationTotal: 0,
+		historyCount: 0
+
 	});
 }
 
+function setDisplayName(userEmail) {
+	console.log("masuk sini lhoooooooooo");
+			var setMyDisplayName;
+			firebase.database().ref().child('users').on('value', function (snapshot) {
+				snapshot.forEach(function (childSnapshot) {
+					var childKey = childSnapshot.key;
+					// var childData = childSnapshot.val();
+					firebase.database().ref('/users/' + childKey).on('value', function (snapshot) {
+						var readName = snapshot.child('name').val();
+						var readEmail = snapshot.child('email').val();
+
+						if (userEmail == readEmail) {
+							setMyDisplayName = readName;
+							firebase.auth().currentUser.updateProfile({
+								displayName: setMyDisplayName,
+								photoURL: "/assets/profile_placeholder.png"
+							}).then(function () {
+								
+								// Profile updated successfully!
+								// "Jane Q. User"
+								console.log("Profile updated successfully");
+								var displayName = firebase.auth().currentUser.displayName;
+								console.log("yang terupdate: "+ displayName);
+								// "https://example.com/jane-q-user/profile.jpg"
+								//var photoURL = user.photoURL;
+							}, function (error) {
+								// An error happened.
+								console.log("error updated profile");
+							});
+						}
+					});
+				});
+			});
+}
 // firebase.auth().signInAnonymously().catch(function(error) {
 // 	// Handle Errors here.
 // 	var errorCode = error.code;
@@ -201,13 +245,18 @@ firebase.auth().onAuthStateChanged(function (user) {
 		var id = user.uid;
 		var userIndex;
 		console.log(id);
-		readData(user.email);
+		console.log(user.email);
+		if (user.displayName == null) {
+			setDisplayName(user.email);
+		}
+		readData(user.email, user.uid, user.displayName);
+		document.getElementById("userProfilePicture").src = user.photoURL;
 	} else {
 		// No user is signed in.
 		console.log("user ga masuk bos");
 		var count = document.getElementById('riwayat-table').childElementCount;
 		var rTable = document.getElementById('riwayat-table');
-		for(var i=0; i<count-1;i++){
+		for (var i = 0; i < count - 1; i++) {
 			var divContent = document.getElementById('tableContent');
 			rTable.removeChild(divContent);
 		}

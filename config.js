@@ -55,7 +55,7 @@ function init(){
   items[5].addEventListener('click', function(event){
     changeMenu(names[5]);
   });
-
+  document.getElementById("bg-loading").style.visibility = "hidden";
 }
 
 function nextPage(){
@@ -239,7 +239,7 @@ FriendlyChat.prototype.saveMessage = function(e) {
     this.messagesRef.push({
       name: currentUser.displayName,
       text: this.messageInput.value,
-      photoUrl: currentUser.photoURL || '/images/profile_placeholder.png'
+      photoUrl: currentUser.photoURL || '/assets/profile_placeholder.png'
     }).then(function() {
       // Clear message text field and SEND button state.
       FriendlyChat.resetMaterialTextfield(this.messageInput);
@@ -274,7 +274,7 @@ FriendlyChat.prototype.saveImageMessage = function(event) {
     this.messagesRef.push({
       name: currentUser.displayName,
       imageUrl: FriendlyChat.LOADING_IMAGE_URL,
-      photoUrl: currentUser.photoURL || '/images/profile_placeholder.png'
+      photoUrl: currentUser.photoURL || '/assets/profile_placeholder.png'
     }).then(function(data) {
 
       // Upload the image to Cloud Storage.

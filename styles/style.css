@@ -6,6 +6,36 @@ body{
 	height: 100%;
 }
 
+.loader {
+	border: 16px solid #f3f3f3;
+	border-radius: 50%;
+	border-top: 16px solid #3498db;
+	position: fixed;
+	width: 500px;
+	height: 500px;
+	left: 30%;
+	margin-top: 2%;
+	-webkit-animation: spin 2s linear infinite;
+	/* Safari */
+	animation: spin 2s linear infinite;
+}
+#bg-loading{
+	width: 100%;
+	height: 1080px;
+	background-color: rgba(0, 0, 0, 0.9);
+	position: fixed;
+	z-index: 1000;
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
 .hover-active:hover{
 	cursor: pointer;
 }
