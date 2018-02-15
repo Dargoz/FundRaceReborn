@@ -3,7 +3,7 @@ var names = [];
 var items = [];
 
 var swappable = [];
-var bypass = 'login'
+var bypass = 'profile';
 
 function changeVal(byVal){
   bypass = byVal;
@@ -16,46 +16,51 @@ function changeVal(byVal){
   }
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 function init(){
   window.friendlyChat = new FriendlyChat();
   swappable.push(document.getElementById('login'));
   swappable.push(document.getElementById('reg'));
   swappable.push(document.getElementById('profile'));
 
-	items = document.getElementsByClassName('nav-link');
+  items = document.getElementsByClassName('nav-link');
 
   for(var i = 0; i<items.length; i++){
     names[i] = items[i].name;
   }
+  
+  // Leave out Storagef
+  //require("firebase/storage");
 
-	// Leave out Storagef
-	//require("firebase/storage");
-
-	items[0].addEventListener('click', function(event){
-		changeMenu(names[0]);
-	});
-	items[1].addEventListener('click', function(event){
-		changeMenu(names[1]);
-	});
-	items[2].addEventListener('click', function(event){
-		changeMenu(names[2]);
-	});
-	items[3].addEventListener('click', function(event){
-		changeMenu(names[3]);
-	});
+  items[0].addEventListener('click', function(event){
+    changeMenu(names[0]);
+  });
+  items[1].addEventListener('click', function(event){
+    changeMenu(names[1]);
+  });
+  items[2].addEventListener('click', function(event){
+    changeMenu(names[2]);
+  });
+  items[3].addEventListener('click', function(event){
+    changeMenu(names[3]);
+  });
   items[4].addEventListener('click', function(event){
     changeMenu(names[4]);
   });
   items[5].addEventListener('click', function(event){
     changeMenu(names[5]);
   });
-  document.getElementById("bg-loading").style.visibility = "hidden";
+  document.getElementById("bg-loading").style.visibility = "hidden"; 
 }
 
 function nextPage(){
   var NxtIndex = 0;
   var CurrIndex = 0;
+
+  console.log(bypass);
 
   if(currMenu == 'home'){
     changeMenu(bypass);
@@ -76,9 +81,7 @@ function nextPage(){
 
   var curr = document.getElementsByClassName(currMenu)[0];
   var nxt = document.getElementsByClassName(names[NxtIndex])[0];
-
-  console.log(names[NxtIndex]);
-
+  
   doChange(curr, nxt, CurrIndex, NxtIndex, names[NxtIndex], 'next');
 }
 
@@ -87,18 +90,15 @@ function prevPage(){
   var CurrIndex = 0;
 
   if(currMenu == 'campaign'){
-    changeMenu(bypass);
+    changeMenuDir(bypass, 'prev');
     return;
   } else if(currMenu == bypass){
-    changeMenu('home');
+    changeMenuDir('home', 'prev');
     return;
   }
 
   for (var i = 0; i<names.length; i++){
-    if((currMenu == names[i] && names[i] == "login" && login) || (currMenu == names[i] && names[i-1] == "login" && !login)) {
-      CurrIndex = i-1;
-    }
-    else if (currMenu == names[i]) {
+    if (currMenu == names[i]) {
       CurrIndex = i;
     }
   }
@@ -134,6 +134,33 @@ function changeMenu(menuName){
   doChange(curr, nxt, CurrIndex, NxtIndex, menuName, 'next');
 }
 
+function changeMenuDir(menuName, dir){
+  console.log(menuName);
+  if (currMenu == menuName) return;
+
+
+  var NxtIndex = -1;
+  var CurrIndex = -1;
+
+  for (var i = 0; i<names.length; i++){
+    if(menuName == names[i]) {
+      NxtIndex = i;
+    }
+    if(currMenu == names[i]) {
+      CurrIndex = i;
+    }
+  }
+
+  if (NxtIndex == -1) {
+    NxtIndex = 3;
+  }
+
+  var curr = document.getElementsByClassName(currMenu)[0];
+  var nxt = document.getElementsByClassName(menuName)[0];
+
+  doChange(curr, nxt, CurrIndex, NxtIndex, menuName, dir);
+}
+
 function doChange(curr, nxt, CurrIndex, NxtIndex, menuName, to){
   nxt.classList.toggle('ready--' + to);
   curr.classList.toggle('menu--off--' + to);
@@ -156,6 +183,7 @@ function doChange(curr, nxt, CurrIndex, NxtIndex, menuName, to){
 
   currMenu = menuName;
 }
+
 
 'use strict';
 
@@ -304,14 +332,13 @@ FriendlyChat.prototype.signOut = function() {
 // Triggers when the auth state change for instance when the user signs-in or signs-out.
 FriendlyChat.prototype.onAuthStateChanged = function(user) {
   if (user) { 
-    bypass = 'profile';
-    changeMenu(bypass);
     for(var i = 0; i<swappable.length; i++){
       swappable[i].classList.add('hide');
       if(swappable[i].name == bypass){
         swappable[i].classList.remove('hide');
       }
     }
+
     // User is signed in!
     // Get profile pic and user's name from the Firebase user object.
     var profilePicUrl = user.photoURL; // Only change these two lines!
@@ -336,8 +363,7 @@ FriendlyChat.prototype.onAuthStateChanged = function(user) {
     this.saveMessagingDeviceToken();
   } else { // User is signed out!
     // Hide user's profile and sign-out button.
-    bypass = 'login';
-    changeMenu('home');
+
     for(var i = 0; i<swappable.length; i++){
       swappable[i].classList.add('hide');
       if(swappable[i].name == bypass){
