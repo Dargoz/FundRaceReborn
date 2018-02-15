@@ -189,7 +189,7 @@
 			<div class="profile-desc">
 				<div class="main-desc">
 					<p id="user-name">Loading...</p>
-					<p id="user-lv">Loading...</p>
+					<!-- <p id="user-lv">Loading...</p> -->
 					<p id="user-tier">Loading...</p>
 					<p id="user-team">Team : -</p>					
 				</div>
@@ -217,7 +217,7 @@
 				<h1>Points</h1>
 				<div class="sec-desc">
 					<p id="viewPoint">Anda memiliki 500 poin.</p>
-					<p>Terdapat 2 buah hadiah yang dapat anda tukarkan</p>
+					<p id="exchangeAvailable">Terdapat 2 jenis hadiah yang dapat anda tukarkan</p>
 					<p class="yellow hover-active" onclick="changeMenuDir('prize-page', 'next')">Pergi ke penukaran poin</p>
 				</div>
 			</div>
@@ -700,50 +700,50 @@
     	<div class="content shade">
     		<p class="cyan hover-active" onclick="changeMenuDir('profile', 'prev')"><< Kembali ke halaman profile</p>
     		<h3>Point Rewards</h3>
-    		<p style="display: inline">Barang-barang di bawah sifatnya stok terbatas dan dikirimkan ke alamat yang dicantumkan pada profile anda, dengan memotong poin perolehan anda. <p style="display: inline;" class="cyan">Saat ini anda memiliki 500 poin</></p>
+    		<p style="display: inline">Barang-barang di bawah sifatnya stok terbatas dan dikirimkan ke alamat yang dicantumkan pada profile anda, dengan memotong poin perolehan anda. <p style="display: inline;" class="cyan" id="rewardPointStat">Saat ini anda memiliki - poin</></p>
 
     		<div class="prize-row flex">
     			<div class="prize-card">
-    				<div class="img-round"></div>
-    				<p class="prize-desc yellow">TEDDYHOUSE Teddy Bear</p>
-    				<p class="prize-point">17,000 point</p>
+    				<div class="img-round" id="rwd1" onclick="getReward(this)" value="35000"></div>
+    				<p class="prize-desc yellow">Binder</p>
+    				<p class="prize-point">35.000 point</p>
     			</div>
     			<div class="prize-card">
-    				<div class="img-round"></div>
-    				<p class="prize-desc yellow">TEDDYHOUSE Teddy Bear</p>
-    				<p class="prize-point">17,000 point</p>
+    				<div class="img-round" id="rwd2" onclick="getReward(this)" value="60000"></div>
+    				<p class="prize-desc yellow">Graduated Teddy Bear</p>
+    				<p class="prize-point">60.000 point</p>
     			</div>
     			<div class="prize-card">
-    				<div class="img-round"></div>
-    				<p class="prize-desc yellow">TEDDYHOUSE Teddy Bear</p>
-    				<p class="prize-point">17,000 point</p>
+    				<div class="img-round" id="rwd3" onclick="getReward(this)" value="110000"></div>
+    				<p class="prize-desc yellow">Wireless Mouse Logitech</p>
+    				<p class="prize-point">110.000 point</p>
     			</div>
     			<div class="prize-card">
-    				<div class="img-round"></div>
-    				<p class="prize-desc yellow">TEDDYHOUSE Teddy Bear</p>
-    				<p class="prize-point">17,000 point</p>
+    				<div class="img-round" id="rwd4" onclick="getReward(this)" value="350000"></div>
+    				<p class="prize-desc yellow">Tas cewek</p>
+    				<p class="prize-point">350.000 point</p>
     			</div>
     		</div>
     		<div class="prize-row flex">
     			<div class="prize-card">
-    				<div class="img-round"></div>
+    				<div class="img-round" id="rwd5" onclick="getReward(this)" value="500000"></div>
     				<p class="prize-desc yellow">TEDDYHOUSE Teddy Bear</p>
-    				<p class="prize-point">17,000 point</p>
+    				<p class="prize-point">500.000 point</p>
     			</div>
     			<div class="prize-card">
-    				<div class="img-round"></div>
-    				<p class="prize-desc yellow">TEDDYHOUSE Teddy Bear</p>
-    				<p class="prize-point">17,000 point</p>
+    				<div class="img-round" id="rwd6" onclick="getReward(this)" value="850000"></div>
+    				<p class="prize-desc yellow">Backpack</p>
+    				<p class="prize-point">850.000 point</p>
     			</div>
     			<div class="prize-card">
-    				<div class="img-round"></div>
-    				<p class="prize-desc yellow">TEDDYHOUSE Teddy Bear</p>
-    				<p class="prize-point">17,000 point</p>
+    				<div class="img-round" id="rwd7" onclick="getReward(this)" value="1200000"></div>
+    				<p class="prize-desc yellow">CASIO</p>
+    				<p class="prize-point">1.200.000 point</p>
     			</div>
     			<div class="prize-card">
-    				<div class="img-round"></div>
-    				<p class="prize-desc yellow">TEDDYHOUSE Teddy Bear</p>
-    				<p class="prize-point">17,000 point</p>
+    				<div class="img-round" id="rwd8" onclick="getReward(this)" value="2750000"></div>
+    				<p class="prize-desc yellow">Nike Black Shoes</p>
+    				<p class="prize-point">2.750.000 point</p>
     			</div>
     		</div>
 

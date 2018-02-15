@@ -328,6 +328,8 @@ FriendlyChat.prototype.signOut = function() {
 // Triggers when the auth state change for instance when the user signs-in or signs-out.
 FriendlyChat.prototype.onAuthStateChanged = function(user) {
   if (user) { 
+    bypass = 'profile';
+    changeMenu(bypass);
     for(var i = 0; i<swappable.length; i++){
       swappable[i].classList.add('hide');
       if(swappable[i].name == bypass){
@@ -359,7 +361,8 @@ FriendlyChat.prototype.onAuthStateChanged = function(user) {
     this.saveMessagingDeviceToken();
   } else { // User is signed out!
     // Hide user's profile and sign-out button.
-
+    bypass = 'login';
+    changeMenu('home');
     for(var i = 0; i<swappable.length; i++){
       swappable[i].classList.add('hide');
       if(swappable[i].name == bypass){

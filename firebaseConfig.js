@@ -32,15 +32,17 @@ messaging.requestPermission()
 		console.log('Unable to get permission to notify.', err);
 	});
 
-var a = 702000.00;
-var b = parseInt(a);
-var c = b.toString();
+// var a = 702000.00;
+// var b = parseInt(a);
+// var c = b.toString();
 var countNum = 0;
 
 // Get Instance ID token. Initially this makes a network call, once retrieved
 // subsequent calls to getToken will return from cache.
 var userList = [];
-
+var teamList = [];
+var refreshLeaderBoard = 0;
+var refreshSearch = 0;
 
 firebase.database().ref().child('users').on('value', function (snapshot) {
 	var allDonation = 0;
@@ -48,6 +50,7 @@ firebase.database().ref().child('users').on('value', function (snapshot) {
 	// console.log("jlan jlan jlan");
 	snapshot.forEach(function (childSnapshot) {
 		var childKey = childSnapshot.key;
+		userList.push(childKey);
 		firebase.database().ref('/users/' + childKey).once('value', function (snapshot) {
 			var readDonationTotal = snapshot.child('donationTotal').val();
 			allDonation += readDonationTotal;
@@ -98,15 +101,15 @@ function listTeam(userId, usrname) {
 	if (baca == 1) {
 		var teamTable = document.getElementById("teamListTable");
 		var countTable = teamTable.childElementCount;
-		var trRecord = document.getElementById("teamRecord");
 		for (var i = 0; i < countTable; i++) {
+			var trRecord = document.getElementById("teamRecord");
 			teamTable.removeChild(trRecord);
 		}
 		baca = 0;
 	}
 	baca++;
 	firebase.database().ref().child('teams').once('value', function (snapshot) {
-
+		var index = 0;
 		snapshot.forEach(function (childSnapshot) {
 
 			var childKey = childSnapshot.key;
@@ -127,7 +130,8 @@ function listTeam(userId, usrname) {
 				var td3 = document.createElement("td");
 				var td4 = document.createElement("td");
 				var td5 = document.createElement("td");
-				td1.textContent = "1";
+				td1.textContent = index + 1;
+				index++;
 				td2.textContent = readTeamName;
 				td3.textContent = readTotalMember + "/" + readMaxMember;
 				td4.textContent = readDonationPeriod;
@@ -158,7 +162,7 @@ function listTeam(userId, usrname) {
 	console.log("baca:" + baca);
 }
 
-function writeTeamData(getName, getInputName, getMaxMember, getMinTier,userId) {
+function writeTeamData(getName, getInputName, getMaxMember, getMinTier, userId) {
 	var countTeam = 0;
 	firebase.database().ref().child('teams').once('value', function (snapshot) {
 		snapshot.forEach(function (childSnapshot) {
@@ -166,7 +170,7 @@ function writeTeamData(getName, getInputName, getMaxMember, getMinTier,userId) {
 			countTeam++;
 		});
 	});
-	var generateTeamID = "team" + countTeam + 1;
+	var generateTeamID = "team" + teamList.length + 1;
 	firebase.database().ref('teams/' + generateTeamID).update({
 		maxMember: getMaxMember,
 		totalMember: 1,
@@ -196,28 +200,42 @@ function createTeam(userEmail) {
 			firebase.database().ref('/users/' + childKey).once('value', function (snapshot) {
 				var readEmail = snapshot.child('email').val();
 				var readName = snapshot.child('name').val();
-				if(readEmail == userEmail){
-					
-					writeTeamData(readName,inputTeamName,inputMemberCapacity,inputTier,childKey);
+				if (readEmail == userEmail) {
+
+					writeTeamData(readName, inputTeamName, inputMemberCapacity, inputTier, childKey);
 				}
 			});
 		});
 	});
-	
+
 
 	console.log("input Team name: " + inputTeamName);
 	console.log("input Member Capt: " + inputMemberCapacity);
 	console.log("input Min Tier: " + inputTier);
 	console.log("input team desc: " + inputTeamDesc);
 
-	
+
 }
 
 function listLeaderBoard() {
-	var num = 0;
-	firebase.database().ref().child('teams').once('value', function (snapshot) {
+
+	var leaderBoard = document.getElementById("leaderBoard");
+	firebase.database().ref().child('teams').orderByChild('name').on('value', function (snapshot) {
+		var num = 0;
+		//console.log("refreshLeader Board: " + refreshLeaderBoard);
+		if (refreshLeaderBoard == 1) {
+			var countBoard = leaderBoard.childElementCount;
+			for (var i = 0; i < countBoard; i++) {
+				var BoardChild = document.getElementById("tableContent-Board");
+				leaderBoard.removeChild(BoardChild);
+			}
+		}
+		refreshLeaderBoard = 1;
+
 		snapshot.forEach(function (childSnapshot) {
+
 			var childKey = childSnapshot.key;
+			teamList.push(childKey);
 			firebase.database().ref('/teams/' + childKey).once('value', function (snapshot) {
 
 				var readDonationPeriod = snapshot.child('donationPeriod').val();
@@ -227,9 +245,9 @@ function listLeaderBoard() {
 				var readTeamName = snapshot.child('name').val();
 				var readTotalMember = snapshot.child('totalMember').val();
 
-				var leaderBoard = document.getElementById("leaderBoard");
 				var divTableContent = document.createElement("div");
 				divTableContent.className = "table-content";
+				divTableContent.id = "tableContent-Board";
 				var divNo = document.createElement("div");
 				divNo.className = "no";
 				var h1 = document.createElement("h1");
@@ -274,11 +292,16 @@ function readTeamData(getTeamID) {
 	});
 }
 
+var toggleState = 0;
+var toggleStateNoTeam = 0;
+var habisLogin = 0;
+var adaTeam = 0;
+
 function readData(userEmail, uid, googleDisplayName) {
 	var read = 0;
 	var flag = 0;
+	var header = document.getElementsByClassName('header-profile');
 	firebase.database().ref().child('users').on('value', function (snapshot) {
-		
 
 		snapshot.forEach(function (childSnapshot) {
 			var childKey = childSnapshot.key;
@@ -311,14 +334,36 @@ function readData(userEmail, uid, googleDisplayName) {
 					}
 
 					if (readTeamID == "null") {
-						listTeam(childKey, readName);
-					} else {
-						var header = document.getElementsByClassName('header-profile');
-						for (var i = 0; i < header.length; i++) {
-							
+						//dari awal login
+						if (toggleStateNoTeam != 1) {
+							header[0].classList.toggle('hide');
 							header[1].classList.toggle('hide');
-							//console.log(22222222222222222222);
+							console.log("masuk kene");
+
 						}
+						if (adaTeam == 1) {
+							header[1].classList.toggle('hide');
+							header[3].classList.toggle('hide');
+							console.log("masuk kono");
+						}
+
+						listTeam(childKey, readName);
+						adaTeam = 0;
+					} else {
+						adaTeam = 1;
+
+						if (toggleState != 1) {
+							for (var i = 0; i < header.length; i++) {
+
+								header[i].classList.toggle('hide');
+								//console.log(22222222222222222222);
+							}
+							header[1].classList.toggle('hide');
+							header[2].classList.toggle('hide');
+						}
+
+						toggleState = 1;
+						//console.log(header.length);
 						document.getElementById("nama-team").innerHTML = readTeamID;
 						readTeamData(readTeamID);
 					}
@@ -327,7 +372,7 @@ function readData(userEmail, uid, googleDisplayName) {
 
 					console.log(readName);
 					document.getElementById("user-name").innerHTML = readName;
-					document.getElementById("user-lv").innerHTML = "Lv. " + readLvl;
+					//document.getElementById("user-lv").innerHTML = "Lv. " + readLvl;
 					document.getElementById("user-tier").innerHTML = readTier;
 					document.getElementById("user-team").innerHTML = "Team : " + readTeamID;
 					document.getElementById("user-email").innerHTML = readEmail;
@@ -352,6 +397,33 @@ function readData(userEmail, uid, googleDisplayName) {
 					document.getElementById("expDescription").innerHTML = readEXP + " / " + maxExp + " - ";
 					document.getElementById("progressBar").style.width = persentExp + "%";
 					document.getElementById("expRemain").innerHTML = "&nbsp" + remainingExp + " poin untuk ke tier berikutnya!";
+					var exchangeCount = 0;
+					if (readPoint >= 35000) {
+						exchangeCount++;
+					}
+					if (readPoint >= 60000) {
+						exchangeCount++;
+					}
+					if (readPoint >= 110000) {
+						exchangeCount++;
+					} if (readPoint >= 350000) {
+						exchangeCount++;
+					} if (readPoint >= 500000) {
+						exchangeCount++;
+					} if (readPoint >= 850000) {
+						exchangeCount++;
+					} if (readPoint >= 1200000) {
+						exchangeCount++;
+					} if (readPoint >= 2750000) {
+						exchangeCount++;
+					}
+					if (exchangeCount == 0) {
+						document.getElementById("exchangeAvailable").innerHTML = "Point anda belum mencukupi untuk menukarkan dengan hadiah";
+					} else {
+						document.getElementById("exchangeAvailable").innerHTML = "Terdapat " + exchangeCount + " jenis hadiah yang dapat anda tukarkan";
+					}
+
+					document.getElementById("rewardPointStat").innerHTML = "Saat ini anda memiliki " + readPoint + " poin";
 					if (readHistoryCount == 0) {
 
 
@@ -391,7 +463,6 @@ function readData(userEmail, uid, googleDisplayName) {
 	});
 	flag = 0;
 }
-
 
 function writeUserData(userId, userName, pass, name, email) {
 	firebase.database().ref('users/' + userId).set({
@@ -461,6 +532,62 @@ function setDisplayName(userEmail) {
 		});
 	});
 }
+
+function updateUserPoint(userId, getPoint){
+	firebase.database().ref('users/' + userId).update({
+		point: getPoint
+	});
+}
+
+function processReward(getPrice){
+	var currUser = firebase.auth().currentUser;
+	firebase.database().ref().child('users').once('value', function (snapshot) {
+		console.log("current User : " + currUser);
+		snapshot.forEach(function (childSnapshot) {
+			var childKey = childSnapshot.key;
+			// var childData = childSnapshot.val();
+			firebase.database().ref('/users/' + childKey).once('value', function (snapshot) {
+				var readEmail = snapshot.child('email').val();
+				var readPoint = snapshot.child('point').val();
+				if(currUser.email == readEmail){
+					if(readPoint < getPrice){
+						alert("point tidak cukup");
+					}else{
+						var remainPoint = readPoint - getPrice;
+						updateUserPoint(childKey,readPoint);
+						alert("Reward Anda akan segera dikirim");
+					}
+				}
+			});
+		});
+	});		
+	
+}
+
+function getReward(element) {
+	var parent = element.parentNode;
+	var content = parent.querySelector("div");
+	var price = 0;
+	if (content.id == "rwd1") {
+		price = 35000;
+	} else if (content.id == "rwd2") {
+		price = 60000;
+	} else if (content.id == "rwd3") {
+		price = 110000;
+	} else if (content.id == "rwd4") {
+		price = 350000;
+	} else if (content.id == "rwd5") {
+		price = 500000;
+	} else if (content.id == "rwd6") {
+		price = 850000;
+	} else if (content.id == "rwd7") {
+		price = 1200000;
+	} else {
+		price = 2750000;
+	}
+	processReward(price);
+
+}
 // firebase.auth().signInAnonymously().catch(function(error) {
 // 	// Handle Errors here.
 // 	var errorCode = error.code;
@@ -472,7 +599,7 @@ function setDisplayName(userEmail) {
 firebase.auth().onAuthStateChanged(function (user) {
 	if (user) {
 		// User is signed in.
-		bypass = 'profile';
+		habisLogin = 1;
 		var btnCreateTeam = document.getElementById("submitTeam");
 		btnCreateTeam.onclick = function () {
 			createTeam(user.email);
@@ -490,7 +617,20 @@ firebase.auth().onAuthStateChanged(function (user) {
 		document.getElementById("userProfilePicture").src = user.photoURL;
 	} else {
 		// No user is signed in.
-		bypass = 'login';
+		var header = document.getElementsByClassName('header-profile');
+		if (habisLogin == 1) {
+			if (adaTeam == 1) {
+				header[0].classList.toggle('hide');
+				header[3].classList.toggle('hide');
+			} else {
+				header[0].classList.toggle('hide');
+				header[1].classList.toggle('hide');
+			}
+
+		}
+		toggleState = 0;
+		toggleStateNoTeam = 0;
+		adaTeam = 0;
 		console.log("user ga masuk bos");
 		var count = document.getElementById('riwayat-table').childElementCount;
 		var rTable = document.getElementById('riwayat-table');

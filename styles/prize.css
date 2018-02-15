@@ -25,6 +25,48 @@
 	margin-bottom: 5pt;
 }
 
+#rwd1{
+	background-image: url("/assets/reward1.jpg");
+	background-size: 100%;
+	cursor: pointer;
+}
+#rwd2{
+	background-image: url("/assets/reward2.jpg");
+	background-size: 100%;
+	cursor: pointer;
+}
+#rwd3{
+	background-image: url("/assets/reward3.jpg");
+	background-size: 100%;
+	cursor: pointer;
+}
+#rwd4{
+	background-image: url("/assets/reward4.jpg");
+	background-size: 100%;
+	cursor: pointer;
+}
+#rwd5{
+	background-image: url("/assets/reward5.jpg");
+	background-size: 100%;
+	cursor: pointer;
+}
+#rwd6{
+	background-image: url("/assets/reward6.jpg");
+	background-size: 100%;
+	cursor: pointer;
+}
+#rwd7{
+	background-image: url("/assets/reward7.jpg");
+	background-size: 100%;
+	cursor: pointer;
+}
+#rwd8{
+	background-image: url("/assets/reward8.jpg");
+	background-size: 100%;
+	cursor: pointer;
+}
+
+
 .prize-card>p{
 	text-align: center;
 }
