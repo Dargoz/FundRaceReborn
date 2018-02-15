@@ -218,7 +218,7 @@
 				<div class="sec-desc">
 					<p id="viewPoint">Anda memiliki 500 poin.</p>
 					<p>Terdapat 2 buah hadiah yang dapat anda tukarkan</p>
-					<p>Pergi ke penukaran poin</p>
+					<p class="yellow hover-active" onclick="changeMenuDir('prize-page', 'next')">Pergi ke penukaran poin</p>
 				</div>
 			</div>
 
@@ -371,7 +371,13 @@
 	</div>
 	<div class="cafe menu">
 		<div class="header-cafe shade" id="SearchTrigger">
-			<div class="header-profile user-dont-have-team flex" onclick="searchModalOn()">
+			<div class="header-profile user-not-log-in flex ">
+				<div class="team-head">
+					<p>FundRace Team anda:</p>
+					<h2>Bergabung dalam FundRace untuk masuk dalam FundRacer Team!h2>
+				</div>
+			</div>
+			<div class="header-profile user-dont-have-team flex hide" onclick="searchModalOn()">
 				<div class="team-head">
 					<p>FundRace Team anda:</p>
 					<h2>Bergabung dalam sebuah FundRacer Team...</h2>

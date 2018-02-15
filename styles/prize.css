@@ -1,0 +1,30 @@
+.prize-page{
+	height: 100%;
+	width: 100%;
+	margin-top: 5%;
+    margin-left: 10%;
+}
+
+.content{
+    height: 80%;
+    width: 80%;
+    padding: 15pt;
+}
+
+.prize-card{
+	margin-top: 15px;
+	width: 300px;
+}
+
+.img-round{
+	height: 125px;
+	width: 125px;
+	background-color: white;
+	border-radius: 50%;
+	margin: auto;
+	margin-bottom: 5pt;
+}
+
+.prize-card>p{
+	text-align: center;
+}

@@ -16,12 +16,6 @@ function changeVal(byVal){
   }
 }
 
-
-// var header = document.getElementsByClassName('header-profile');
-// for (var i = 0; i < header.length; i++) {
-//   header[i].classList.toggle('hide')
-// }
-
 function init(){
   window.friendlyChat = new FriendlyChat();
   swappable.push(document.getElementById('login'));
@@ -55,6 +49,7 @@ function init(){
   items[5].addEventListener('click', function(event){
     changeMenu(names[5]);
   });
+  document.getElementById("bg-loading").style.visibility = "hidden"; 
 }
 
 function nextPage(){
@@ -91,18 +86,15 @@ function prevPage(){
   var CurrIndex = 0;
 
   if(currMenu == 'campaign'){
-    changeMenu(bypass);
+    changeMenuDir(bypass, 'prev');
     return;
   } else if(currMenu == bypass){
-    changeMenu('home');
+    changeMenuDir('home', 'prev');
     return;
   }
 
   for (var i = 0; i<names.length; i++){
-    if((currMenu == names[i] && names[i] == "login" && login) || (currMenu == names[i] && names[i-1] == "login" && !login)) {
-      CurrIndex = i-1;
-    }
-    else if (currMenu == names[i]) {
+    if (currMenu == names[i]) {
       CurrIndex = i;
     }
   }
@@ -336,14 +328,13 @@ FriendlyChat.prototype.signOut = function() {
 // Triggers when the auth state change for instance when the user signs-in or signs-out.
 FriendlyChat.prototype.onAuthStateChanged = function(user) {
   if (user) { 
-    bypass = 'profile';
-    changeMenu(bypass);
     for(var i = 0; i<swappable.length; i++){
       swappable[i].classList.add('hide');
       if(swappable[i].name == bypass){
         swappable[i].classList.remove('hide');
       }
     }
+
     // User is signed in!
     // Get profile pic and user's name from the Firebase user object.
     var profilePicUrl = user.photoURL; // Only change these two lines!
@@ -368,8 +359,7 @@ FriendlyChat.prototype.onAuthStateChanged = function(user) {
     this.saveMessagingDeviceToken();
   } else { // User is signed out!
     // Hide user's profile and sign-out button.
-    bypass = 'login';
-    changeMenu('home');
+
     for(var i = 0; i<swappable.length; i++){
       swappable[i].classList.add('hide');
       if(swappable[i].name == bypass){
