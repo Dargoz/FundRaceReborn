@@ -3,7 +3,7 @@ var names = [];
 var items = [];
 
 var swappable = [];
-var bypass = 'login'
+var bypass = 'profile';
 
 function changeVal(byVal){
   bypass = byVal;
@@ -28,39 +28,40 @@ function init(){
   swappable.push(document.getElementById('reg'));
   swappable.push(document.getElementById('profile'));
 
-	items = document.getElementsByClassName('nav-link');
+  items = document.getElementsByClassName('nav-link');
 
   for(var i = 0; i<items.length; i++){
     names[i] = items[i].name;
   }
+  
+  // Leave out Storagef
+  //require("firebase/storage");
 
-	// Leave out Storagef
-	//require("firebase/storage");
-
-	items[0].addEventListener('click', function(event){
-		changeMenu(names[0]);
-	});
-	items[1].addEventListener('click', function(event){
-		changeMenu(names[1]);
-	});
-	items[2].addEventListener('click', function(event){
-		changeMenu(names[2]);
-	});
-	items[3].addEventListener('click', function(event){
-		changeMenu(names[3]);
-	});
+  items[0].addEventListener('click', function(event){
+    changeMenu(names[0]);
+  });
+  items[1].addEventListener('click', function(event){
+    changeMenu(names[1]);
+  });
+  items[2].addEventListener('click', function(event){
+    changeMenu(names[2]);
+  });
+  items[3].addEventListener('click', function(event){
+    changeMenu(names[3]);
+  });
   items[4].addEventListener('click', function(event){
     changeMenu(names[4]);
   });
   items[5].addEventListener('click', function(event){
     changeMenu(names[5]);
   });
-  document.getElementById("bg-loading").style.visibility = "hidden";
 }
 
 function nextPage(){
   var NxtIndex = 0;
   var CurrIndex = 0;
+
+  console.log(bypass);
 
   if(currMenu == 'home'){
     changeMenu(bypass);
@@ -81,9 +82,7 @@ function nextPage(){
 
   var curr = document.getElementsByClassName(currMenu)[0];
   var nxt = document.getElementsByClassName(names[NxtIndex])[0];
-
-  console.log(names[NxtIndex]);
-
+  
   doChange(curr, nxt, CurrIndex, NxtIndex, names[NxtIndex], 'next');
 }
 
@@ -139,6 +138,33 @@ function changeMenu(menuName){
   doChange(curr, nxt, CurrIndex, NxtIndex, menuName, 'next');
 }
 
+function changeMenuDir(menuName, dir){
+  console.log(menuName);
+  if (currMenu == menuName) return;
+
+
+  var NxtIndex = -1;
+  var CurrIndex = -1;
+
+  for (var i = 0; i<names.length; i++){
+    if(menuName == names[i]) {
+      NxtIndex = i;
+    }
+    if(currMenu == names[i]) {
+      CurrIndex = i;
+    }
+  }
+
+  if (NxtIndex == -1) {
+    NxtIndex = 3;
+  }
+
+  var curr = document.getElementsByClassName(currMenu)[0];
+  var nxt = document.getElementsByClassName(menuName)[0];
+
+  doChange(curr, nxt, CurrIndex, NxtIndex, menuName, dir);
+}
+
 function doChange(curr, nxt, CurrIndex, NxtIndex, menuName, to){
   nxt.classList.toggle('ready--' + to);
   curr.classList.toggle('menu--off--' + to);
@@ -161,6 +187,7 @@ function doChange(curr, nxt, CurrIndex, NxtIndex, menuName, to){
 
   currMenu = menuName;
 }
+
 
 'use strict';
 
