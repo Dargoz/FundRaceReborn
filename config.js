@@ -3,7 +3,7 @@ var names = [];
 var items = [];
 
 var swappable = [];
-var bypass = 'profile';
+var bypass = 'login';
 
 function changeVal(byVal){
   bypass = byVal;
