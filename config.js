@@ -16,10 +16,6 @@ function changeVal(byVal){
   }
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 function init(){
   window.friendlyChat = new FriendlyChat();
   swappable.push(document.getElementById('login'));

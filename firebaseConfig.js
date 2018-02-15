@@ -315,11 +315,12 @@ function readData(userEmail, uid, googleDisplayName) {
 					} else {
 						var header = document.getElementsByClassName('header-profile');
 						for (var i = 0; i < header.length; i++) {
-							header[i].classList.toggle('hide');
+							
+							header[1].classList.toggle('hide');
 							//console.log(22222222222222222222);
-							document.getElementById("nama-team").innerHTML = readTeamID;
-							readTeamData(readTeamID);
 						}
+						document.getElementById("nama-team").innerHTML = readTeamID;
+						readTeamData(readTeamID);
 					}
 
 
@@ -471,6 +472,7 @@ function setDisplayName(userEmail) {
 firebase.auth().onAuthStateChanged(function (user) {
 	if (user) {
 		// User is signed in.
+		bypass = 'profile';
 		var btnCreateTeam = document.getElementById("submitTeam");
 		btnCreateTeam.onclick = function () {
 			createTeam(user.email);
@@ -488,6 +490,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 		document.getElementById("userProfilePicture").src = user.photoURL;
 	} else {
 		// No user is signed in.
+		bypass = 'login';
 		console.log("user ga masuk bos");
 		var count = document.getElementById('riwayat-table').childElementCount;
 		var rTable = document.getElementById('riwayat-table');
