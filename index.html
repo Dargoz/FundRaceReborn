@@ -380,13 +380,13 @@
 				<div class="flex">
 					<div class="team-head">
 						<p>FundRace Team anda:</p>
-						<h2>FundRaceTeam1</h2>
+						<h2 id="nama-team">FundRaceTeam1</h2>
 					</div>
 					<div class="team-info">
 						<p class="yellow hover-active">Posisis saat ini; #1</p>
-						<p>Jumlah anggota: 4/5</p>
-						<p>Jumlah donasi periode ini: Rp. 10.990</p>
-						<p>Total donasi terkumpul: Rp. 13.290</p>
+						<p id="jmlh-anggota">Jumlah anggota: 4/5</p>
+						<p id="jmlh-donasi">Jumlah donasi periode ini: Rp. 10.990</p>
+						<p id="total-donasi-cafe">Total donasi terkumpul: Rp. 13.290</p>
 					</div>
 					<div class="cafe-menu">
 						<p>MENU</p>
@@ -419,56 +419,9 @@
 								<th>available</th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-								<td>1</td>
-								<td>FundRacerTeam1</td>
-								<td>4/5</td>
-								<td>10,980</td>
-								<td>JOIN</td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>s1xGontengs</td>
-								<td>5/5</td>
-								<td>8,750</td>
-								<td>CLOSED</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>OneDirection</td>
-								<td>3/5</td>
-								<td>5,180</td>
-								<td>JOIN</td>
-							</tr>
-							<tr>
-								<td>4</td>
-								<td>a.p.4</td>
-								<td>4/5</td>
-								<td>4,580</td>
-								<td>JOIN</td>
-							</tr>
-							<tr>
-								<td>5</td>
-								<td>CharchoalGuys2</td>
-								<td>2/5</td>
-								<td>4,480</td>
-								<td>JOIN</td>
-							</tr>
-							<tr>
-								<td>6</td>
-								<td>FundRacerTeam2</td>
-								<td>3/5</td>
-								<td>2,480</td>
-								<td>JOIN</td>
-							</tr>
-							<tr>
-								<td>7</td>
-								<td>kemarenmenang</td>
-								<td>3/5</td>
-								<td>1,480</td>
-								<td>JOIN</td>
-							</tr>
+						<tbody id="teamListTable">
+							<!-- //list Team disini-->
+							
 						</tbody>
 					</table>
 				</div>
@@ -531,7 +484,7 @@
 							</div>
 						</div>
 
-						<button type="button" class="btn btn-light submit-team" onclick="">Create</button>
+						<button type="button" class="btn btn-light submit-team" id="submitTeam">Create</button>
 
 					</form>
 				</div>
@@ -542,38 +495,13 @@
 		</div>
 
 		<div class="container center">
-			<div class="leaderboard shade scrollbar-primary">
+			<div class="leaderboard shade scrollbar-primary" id="leaderBoard">
 				<div class="column-header">
 					<p>peringkat &nbsp &nbsp &nbsp | &nbsp &nbsp &nbsp nama fundrace team &nbsp &nbsp &nbsp | &nbsp &nbsp &nbsp jml. donasi</p>
 				</div>
-				<div class="table-content">
-					<div class="no">
-						<h1>1</h1>
-					</div>
-					<div class="team-name" id="apa">Boedihardja</div>
-					<div class="jml-donasi">10,9K</div>
-				</div>
-				<div class="table-content">
-					<div class="no">
-						<h1>2</h1>
-					</div>
-					<div class="team-name">Gozali</div>
-					<div class="jml-donasi">5,5K</div>
-				</div>
-				<div class="table-content">
-					<div class="no">
-						<h1>3</h1>
-					</div>
-					<div class="team-name">Sardew</div>
-					<div class="jml-donasi">3,1K</div>
-				</div>
-				<div class="table-content">
-					<div class="no">
-						<h1>4</h1>
-					</div>
-					<div class="team-name">Lawrence</div>
-					<div class="jml-donasi">1,9K</div>
-				</div>
+				
+				<!-- leaderboard content -->
+				
 			</div>
 			<div class="right-side">
 				<div class="chat shade">

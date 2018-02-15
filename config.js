@@ -17,11 +17,6 @@ function changeVal(byVal){
 }
 
 
-// var header = document.getElementsByClassName('header-profile');
-// for (var i = 0; i < header.length; i++) {
-//   header[i].classList.toggle('hide')
-// }
-
 function init(){
   window.friendlyChat = new FriendlyChat();
   swappable.push(document.getElementById('login'));
