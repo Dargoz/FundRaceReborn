@@ -20,6 +20,24 @@ function closeCreateTeamModal() {
     modal.style.display = "none";
 }
 
+function donationHistoryModalOn(){
+	var modal = document.getElementById('donationHistoryModal');
+	modal.style.display = "block";
+}
+function closeDonationHistoryModal(){
+	var modal = document.getElementById('donationHistoryModal');
+	modal.style.display = "none";
+}
+
+function archiveModalOn(){
+	var modal = document.getElementById('archiveModal');
+	modal.style.display = "block";
+}
+function closeArchiveModal(){
+	var modal = document.getElementById('archiveModal');
+	modal.style.display = "none";
+}
+
 window.onclick = function(event) {
 	var modal = document.getElementById('myModal');
 	var btn = document.getElementById("trigger");
