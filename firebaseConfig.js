@@ -176,7 +176,9 @@ function writeTeamData(getName, getInputName, getMaxMember, getMinTier, userId) 
 		totalMember: 1,
 		name: getInputName,
 		minTier: getMinTier,
-		donationPeriod: 0
+		donationPeriod: 0,
+		archiveCount: 0,
+		teamDonationHistoryCount: 0
 	});
 	firebase.database().ref('teams/' + generateTeamID + "/member/" + "userT01").update({
 		name: getName
@@ -225,10 +227,13 @@ function listLeaderBoard() {
 		//console.log("refreshLeader Board: " + refreshLeaderBoard);
 		if (refreshLeaderBoard == 1) {
 			var countBoard = leaderBoard.childElementCount;
-			for (var i = 0; i < countBoard; i++) {
+			//console.log(countBoard);
+			for (var i = 0; i < countBoard-1; i++) {
 				var BoardChild = document.getElementById("tableContent-Board");
 				leaderBoard.removeChild(BoardChild);
+				
 			}
+			
 		}
 		refreshLeaderBoard = 1;
 
