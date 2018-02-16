@@ -5,18 +5,18 @@ var items = [];
 var swappable = [];
 var bypass = 'login';
 
-function changeVal(byVal){
+function changeVal(byVal) {
   bypass = byVal;
   changeMenu(bypass);
-  for(var i = 0; i<swappable.length; i++){
+  for (var i = 0; i < swappable.length; i++) {
     swappable[i].classList.add('hide');
-    if(swappable[i].name == bypass){
+    if (swappable[i].name == bypass) {
       swappable[i].classList.remove('hide');
     }
   }
 }
 
-function init(){
+function init() {
   window.friendlyChat = new FriendlyChat();
   swappable.push(document.getElementById('login'));
   swappable.push(document.getElementById('reg'));
@@ -24,81 +24,86 @@ function init(){
 
   items = document.getElementsByClassName('nav-link');
 
-  for(var i = 0; i<items.length; i++){
+  for (var i = 0; i < items.length; i++) {
     names[i] = items[i].name;
   }
-  
+
   // Leave out Storagef
   //require("firebase/storage");
 
-  items[0].addEventListener('click', function(event){
+  items[0].addEventListener('click', function (event) {
     changeMenu(names[0]);
   });
-  items[1].addEventListener('click', function(event){
+  items[1].addEventListener('click', function (event) {
     changeMenu(names[1]);
   });
-  items[2].addEventListener('click', function(event){
+  items[2].addEventListener('click', function (event) {
     changeMenu(names[2]);
   });
-  items[3].addEventListener('click', function(event){
+  items[3].addEventListener('click', function (event) {
     changeMenu(names[3]);
   });
-  items[4].addEventListener('click', function(event){
+  items[4].addEventListener('click', function (event) {
     changeMenu(names[4]);
   });
-  items[5].addEventListener('click', function(event){
+  items[5].addEventListener('click', function (event) {
     changeMenu(names[5]);
   });
-  document.getElementById("bg-loading").style.visibility = "hidden"; 
+  document.getElementById("headerNotLogin").style.display = "";
+  document.getElementById("headerDontHaveTeam").style.display = "none";
+  document.getElementById("headerNotQualified").style.display = "none";
+  document.getElementById("headerHaveTeam").style.display = "none";
+
+  document.getElementById("bg-loading").style.visibility = "hidden";
 }
 
-function nextPage(){
+function nextPage() {
   var NxtIndex = 0;
   var CurrIndex = 0;
 
   console.log(bypass);
 
-  if(currMenu == 'home'){
+  if (currMenu == 'home') {
     changeMenu(bypass);
     return;
-  } else if(currMenu == bypass){
+  } else if (currMenu == bypass) {
     changeMenu('campaign');
     return;
   }
 
-  for (var i = 0; i<names.length; i++){
+  for (var i = 0; i < names.length; i++) {
     if (currMenu == names[i]) {
       CurrIndex = i;
     }
   }
 
-  NxtIndex = CurrIndex+1;
-  NxtIndex %= items.length; 
+  NxtIndex = CurrIndex + 1;
+  NxtIndex %= items.length;
 
   var curr = document.getElementsByClassName(currMenu)[0];
   var nxt = document.getElementsByClassName(names[NxtIndex])[0];
-  
+
   doChange(curr, nxt, CurrIndex, NxtIndex, names[NxtIndex], 'next');
 }
 
-function prevPage(){
+function prevPage() {
   var NxtIndex = 0;
   var CurrIndex = 0;
 
-  if(currMenu == 'campaign'){
+  if (currMenu == 'campaign') {
     changeMenuDir(bypass, 'prev');
     return;
-  } else if(currMenu == bypass){
+  } else if (currMenu == bypass) {
     changeMenuDir('home', 'prev');
     return;
   }
 
-  for (var i = 0; i<names.length; i++){
+  for (var i = 0; i < names.length; i++) {
     if (currMenu == names[i]) {
       CurrIndex = i;
     }
   }
-  NxtIndex = CurrIndex-1;
+  NxtIndex = CurrIndex - 1;
   if (NxtIndex < 0) NxtIndex += items.length;
 
   var curr = document.getElementsByClassName(currMenu)[0];
@@ -107,7 +112,7 @@ function prevPage(){
   doChange(curr, nxt, CurrIndex, NxtIndex, names[NxtIndex], 'prev');
 }
 
-function changeMenu(menuName){
+function changeMenu(menuName) {
   console.log(menuName);
   if (currMenu == menuName) return;
 
@@ -115,11 +120,11 @@ function changeMenu(menuName){
   var NxtIndex = 0;
   var CurrIndex = 0;
 
-  for (var i = 0; i<names.length; i++){
-    if(menuName == names[i]) {
+  for (var i = 0; i < names.length; i++) {
+    if (menuName == names[i]) {
       NxtIndex = i;
     }
-    if(currMenu == names[i]) {
+    if (currMenu == names[i]) {
       CurrIndex = i;
     }
   }
@@ -130,7 +135,7 @@ function changeMenu(menuName){
   doChange(curr, nxt, CurrIndex, NxtIndex, menuName, 'next');
 }
 
-function changeMenuDir(menuName, dir){
+function changeMenuDir(menuName, dir) {
   console.log(menuName);
   if (currMenu == menuName) return;
 
@@ -138,11 +143,11 @@ function changeMenuDir(menuName, dir){
   var NxtIndex = -1;
   var CurrIndex = -1;
 
-  for (var i = 0; i<names.length; i++){
-    if(menuName == names[i]) {
+  for (var i = 0; i < names.length; i++) {
+    if (menuName == names[i]) {
       NxtIndex = i;
     }
-    if(currMenu == names[i]) {
+    if (currMenu == names[i]) {
       CurrIndex = i;
     }
   }
@@ -157,23 +162,23 @@ function changeMenuDir(menuName, dir){
   doChange(curr, nxt, CurrIndex, NxtIndex, menuName, dir);
 }
 
-function doChange(curr, nxt, CurrIndex, NxtIndex, menuName, to){
+function doChange(curr, nxt, CurrIndex, NxtIndex, menuName, to) {
   nxt.classList.toggle('ready--' + to);
   curr.classList.toggle('menu--off--' + to);
-  window.setTimeout(function(){
+  window.setTimeout(function () {
     nxt.classList.toggle('ready--' + to);
-    nxt.classList.toggle('menu--on'); 
+    nxt.classList.toggle('menu--on');
   }, 100);
   curr.classList.toggle('menu--on');
 
   console.log("Curr Class: " + CurrIndex);
 
-  for(var i = 0; i<items.length; i++){
+  for (var i = 0; i < items.length; i++) {
     items[i].classList.remove('active');
   }
   items[NxtIndex].classList.add('active');
 
-  window.setTimeout(function(){
+  window.setTimeout(function () {
     curr.classList.toggle('menu--off--' + to);
   }, 500);
 
@@ -212,7 +217,7 @@ function FriendlyChat() {
   this.messageInput.addEventListener('change', buttonTogglingHandler);
 
   // Events for image upload.
-  this.submitImageButton.addEventListener('click', function(e) {
+  this.submitImageButton.addEventListener('click', function (e) {
     e.preventDefault();
     this.mediaCapture.click();
   }.bind(this));
@@ -222,7 +227,7 @@ function FriendlyChat() {
 }
 
 // Sets up shortcuts to Firebase features and initiate firebase auth.
-FriendlyChat.prototype.initFirebase = function() {
+FriendlyChat.prototype.initFirebase = function () {
   // Shortcuts to Firebase SDK features.
   this.auth = firebase.auth();
   this.database = firebase.database();
@@ -232,14 +237,14 @@ FriendlyChat.prototype.initFirebase = function() {
 };
 
 // Loads chat messages history and listens for upcoming ones.
-FriendlyChat.prototype.loadMessages = function() {
+FriendlyChat.prototype.loadMessages = function () {
   // Reference to the /messages/ database path.
   this.messagesRef = this.database.ref('messages');
   // Make sure we remove all previous listeners.
   this.messagesRef.off();
 
   // Loads the last 12 messages and listen for new ones.
-  var setMessage = function(data) {
+  var setMessage = function (data) {
     var val = data.val();
     this.displayMessage(data.key, val.name, val.text, val.photoUrl, val.imageUrl);
   }.bind(this);
@@ -248,7 +253,7 @@ FriendlyChat.prototype.loadMessages = function() {
 };
 
 // Saves a new message on the Firebase DB.
-FriendlyChat.prototype.saveMessage = function(e) {
+FriendlyChat.prototype.saveMessage = function (e) {
   e.preventDefault();
   // Check that the user entered a message and is signed in.
   if (this.messageInput.value && this.checkSignedInWithMessage()) {
@@ -259,11 +264,11 @@ FriendlyChat.prototype.saveMessage = function(e) {
       name: currentUser.displayName,
       text: this.messageInput.value,
       photoUrl: currentUser.photoURL || '/assets/profile_placeholder.png'
-    }).then(function() {
+    }).then(function () {
       // Clear message text field and SEND button state.
       FriendlyChat.resetMaterialTextfield(this.messageInput);
       this.toggleButton();
-    }.bind(this)).catch(function(error) {
+    }.bind(this)).catch(function (error) {
       console.error('Error writing new message to Firebase Database', error);
     });
 
@@ -271,11 +276,11 @@ FriendlyChat.prototype.saveMessage = function(e) {
 };
 
 // Sets the URL of the given img element with the URL of the image stored in Cloud Storage.
-FriendlyChat.prototype.setImageUrl = function(imageUri, imgElement) {
+FriendlyChat.prototype.setImageUrl = function (imageUri, imgElement) {
 
   if (imageUri.startsWith('gs://')) {
     imgElement.src = FriendlyChat.LOADING_IMAGE_URL; // Display a loading image first.
-    this.storage.refFromURL(imageUri).getMetadata().then(function(metadata) {
+    this.storage.refFromURL(imageUri).getMetadata().then(function (metadata) {
       imgElement.src = metadata.downloadURLs[0];
     });
   } else {
@@ -285,7 +290,7 @@ FriendlyChat.prototype.setImageUrl = function(imageUri, imgElement) {
 
 // Saves a new message containing an image URI in Firebase.
 // This first saves the image in Firebase storage.
-FriendlyChat.prototype.saveImageMessage = function(event) {
+FriendlyChat.prototype.saveImageMessage = function (event) {
   if (this.checkSignedInWithMessage()) {
 
     // We add a message with a loading icon that will get updated with the shared image.
@@ -294,17 +299,17 @@ FriendlyChat.prototype.saveImageMessage = function(event) {
       name: currentUser.displayName,
       imageUrl: FriendlyChat.LOADING_IMAGE_URL,
       photoUrl: currentUser.photoURL || '/assets/profile_placeholder.png'
-    }).then(function(data) {
+    }).then(function (data) {
 
       // Upload the image to Cloud Storage.
       var filePath = currentUser.uid + '/' + data.key + '/' + file.name;
-      return this.storage.ref(filePath).put(file).then(function(snapshot) {
+      return this.storage.ref(filePath).put(file).then(function (snapshot) {
 
         // Get the file's Storage URI and update the chat message placeholder.
         var fullPath = snapshot.metadata.fullPath;
-        return data.update({imageUrl: this.storage.ref(fullPath).toString()});
+        return data.update({ imageUrl: this.storage.ref(fullPath).toString() });
       }.bind(this));
-    }.bind(this)).catch(function(error) {
+    }.bind(this)).catch(function (error) {
       console.error('There was an error uploading a file to Cloud Storage:', error);
     });
   }
@@ -313,26 +318,26 @@ FriendlyChat.prototype.saveImageMessage = function(event) {
 
 
 // Signs-in Friendly Chat.
-FriendlyChat.prototype.signIn = function() {
+FriendlyChat.prototype.signIn = function () {
   // Sign in Firebase using popup auth and Google as the identity provider.
   var provider = new firebase.auth.GoogleAuthProvider();
   this.auth.signInWithPopup(provider);
 };
 
 // Signs-out of Friendly Chat.
-FriendlyChat.prototype.signOut = function() {
+FriendlyChat.prototype.signOut = function () {
   // TODO(DEVELOPER): Sign out of Firebase.
   this.auth.signOut();
 };
 
 // Triggers when the auth state change for instance when the user signs-in or signs-out.
-FriendlyChat.prototype.onAuthStateChanged = function(user) {
-  if (user) { 
+FriendlyChat.prototype.onAuthStateChanged = function (user) {
+  if (user) {
     bypass = 'profile';
     changeMenu(bypass);
-    for(var i = 0; i<swappable.length; i++){
+    for (var i = 0; i < swappable.length; i++) {
       swappable[i].classList.add('hide');
-      if(swappable[i].name == bypass){
+      if (swappable[i].name == bypass) {
         swappable[i].classList.remove('hide');
       }
     }
@@ -363,9 +368,9 @@ FriendlyChat.prototype.onAuthStateChanged = function(user) {
     // Hide user's profile and sign-out button.
     bypass = 'login';
     changeMenu('home');
-    for(var i = 0; i<swappable.length; i++){
+    for (var i = 0; i < swappable.length; i++) {
       swappable[i].classList.add('hide');
-      if(swappable[i].name == bypass){
+      if (swappable[i].name == bypass) {
         swappable[i].classList.remove('hide');
       }
     }
@@ -380,7 +385,7 @@ FriendlyChat.prototype.onAuthStateChanged = function(user) {
 };
 
 // Returns true if user is signed-in. Otherwise false and displays a message.
-FriendlyChat.prototype.checkSignedInWithMessage = function() {
+FriendlyChat.prototype.checkSignedInWithMessage = function () {
   /* TODO(DEVELOPER): Check if user is signed-in Firebase. */
   if (this.auth.currentUser) {
     return true;
@@ -395,34 +400,34 @@ FriendlyChat.prototype.checkSignedInWithMessage = function() {
 };
 
 // Saves the messaging device token to the datastore.
-FriendlyChat.prototype.saveMessagingDeviceToken = function() {
+FriendlyChat.prototype.saveMessagingDeviceToken = function () {
   // TODO(DEVELOPER): Save the device token in the realtime datastore
 };
 
 // Requests permissions to show notifications.
-FriendlyChat.prototype.requestNotificationsPermissions = function() {
+FriendlyChat.prototype.requestNotificationsPermissions = function () {
   // TODO(DEVELOPER): Request permissions to send notifications.
 };
 
 // Resets the given MaterialTextField.
-FriendlyChat.resetMaterialTextfield = function(element) {
+FriendlyChat.resetMaterialTextfield = function (element) {
   element.value = '';
   element.parentNode.MaterialTextfield.boundUpdateClassesHandler();
 };
 
 // Template for messages.
 FriendlyChat.MESSAGE_TEMPLATE =
-    '<div class="message-container">' +
-      '<div class="spacing"><div class="pic"></div></div>' +
-      '<div class="message"></div>' +
-      '<div class="name"></div>' +
-    '</div>';
+  '<div class="message-container">' +
+  '<div class="spacing"><div class="pic"></div></div>' +
+  '<div class="message"></div>' +
+  '<div class="name"></div>' +
+  '</div>';
 
 // A loading image URL.
 FriendlyChat.LOADING_IMAGE_URL = 'https://www.google.com/images/spin-32.gif';
 
 // Displays a Message in the UI.
-FriendlyChat.prototype.displayMessage = function(key, name, text, picUrl, imageUri) {
+FriendlyChat.prototype.displayMessage = function (key, name, text, picUrl, imageUri) {
   var div = document.getElementById(key);
   // If an element for that message does not exists yet we create it.
   if (!div) {
@@ -443,7 +448,7 @@ FriendlyChat.prototype.displayMessage = function(key, name, text, picUrl, imageU
     messageElement.innerHTML = messageElement.innerHTML.replace(/\n/g, '<br>');
   } else if (imageUri) { // If the message is an image.
     var image = document.createElement('img');
-    image.addEventListener('load', function() {
+    image.addEventListener('load', function () {
       this.messageList.scrollTop = this.messageList.scrollHeight;
     }.bind(this));
     this.setImageUrl(imageUri, image);
@@ -451,14 +456,14 @@ FriendlyChat.prototype.displayMessage = function(key, name, text, picUrl, imageU
     messageElement.appendChild(image);
   }
   // Show the card fading-in.
-  setTimeout(function() {div.classList.add('visible')}, 1);
+  setTimeout(function () { div.classList.add('visible') }, 1);
   this.messageList.scrollTop = this.messageList.scrollHeight;
   this.messageInput.focus();
 };
 
 // Enables or disables the submit button depending on the values of the input
 // fields.
-FriendlyChat.prototype.toggleButton = function() {
+FriendlyChat.prototype.toggleButton = function () {
   if (this.messageInput.value) {
     this.submitButton.removeAttribute('disabled');
   } else {
@@ -467,11 +472,11 @@ FriendlyChat.prototype.toggleButton = function() {
 };
 
 // Checks that the Firebase SDK has been correctly setup and configured.
-FriendlyChat.prototype.checkSetup = function() {
+FriendlyChat.prototype.checkSetup = function () {
   if (!window.firebase || !(firebase.app instanceof Function) || !firebase.app().options) {
     window.alert('You have not configured and imported the Firebase SDK. ' +
-        'Make sure you go through the codelab setup instructions and make ' +
-        'sure you are running the codelab using `firebase serve`');
+      'Make sure you go through the codelab setup instructions and make ' +
+      'sure you are running the codelab using `firebase serve`');
   }
 };
 

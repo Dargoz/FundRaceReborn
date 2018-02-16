@@ -43,10 +43,6 @@ var userList = [];
 var teamList = [];
 var refreshLeaderBoard = 0;
 var refreshSearch = 0;
-var toggleState = 0;
-var toggleStateNoTeam = 0;
-var habisLogin = 0;
-var adaTeam = 0;
 
 firebase.database().ref().child('users').on('value', function (snapshot) {
 	var allDonation = 0;
@@ -102,7 +98,7 @@ function updateTeam(userId, getTeamName, teamId, getTotalMember, getName, getMem
 }
 
 function listTeam(userId, usrname) {
-	
+
 	firebase.database().ref().child('teams').on('value', function (snapshot) {
 		console.log("lisstt TEAM JALAN OIII");
 		if (baca == 1) {
@@ -152,7 +148,7 @@ function listTeam(userId, usrname) {
 						//console.log(this.value);
 						toggleState = 1;
 						var modal = document.getElementById('searchModal');
-    					modal.style.display = "none";
+						modal.style.display = "none";
 					};
 					td5.appendChild(joinBtn);
 					//console.log("value JOIN: " + joinBtn.value);
@@ -248,16 +244,16 @@ function leaveTeam(userId, teamId, memberName) {
 						snapshot.forEach(function (childSnapshot) {
 							var memberChildKey = childSnapshot.key;
 							// var childData = childSnapshot.val();
-							firebase.database().ref('/teams/' + childKey +"/member/" + memberChildKey).once('value', function (snapshot) {
+							firebase.database().ref('/teams/' + childKey + "/member/" + memberChildKey).once('value', function (snapshot) {
 								var readMemberName = snapshot.child('name').val();
-								if(memberName == readMemberName){
+								if (memberName == readMemberName) {
 									console.log("opo o ikiiiii");
 									updateTeam(userId, "null", childKey, updateMember, null, memberChildKey);
 								}
 							});
 						});
 					});
-					
+
 				}
 			});
 		});
@@ -349,7 +345,7 @@ function readData(userEmail, uid, googleDisplayName) {
 	var flag = 0;
 	var header = document.getElementsByClassName('header-profile');
 	firebase.database().ref().child('users').on('value', function (snapshot) {
-		
+
 		snapshot.forEach(function (childSnapshot) {
 			var childKey = childSnapshot.key;
 			// var childData = childSnapshot.val();
@@ -382,37 +378,22 @@ function readData(userEmail, uid, googleDisplayName) {
 					}
 
 					if (readTeamID == "null") {
-						//dari awal login
-						if (toggleStateNoTeam != 1 && adaTeam !=1) {
-							header[0].classList.toggle('hide');
-							header[1].classList.toggle('hide');
-							console.log("masuk kene");
 
-						}
-						if (adaTeam == 1) {
-							header[1].classList.toggle('hide');
-							header[3].classList.toggle('hide');
-							console.log("masuk kono");
-						}
+						document.getElementById("headerNotLogin").style.display = "none";
+						document.getElementById("headerDontHaveTeam").style.display = "";
+						document.getElementById("headerNotQualified").style.display = "none";
+						document.getElementById("headerHaveTeam").style.display = "none";
+
 						toggleStateNoTeam = 1;
 						listTeam(childKey, readName);
 						adaTeam = 0;
 					} else {
-						if(adaTeam == 0 && toggleState == 1){
-							header[1].classList.toggle('hide');
-							header[3].classList.toggle('hide');
-							console.log("kok masuk seeee");
-						}
-						
-						adaTeam = 1;
-						if (toggleState != 1) {
-							console.log(22222222222222222222);
-							header[0].classList.toggle('hide');
-							header[3].classList.toggle('hide');
-						}
-						
-						toggleState = 1;
-						//console.log(header.length);
+
+						document.getElementById("headerNotLogin").style.display = "none";
+						document.getElementById("headerDontHaveTeam").style.display = "none";
+						document.getElementById("headerNotQualified").style.display = "none";
+						document.getElementById("headerHaveTeam").style.display = "";
+
 						document.getElementById("nama-team").innerHTML = readTeamID;
 						document.getElementById("leave-team").onclick = function () { leaveTeam(childKey, readTeamID, readName) };
 						readTeamData(readTeamID);
@@ -668,19 +649,11 @@ firebase.auth().onAuthStateChanged(function (user) {
 	} else {
 		// No user is signed in.
 		var header = document.getElementsByClassName('header-profile');
-		if (habisLogin == 1) {
-			if (adaTeam == 1) {
-				header[0].classList.toggle('hide');
-				header[3].classList.toggle('hide');
-			} else {
-				header[0].classList.toggle('hide');
-				header[1].classList.toggle('hide');
-			}
-
-		}
-		toggleState = 0;
-		toggleStateNoTeam = 0;
-		adaTeam = 0;
+		document.getElementById("headerNotLogin").style.display = "";
+		document.getElementById("headerDontHaveTeam").style.display = "none";
+		document.getElementById("headerNotQualified").style.display = "none";
+		document.getElementById("headerHaveTeam").style.display = "none";
+		
 		console.log("user ga masuk bos");
 		var count = document.getElementById('riwayat-table').childElementCount;
 		var rTable = document.getElementById('riwayat-table');
