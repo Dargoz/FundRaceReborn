@@ -1,17 +1,15 @@
-body{
-    background-image: url("../assets/img-info.jpg");
-}
-
 .about-us{
     height: 100%;
     width: 100%;
-    margin-top: 8%;
-    margin-left: 10%;
+    top: 100%;
     color: white;
+    position: absolute;
+    background-image: url("../assets/img-info.jpg");
+    padding-left: 8%;
+    padding-top: 5%;
 }
 
 .content{
-    height: 65%;
     width: 80%;
 }
 
