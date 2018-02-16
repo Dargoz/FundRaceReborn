@@ -349,7 +349,7 @@ function readData(userEmail, uid, googleDisplayName) {
 	var flag = 0;
 	var header = document.getElementsByClassName('header-profile');
 	firebase.database().ref().child('users').on('value', function (snapshot) {
-
+		
 		snapshot.forEach(function (childSnapshot) {
 			var childKey = childSnapshot.key;
 			// var childData = childSnapshot.val();
@@ -368,6 +368,7 @@ function readData(userEmail, uid, googleDisplayName) {
 
 				if (userEmail == readEmail) {
 					alert("Ada Cuuuii");
+					console.log("kepanggil");
 					flag = 1;
 					if (read == 1) {
 						var count = document.getElementById('riwayat-table').childElementCount;
@@ -406,13 +407,8 @@ function readData(userEmail, uid, googleDisplayName) {
 						adaTeam = 1;
 						if (toggleState != 1) {
 							console.log(22222222222222222222);
-							for (var i = 0; i < header.length; i++) {
-
-								header[i].classList.toggle('hide');
-								
-							}
-							header[1].classList.toggle('hide');
-							header[2].classList.toggle('hide');
+							header[0].classList.toggle('hide');
+							header[3].classList.toggle('hide');
 						}
 						
 						toggleState = 1;
