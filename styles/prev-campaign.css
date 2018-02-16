@@ -1,10 +1,9 @@
-body{
-    background-image: url("../assets/img-info.jpg");
-}
-
 .prev-campaign{
     height: 100%;
     width: 100%;
+    background-image: url("../assets/img-info.jpg");
+    position: absolute;
+    top: 200%;
 }
 
 .header{
@@ -13,7 +12,7 @@ body{
     color: white;
 }
 
-.content{
+.content-prev{
     padding-top: 2%;
     padding-left: 2%;
     padding-right: 2%;
@@ -31,7 +30,7 @@ body{
     margin-bottom: 5%;
 }
 
-.img-thumb{
+.img-thumb-prev{
     width: 30%;
     background: url("../assets/Armour.jpg") center no-repeat;
     background-size: contain;

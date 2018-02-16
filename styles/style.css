@@ -1,9 +1,9 @@
 body{
-	overflow: hidden;
 	background: url("../assets/pahawang.jpg") no-repeat fixed center;
 	background-size: 100%;
 	width: 100%;
 	height: 100%;
+	overflow-x: hidden;
 }
 
 .loader {
