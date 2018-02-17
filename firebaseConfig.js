@@ -115,7 +115,7 @@ function updateTeam(userId, getTeamName, teamId, getTotalMember, getName, getMem
 
 function listTeam(userId, usrname) {
 
-	firebase.database().ref().child('teams').on('value', function (snapshot) {
+	firebase.database().ref().child('teams').orderByChild('donationPeriod').on('value', function (snapshot) {
 		console.log("lisstt TEAM JALAN OIII");
 		if (baca == 1) {
 			var teamTable = document.getElementById("teamListTable");
@@ -127,7 +127,7 @@ function listTeam(userId, usrname) {
 			baca = 0;
 		}
 		baca++;
-		var index = 0;
+		var index = snapshot.numChildren();
 		snapshot.forEach(function (childSnapshot) {
 
 			var childKey = childSnapshot.key;
@@ -149,8 +149,8 @@ function listTeam(userId, usrname) {
 				var td3 = document.createElement("td");
 				var td4 = document.createElement("td");
 				var td5 = document.createElement("td");
-				td1.textContent = index + 1;
-				index++;
+				td1.textContent = index;
+				index--;
 				td2.textContent = readTeamName;
 				td3.textContent = readTotalMember + "/" + readMaxMember;
 				td4.textContent = readDonationPeriod;
@@ -208,7 +208,13 @@ function listTeam(userId, usrname) {
 				tr.appendChild(td3);
 				tr.appendChild(td4);
 				tr.appendChild(td5);
-				teamTable.appendChild(tr);
+				if(teamTable.childElementCount > 0){
+					teamTable.insertBefore(tr, teamTable.childNodes[0]);
+				}else{
+					teamTable.appendChild(tr);
+				}
+				
+				
 			});
 		});
 	});
@@ -346,8 +352,8 @@ function leaveTeam(userId, teamId, memberName) {
 function listLeaderBoard() {
 
 	var leaderBoard = document.getElementById("leaderBoard");
-	firebase.database().ref().child('teams').orderByChild('name').on('value', function (snapshot) {
-		var num = 0;
+	firebase.database().ref().child('teams').orderByChild('donationPeriod').on('value', function (snapshot) {
+		var num = snapshot.numChildren();
 		//console.log("refreshLeader Board: " + refreshLeaderBoard);
 		if (refreshLeaderBoard == 1) {
 			var countBoard = leaderBoard.childElementCount;
@@ -384,17 +390,22 @@ function listLeaderBoard() {
 				divTeamName.className = "team-name";
 				var divTeamDonation = document.createElement("div");
 				divTeamDonation.className = "jml-donasi";
-				h1.textContent = num + 1;
+				h1.textContent = num;
 				divTeamName.textContent = readTeamName;
 				divTeamDonation.textContent = readDonationPeriod;
 				divNo.appendChild(h1);
 				divTableContent.appendChild(divNo);
 				divTableContent.appendChild(divTeamName);
 				divTableContent.appendChild(divTeamDonation);
-				leaderBoard.appendChild(divTableContent);
+				if(leaderBoard.childElementCount > 1){
+					leaderBoard.insertBefore(divTableContent, leaderBoard.childNodes[2]);
+				}else{
+					leaderBoard.appendChild(divTableContent);
+				}
+				
 
 			});
-			num++;
+			num--;
 		});
 	});
 }
