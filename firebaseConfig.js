@@ -282,7 +282,7 @@ function leaveTeam(userId, teamId, memberName) {
 			var childKey = childSnapshot.key;
 			console.log("buat keluar team: " + childKey);
 			console.log("teamID: " + teamId);
-			console.log("userId: "+ userId);
+			console.log("userId: " + userId);
 			console.log("memberName: " + memberName);
 			// var childData = childSnapshot.val();
 			firebase.database().ref('/teams/' + childKey).once('value', function (snapshot) {
@@ -421,9 +421,9 @@ function readTeamData(getTeamID) {
 					document.getElementById("total-donasi-cafe").innerHTML = "Total donasi terkumpul: Rp. " + 0;
 					var teamDonateHistoryTable = document.getElementById("teamDonationHistoryList");
 					var archiveTableList = document.getElementById("archiveTable");
-					if(readTeamDonationHist == 0){
+					if (readTeamDonationHist == 0) {
 
-					}else{
+					} else {
 						if (createHist == 1) {
 							var countTableHist = teamDonateHistoryTable.childElementCount;
 							for (var i = 0; i < countTableHist; i++) {
@@ -441,7 +441,7 @@ function readTeamData(getTeamID) {
 									var readDateHist = snapshot.child('date').val();
 									var readTimeHist = snapshot.child('time').val();
 									var readAmountHist = snapshot.child('amount').val();
-	
+
 									var trHistory = document.createElement("tr");
 									trHistory.id = "trRecordTeamDonateHist";
 									var tdHistory1 = document.createElement("td");
@@ -463,9 +463,9 @@ function readTeamData(getTeamID) {
 						});
 					}
 
-					if(readArchiveCount == 0){
+					if (readArchiveCount == 0) {
 
-					}else{
+					} else {
 						if (createArch == 1) {
 							var countTableHist = archiveTableList.childElementCount;
 							for (var i = 0; i < countTableHist; i++) {
@@ -503,7 +503,7 @@ function readTeamData(getTeamID) {
 							});
 						});
 					}
-					
+
 				}
 
 			});
@@ -537,12 +537,12 @@ function readData(userEmail, uid, googleDisplayName) {
 
 				if (userEmail == readEmail) {
 					alert("Ada Cuuuii");
-					console.log("kepanggil");
+					//console.log("kepanggil");
 					flag = 1;
 					if (read == 1) {
 						var count = document.getElementById('riwayat-table').childElementCount;
 						var rTable = document.getElementById('riwayat-table');
-						console.log("count riwayat:" + count);
+						//console.log("count riwayat:" + count);
 						for (var i = 0; i < count - 1; i++) {
 							var divContent = document.getElementById('tableContent');
 							rTable.removeChild(divContent);
@@ -551,11 +551,19 @@ function readData(userEmail, uid, googleDisplayName) {
 					}
 
 					if (readTeamID == "null") {
+						if (readTier == "Bronze") {
+							document.getElementById("headerNotLogin").style.display = "none";
+							document.getElementById("headerDontHaveTeam").style.display = "none";
+							document.getElementById("headerNotQualified").style.display = "";
+							document.getElementById("headerHaveTeam").style.display = "none";
 
-						document.getElementById("headerNotLogin").style.display = "none";
-						document.getElementById("headerDontHaveTeam").style.display = "";
-						document.getElementById("headerNotQualified").style.display = "none";
-						document.getElementById("headerHaveTeam").style.display = "none";
+						} else {
+							document.getElementById("headerNotLogin").style.display = "none";
+							document.getElementById("headerDontHaveTeam").style.display = "";
+							document.getElementById("headerNotQualified").style.display = "none";
+							document.getElementById("headerHaveTeam").style.display = "none";
+							console.log("user not qualified");
+						}
 
 						toggleStateNoTeam = 1;
 						listTeam(childKey, readName);
