@@ -1,9 +1,14 @@
 var currMenu = "home";
+var currMenuGalery = "tentang";
+
 var names = [];
 var items = [];
 
 var swappable = [];
 var bypass = 'login';
+
+var galleryLinks = [];
+var galleryLinkNames = [];
 
 function changeVal(byVal) {
   bypass = byVal;
@@ -23,9 +28,14 @@ function init() {
   swappable.push(document.getElementById('profile'));
 
   items = document.getElementsByClassName('nav-link');
+  galleryLinks = document.getElementsByClassName('galery-link');
 
   for (var i = 0; i < items.length; i++) {
     names[i] = items[i].name;
+  }
+
+  for (var i = 0; i < galleryLinks.length; i++) {
+    galleryLinkNames[i] = galleryLinks[i].name;
   }
 
   // Leave out Storagef
@@ -49,6 +59,24 @@ function init() {
   items[5].addEventListener('click', function (event) {
     changeMenu(names[5]);
   });
+
+  galleryLinks[0].addEventListener('click', function (event) {
+    changeMenuGalery(galleryLinkNames[0]);
+  });
+  galleryLinks[1].addEventListener('click', function (event) {
+    changeMenuGalery(galleryLinkNames[1]);
+  });
+  galleryLinks[2].addEventListener('click', function (event) {
+    changeMenuGalery(galleryLinkNames[2]);
+  });
+  galleryLinks[3].addEventListener('click', function (event) {
+    changeMenuGalery(galleryLinkNames[3]);
+  });
+  galleryLinks[4].addEventListener('click', function (event) {
+    changeMenuGalery(galleryLinkNames[4]);
+  });
+
+
   document.getElementById("headerNotLogin").style.display = "";
   document.getElementById("headerDontHaveTeam").style.display = "none";
   document.getElementById("headerNotQualified").style.display = "none";
@@ -66,7 +94,7 @@ function nextPage() {
   if (currMenu == 'home') {
     changeMenu(bypass);
     return;
-  } else if (currMenu == bypass) {
+  } else if (currMenu == bypass || currMenu == 'prize-page') {
     changeMenu('campaign');
     return;
   }
@@ -93,7 +121,7 @@ function prevPage() {
   if (currMenu == 'campaign') {
     changeMenuDir(bypass, 'prev');
     return;
-  } else if (currMenu == bypass) {
+  } else if (currMenu == bypass || currMenu == 'prize-page') {
     changeMenuDir('home', 'prev');
     return;
   }
@@ -135,10 +163,31 @@ function changeMenu(menuName) {
   doChange(curr, nxt, CurrIndex, NxtIndex, menuName, 'next');
 }
 
+function changeMenuGalery(menuName) {
+  console.log(menuName);
+  if (currMenuGalery == menuName) return;
+
+  var NxtIndex = 0;
+  var CurrIndex = 0;
+
+  for (var i = 0; i < names.length; i++) {
+    if (menuName == galleryLinkNames[i]) {
+      NxtIndex = i;
+    }
+    if (currMenuGalery == galleryLinkNames[i]) {
+      CurrIndex = i;
+    }
+  }
+
+  var curr = document.getElementsByClassName(currMenuGalery)[0];
+  var nxt = document.getElementsByClassName(menuName)[0];
+
+  doChangeGalery(curr, nxt, CurrIndex, NxtIndex, menuName, 'next');
+}
+
 function changeMenuDir(menuName, dir) {
   console.log(menuName);
   if (currMenu == menuName) return;
-
 
   var NxtIndex = -1;
   var CurrIndex = -1;
@@ -183,6 +232,29 @@ function doChange(curr, nxt, CurrIndex, NxtIndex, menuName, to) {
   }, 500);
 
   currMenu = menuName;
+}
+
+function doChangeGalery(curr, nxt, CurrIndex, NxtIndex, menuName, to) {
+  nxt.classList.toggle('ready--' + to);
+  curr.classList.toggle('menu--off--' + to);
+  window.setTimeout(function () {
+    nxt.classList.toggle('ready--' + to);
+    nxt.classList.toggle('menu--on');
+  }, 100);
+  curr.classList.toggle('menu--on');
+
+  console.log("Curr Class: " + CurrIndex);
+
+  for (var i = 0; i < galleryLinks.length; i++) {
+    galleryLinks[i].classList.remove('active');
+  }
+  galleryLinks[NxtIndex].classList.add('active');
+
+  window.setTimeout(function () {
+    curr.classList.toggle('menu--off--' + to);
+  }, 500);
+
+  currMenuGalery = menuName;
 }
 
 

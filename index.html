@@ -25,6 +25,9 @@
 	<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
 	<script type="text/javascript" src="modal.js"></script>
 	<script type="text/javascript" src="config.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	<link rel="manifest" href="/manifest.json">
 
 	<!--<script type="text/javascript" src="require.js"></script>
@@ -33,12 +36,22 @@
 </head>
 
 <body onload="init()">
-		<div id="bg-loading"><div class="loader"></div></div>
+		<!-- <div id="bg-loading"><div class="loader"></div></div> -->
 	<!-- NAVBAR -->
 
 	<pre id="object"></pre>
 	<nav class="navbar navbar-dark navbar-expand-lg" id="navbar">
-		<a class="navbar-brand" href="#">FundRace</a>
+		<div class="dropdown show">
+		  <a class="navbar-brand dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		    FundRace
+		  </a>
+
+		  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+		    <a class="dropdown-item" href="#">Action</a>
+		    <a class="dropdown-item" href="#">Another action</a>
+		    <a class="dropdown-item" href="#">Something else here</a>
+		  </div>
+		</div>
 		<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
 			<ul class="navbar-nav justify-content-end">
 				<li class="nav-item">
@@ -244,21 +257,26 @@
 		<div class="left">
 			<h1 class="title">BAKTI SOSIAL ARMOUR 2017</h1>
 			<div class="camp-nav">
-				<a class="galery-link active">tentang &nbsp;&nbsp;|&nbsp;&nbsp; </a>
-				<a class="galery-link">periode &nbsp;&nbsp;|&nbsp;&nbsp; </a>
-				<a class="galery-link">hadiah &nbsp;&nbsp;|&nbsp;&nbsp; </a>
-				<a class="galery-link">galeri &nbsp;&nbsp;|&nbsp;&nbsp; </a>
-				<a class="galery-link">blog</a>
+				<a class="galery-link active hover-active" name="tentang">tentang &nbsp;&nbsp;|&nbsp;&nbsp; </a>
+				<a class="galery-link hover-active" name="periode">periode &nbsp;&nbsp;|&nbsp;&nbsp; </a>
+				<a class="galery-link hover-active" name="hadiah">hadiah &nbsp;&nbsp;|&nbsp;&nbsp; </a>
+				<a class="galery-link hover-active" name="galery">galeri &nbsp;&nbsp;|&nbsp;&nbsp; </a>
+				<a class="galery-link hover-active">blog</a>
 			</div>
 			<div class="campaign-placeholder">
 				<div class="tentang container menu menu--on">
 					<div class="tentang--isi scrollbar-primary">
-						<img src="assets/img-1.jpg" class="tentang-img">
+						<img src="assets/galery-thumb.jpg" class="tentang-img">
 						<p>
-							<br>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-							aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-							Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-							occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+							</br>Armour adalah suatu keluarga kecil dalam PPTI BCA yang beranggotakan 28 orang, 
+							yang terdiri dari 18 provinsi berbeda dari seluruh Indonesia. 
+							Dalam rangka menyambut Tahun Baru 2018, Armour akan mengadakan bakti sosial di Panti Asuhan Cinta Kasih. 
+							Kegiatan ini akan diselenggarakan pada hari Minggu, 10 Juni 2018. Dimulai dari jam 11.00 - selesai.
+							Alamat lokasi kegiatan di Jalan Venesia No.28, Sentul City. 
+							Dalam menunjang kegiatan ini, kami turut menyumbangkan 5 karung beras, 10 kotak indomie, 10 liter minyak goreng dan 10 kotak aqua.
+							Selain itu, kami juga mengadakan berbagai kegiatan kebersamaan seperti bermain games, bernyanyi, sharing dan foto bersama.
+							Dan masih banyak kegiatan menarik lainnya lho...! Ayuk segera bergabung bersama kami :)
+						</p>
 					</div>
 
 				</div>
@@ -286,13 +304,23 @@
 								<p>#1</p>
 							</div>
 							<div class="col-md">
-								<img src="assets/img-1.jpg" class="img-thumbnail">
+								<img src="assets/Parcel1.jpg" class="img-thumbnail">
 							</div>
 							<div class="col-xl-8">
-								<p>Alfredo</p>
-								<p>Serena</p>
-								<p>Broniz</p>
-								<p>White Coffee</p>
+								<p>1 pc Choco Pie</p>
+								<p>1 pc Master Potato</p>
+								<p>1 pc biskuit Modena</p>
+								<p>1 pc biskuit Monde</p>
+								<p>1 pc coklat Dove</p>
+								<p>1 pc klop</p>
+								<p>1 pc permen Foxs</p>
+								<p>1 pc waffle Tango</p>
+								<p>1 pc biskuit Roma</p>
+								<p>1 pc coklat Beng Beng</p>
+								<p>1 pc Sticks Waffle</p>
+								<p>1 kotak kopi Kapal Api</p>
+								<p>2 kaleng minuman Fanta</p>
+								<p>1 pc Nutri Sari Sachets</p>
 							</div>
 						</div>
 						<div class="hadiah-list row">
@@ -300,13 +328,19 @@
 								<p>#2</p>
 							</div>
 							<div class="col-md">
-								<img src="assets/img-2.jpg" class="img-thumbnail">
+								<img src="assets/Parcel2.jpg" class="img-thumbnail">
 							</div>
 							<div class="col-xl-8">
-								<p>Alfredo</p>
-								<p>Serena</p>
-								<p>Broniz</p>
-								<p>White Coffee</p>
+								<p>1 pc Richeese Nabati</p>
+								<p>1 pc Choco Banana</p>
+								<p>1 pc permen Foxs</p>
+								<p>1 pc waffle Tango</p>
+								<p>1 pc Chocolatos</p>
+								<p>1 pc Oreo</p>
+								<p>1 kotak kopi Grande</p>
+								<p>1 kotak Teh Poci</p>
+								<p>1 kotak Tehbotol</p>
+								<p>1 botol sirup ABC</p>
 							</div>
 						</div>
 						<div class="hadiah-list row">
@@ -314,13 +348,17 @@
 								<p>#3</p>
 							</div>
 							<div class="col-md">
-								<img src="assets/img-3.jpg" class="img-thumbnail">
+								<img src="assets/Parcel3.jpg" class="img-thumbnail">
 							</div>
 							<div class="col-xl-8">
-								<p>Alfredo</p>
-								<p>Serena</p>
-								<p>Broniz</p>
-								<p>White Coffee</p>
+								<p>1 kaleng biskuit Nissin</p>
+								<p>1 pc kripik Qtela</p>
+								<p>1 pc kacang Garuda</p>
+								<p>1 pc permen Mintz</p>
+								<p>1 kotak Teh Poci</p>
+								<p>1 kotak Good Day Chocolate</p>
+								<p>1 kotak Tehbotol</p>
+								<p>1 pc waffle Tango</p>
 							</div>
 						</div>
 					</div>
@@ -328,21 +366,29 @@
 				<div class="galery container menu">
 					<div class="row">
 						<div class="col-md-4">
-							<img src="assets/img-1.jpg" class="img-thumbnail">
+							<img src="assets/Event1.jpg" class="img-thumbnail">
 						</div>
 						<div class="col-md-4">
-							<img src="assets/img-2.jpg" class="img-thumbnail">
+							<img src="assets/Event1.1.jpg" class="img-thumbnail">
 						</div>
 						<div class="col-md-4">
-							<img src="assets/img-3.jpg" class="img-thumbnail">
+							<img src="assets/Event1.2.jpg" class="img-thumbnail">
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-4">
-							<img src="assets/img-4.jpg" class="img-thumbnail">
+							<img src="assets/Event1.3.jpg" class="img-thumbnail">
 						</div>
 						<div class="col-md-4">
-							<img src="assets/img-5.jpg" class="img-thumbnail">
+							<img src="assets/Event2.jpg" class="img-thumbnail">
+						</div>
+						<div class="col-md-4">
+							<img src="assets/Event2.1.jpg" class="img-thumbnail">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<img src="assets/Event2.2.jpg" class="img-thumbnail">
 						</div>
 					</div>
 				</div>
@@ -351,7 +397,7 @@
 		<div class="right">
 			<h3 class="about-auth">TENTANG</br>PENYELENGGARA</h3>
 			<div class="img-placeholder">
-				<img src="assets/Armour.jpg" class="profile-pict">
+				<img src="assets/profile.jpg" class="profile-pict">
 			</div>
 			<div class="profile-desc">
 				<div class="main-desc text-center">
@@ -722,11 +768,11 @@
             <div class="flex content-top">
                 <div class="wrap">
                     <div>
-                        <h1>Semangkuk untuk Malang</h1>
+                        <h1>Armour 1st Anniversary</h1>
                     </div>
                     <div class="event-info">
-                        <p class="cyan">Periode: 12/12/2017 ~ 24/12/2017</p>
-                        <p class="cyan">Tempat: Malang, Jawa Timur</p>
+                        <p class="cyan">Periode: 08 Agustus 2017</p>
+                        <p class="cyan">Tempat: Edensor Hills, Sentul City</p>
                         <p class="cyan">Total Donasi Diperoleh:  Rp. 15000.000,00</p>
                         <p class="yellow">FundRace dimenangkan oleh: TeamFT1</p>
                     </div>
@@ -734,7 +780,14 @@
                 <div class="img-thumb-prev"></div>
             </div>
             <div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae repellendus recusandae temporibus dignissimos sapiente architecto veritatis fugiat accusantium eaque pariatur consequuntur incidunt, illo velit perferendis enim voluptatem ipsa numquam laboriosam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo, recusandae mollitia. Nostrum aut magni optio accusantium laborum autem possimus esse, et, assumenda nobis voluptatum dignissimos. Tenetur, dolorem assumenda? Sint, eaque. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi iusto, nostrum necessitatibus optio tenetur eius illum pariatur, numquam omnis rerum quae cum debitis, impedit veritatis suscipit voluptatum! Corporis, voluptates dolore. Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore necessitatibus repellendus vero sint perferendis. Quae, dolor! Excepturi, non, dignissimos cupiditate vitae fugiat velit quae nobis veritatis cumque, atque ea dicta.</p>
+                <p>Armour Anniversary adalah event tahunan Armour dalam memperingati hari jadinya Armour sekaligus
+	  sebagai event sukacita dalam merayakan kebersamaan antar member Armour selama 1 tahun tersebut.
+  	  Di dalam acara tersebut, terdapat berbagai kegiatan menarik seperti pemotongan tumpeng sebagai simbol
+	  dari bertambahnya umur Armour, games kekompakan, sharing, dan foto bersama.
+	  Kegiatan tersebut tentu merupakan bentuk sukacita setiap member dan dapat menjadi media 
+	  dalam meningkatkan kekerabatan dan kekeluargaan antar tiap member Armour. Disamping itu, kami juga
+  	  berharap untuk tetap solid dan kompak dalam keadaan apapun, kapanpun, bagaimanapun untuk saling membantu satu sama lainnya.
+	  Armour - Artistic and Marvelous Four</p>
             </div>
         </div>
     </div>
@@ -788,12 +841,45 @@
         <h1>Mengenal FundRace</h1>
         <div class="content shade flex">
             <div class="about-us-text">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore corporis illum quae eos adipisci cupiditate animi, esse nihil nam asperiores dolore rem reiciendis velit, minus cum dolor voluptas ipsum aspernatur?
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore corporis illum quae eos adipisci cupiditate animi, esse nihil nam asperiores dolore rem reiciendis velit, minus cum dolor voluptas ipsum aspernatur?
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore corporis illum quae eos adipisci cupiditate animi, esse nihil nam asperiores dolore rem reiciendis velit, minus cum dolor voluptas ipsum aspernatur?
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore corporis illum quae eos adipisci cupiditate animi, esse nihil nam asperiores dolore rem reiciendis velit, minus cum dolor voluptas ipsum aspernatur?
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore corporis illum quae eos adipisci cupiditate animi, esse nihil nam asperiores dolore rem reiciendis velit, minus cum dolor voluptas ipsum aspernatur?
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore corporis illum quae eos adipisci cupiditate animi, esse nihil nam asperiores dolore rem reiciendis velit, minus cum dolor voluptas ipsum aspernatur?
+          
+<h2>---------What is Fundrace?----------</h2> <br>
+	Fundrace adalah suatu website penggalangan dana yang menyediakan sarana bagi semua orang 
+untuk berdonasi kepada orang lain yang membutuhkan. Dalam Fundrace ini, terdapat banyak event-event
+yang membutuhkan donasi dana dari orang lain, seperti event bakti sosial, kunjungan ke panti asuhan,
+kunjungan ke panti jompo, kegiatan donor darah, dan masih banyak lagi. Setiap orang dapat melihat informasi-informasi
+seperti deskripsi tentang event yang sedang diselenggarakan, waktu dan tempat, serta total donasi yang telah terkumpulkan.
+Tidak hanya itu saja, bahkan user yang terdaftar maupun tidak (anonymous) dapat melakukan transfer donasi ke no rekening Fundrace yang
+telah tertera pada website Fundrace tersebut. Selain itu, Fundrace juga menyediakan informasi tentang event-event
+yang telah diselenggarakan sebelumnya sehingga setiap orang melihat hasil dan dokumentasi dari event tersebut. <br><br>
+	Fundrace pun didesain dan dirancang dalam bentuk gamification sehingga setiap user yang berdonasi akan mendapat
+points dan exp berdasarkan konversi dari Fundrace sendiri. Points dan exp ini dapat dikumpulkan dan ditukarkan dengan rewards
+menarik yang telah disediakan oleh pihak penyelenggara event tersebut. Semakin banyak donasi maka semakin tinggi pula level user tersebut
+dan begitu pula dengan points dan exp yang didapat. Selain itu, setiap user dapat membentuk Fundrace Team dimana beranggotakan anggota
+Fundrace yang lain dan bertujuan dalam mengumpulkan donasi sebanyak-banyaknya. 3 team teratas yang mengumpulkan donasi terbanyak akan ditampilkan
+di Fundrace Leaderboard dan akan mendapat rewards menarik tentunya. Tidak hanya itu saja, ada pula fitur chatting sehingga dapat memudahkan user
+untuk mendapatkan informasi seputar Fundrace langsung dari adminnya. Dengan begitu, dengan adanya Fundrace ini diharapkan dapat memudahkan
+setiap orang untuk berdana dan saling membantu satu sama lain. 
+<br><br>
+<h2>-----------------Asal Usul-----------------</h2><br>
+	Berawal dari sebuah project Agile Software Development yang menghasilkan 4 anggota dalam 1 tim yang terdiri dari
+Beny, Davin, Fanny dan Metta. Kami akhirnya memutuskan untuk membuat Fundrace ini karena timbulnya kesadaran bahwa sering adanya
+kesulitan bagi orang-orang yang memiliki dana berlebih untuk disalurkan kepada orang lain yang lebih membutuhkan. Oleh karena itu, kami 
+berniat untuk membuat website penggalangan dana yang transparan dan terpercaya bagi seluruh rakyat Indonesia. Akhirnya, terbentuklah
+project yang kami beri nama "Fundrace". Dikarenakan deadline project yang begitu cepat akhirnya kami pun memutuskan untuk fokus pada
+ruang lingkup anak PPA/PPTI BCA dulu tapi untuk kedepannya kami akan mengembangkan project ini untuk kalangan umum dan event-event yang
+lebih banyak pula.
+<br><br>
+<h2>--------------Visi dan Misi----------------</h2><br>
+Visi : Menjadi website penggalangan dana yang transparan dan terpercaya bagi seluruh rakyat Indonesia.<br>
+<br>
+Misi:<br>
+1. Menyediakan informasi akurat mengenai event-event yang akan dilaksanakan<br>
+2. Bersifat transparan terhadap total donasi yang telah dikumpulkan<br>
+3. Selalu mengupdate informasi total donasi yang terkini<br>
+4. Menyediakan dokumentasi sebagai bentuk hasil dari event yang telah dilaksanakan<br>
+5. Selalu memberi inovasi-inovasi menarik lainnya dalam gamification Fundrace tersebut<br> 
+6. Menyediakan tampilan yang user friendly agar memudahkan user dalam mendapatkan informasi seputar event Fundrace<br>
+
             </div>
             <div class="img-thumb"></div>
         </div>

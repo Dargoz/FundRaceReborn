@@ -29,3 +29,10 @@
     background-size: contain;
     margin: auto;
 }
+
+.about-us-text{
+    text-align: center;
+    overflow-y: scroll;
+    height: 95%;
+    margin-right: 15pt;
+}

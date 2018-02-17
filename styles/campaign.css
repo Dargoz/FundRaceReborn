@@ -3,6 +3,10 @@
 	overflow: hidden;
 }
 
+.left{
+	overflow-x: hidden;
+}
+
 .left, .right{
 	margin-top: 65px;
 	margin-left: 3%;
@@ -52,6 +56,11 @@
 
 .hadiah{
 	margin-top: 15pt;
+}
+
+.hadiah-list{
+	border-bottom: 1px solid white;
+	padding-bottom: 10pt;
 }
 
 .row{
