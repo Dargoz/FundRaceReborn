@@ -4,7 +4,7 @@
 }
 
 .left{
-	overflow-x: hidden;
+	overflow: hidden;
 }
 
 .left, .right{
@@ -30,6 +30,10 @@
 	height: 20pt;
 	width: 100%;
 	text-align: center;
+}
+
+.galery{
+	overflow-y: scroll;
 }
 
 .campaign-placeholder{

@@ -19,7 +19,7 @@ html, body {
 }
 
 header{
-  height: 20%;
+  height: 16%;
 }
 
 #header-content{
@@ -38,6 +38,17 @@ header{
 
 }
 
+#icon-google{
+  font-size: 32px;
+}
+
+#sign-in{
+  width: 73px;
+  margin-left: 81%;
+  margin-top: 10px;
+  border-radius: 4px;
+}
+
 #chat-icon{
   width: inherit;
 }
@@ -48,7 +59,7 @@ main, #messages-card {
 }
 
 main{
-  height: 80%;
+  height: 84%;
 }
 #messages-card-container {
   height: calc(100% - 60px);
@@ -90,6 +101,7 @@ main{
 
 #message{
   color: white;
+  width: 95%;
 }
 #message-filler {
   flex-grow: 1;
@@ -124,12 +136,13 @@ main{
   display: table-cell;
   width: calc(100% - 40px);
   padding: 5px 0 5px 10px;
+  color: cyan;
 }
 .message-container .name {
   display: inline-block;
   width: 100%;
   padding-left: 40px;
-  color: #bbb;
+  color: white;
   font-style: italic;
   font-size: 12px;
   box-sizing: border-box;

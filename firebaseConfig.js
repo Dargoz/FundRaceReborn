@@ -100,7 +100,7 @@ function updateTeam(userId, getTeamName, teamId, getTotalMember, getName, getArc
 		firebase.database().ref('teams/' + teamId + '/archives/' + "arch0" + getArchiveCount).update({
 			date: getDate,
 			time: getTime,
-			name: getName,
+			name: arcName,
 			description: "Tergabung dalam team"
 		});
 	} else {
@@ -152,7 +152,11 @@ function listTeam(userId, usrname) {
 				td1.textContent = index;
 				index--;
 				td2.textContent = readTeamName;
-				td3.textContent = readTotalMember + "/" + readMaxMember;
+				if(readTeamName == "Anonymous"){
+					td3.textContent = "Tidak diketahui";
+				}else{
+					td3.textContent = readTotalMember + "/" + readMaxMember;
+				}
 				td4.textContent = readDonationPeriod;
 				if (readTotalMember < readMaxMember) {
 					var joinBtn = document.createElement("button");
@@ -201,7 +205,12 @@ function listTeam(userId, usrname) {
 					td5.appendChild(joinBtn);
 					//console.log("value JOIN: " + joinBtn.value);
 				} else {
-					td5.textContent = "CLOSED";
+					if(readTeamName == "Anonymous"){
+						td5.textContent = "NOT FOR USER";
+					}else{
+						td5.textContent = "CLOSED";
+					}
+					
 				}
 				tr.appendChild(td1);
 				tr.appendChild(td2);
@@ -337,7 +346,7 @@ function leaveTeam(userId, teamId, memberName) {
 										fullDate = date + "-" + month + "-" + year;
 									}
 									var upArchiveCount = readArchiveCount + 1;
-									updateTeam(userId, "null", childKey, updateMember, null, memberChildKey, upArchiveCount, fullDate, fullTime, "leave", readMemberName);
+									updateTeam(userId, "null", childKey, updateMember, null, upArchiveCount, fullDate, fullTime,"leave",memberName);
 								}
 							});
 						});
@@ -354,6 +363,7 @@ function listLeaderBoard() {
 	var leaderBoard = document.getElementById("leaderBoard");
 	firebase.database().ref().child('teams').orderByChild('donationPeriod').on('value', function (snapshot) {
 		var num = snapshot.numChildren();
+		//var color = snapshot.numChildren();
 		//console.log("refreshLeader Board: " + refreshLeaderBoard);
 		if (refreshLeaderBoard == 1) {
 			var countBoard = leaderBoard.childElementCount;
@@ -391,6 +401,15 @@ function listLeaderBoard() {
 				var divTeamDonation = document.createElement("div");
 				divTeamDonation.className = "jml-donasi";
 				h1.textContent = num;
+				if(num == 1){
+					h1.style.color = "yellow";
+				}
+				if(num == 2){
+					h1.style.color = "cyan";
+				}
+				if(num == 3){
+					h1.style.color = "chocolate";
+				}
 				divTeamName.textContent = readTeamName;
 				divTeamDonation.textContent = readDonationPeriod;
 				divNo.appendChild(h1);
@@ -597,8 +616,13 @@ function readData(userEmail, uid, googleDisplayName) {
 					//console.log(readName);
 					document.getElementById("user-name").innerHTML = readName;
 					//document.getElementById("user-lv").innerHTML = "Lv. " + readLvl;
-					document.getElementById("user-tier").innerHTML = readTier;
-					document.getElementById("user-team").innerHTML = "Team : " + readTeamID;
+					document.getElementById("user-tier").innerHTML = "Tier : " + readTier;
+					if(readTeamID == "null"){
+						document.getElementById("user-team").innerHTML = "Team : -";
+					}else{
+						document.getElementById("user-team").innerHTML = "Team : " + readTeamID;
+					}
+					
 					document.getElementById("user-email").innerHTML = readEmail;
 
 					var maxExp;
@@ -685,7 +709,7 @@ function readData(userEmail, uid, googleDisplayName) {
 			writeUserDataForGoogleAccount(uid, googleDisplayName, userEmail);
 		}
 	});
-	flag = 0;
+	
 }
 
 function writeUserData(userId, userName, pass, name, email) {

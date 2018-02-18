@@ -43,7 +43,7 @@
 	<nav class="navbar navbar-dark navbar-expand-lg" id="navbar">
 		<div class="dropdown show">
 		  <a class="navbar-brand dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		    FundRace
+		    <img src="/assets/logo.png" alt="" id="logo">
 		  </a>
 
 		  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -55,22 +55,22 @@
 		<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
 			<ul class="navbar-nav justify-content-end">
 				<li class="nav-item">
-					<a class="nav-link active hover-active" name="home">Home</a>
+					<a class="nav-link active hover-active" name="home" href="#">Home</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link hover-active" id="login" name="login">Login</a>
+					<a class="nav-link hover-active" id="login" name="login" href="#">Login</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link hover-active hide" id="reg" name="reg">Register</a>
+					<a class="nav-link hover-active hide" id="reg" name="reg" href="#">Register</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link hover-active hide" id="profile" name="profile">Profile</a>
+					<a class="nav-link hover-active hide" id="profile" name="profile" href="#">Profile</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link hover-active" name="campaign">Campaign</a>
+					<a class="nav-link hover-active" name="campaign" href="#">Campaign</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link hover-active" name="cafe">FundRacer's Cafe</a>
+					<a class="nav-link hover-active" name="cafe" href="#">FundRacer's Cafe</a>
 				</li>
 			</ul>
 		</div>
@@ -84,10 +84,10 @@
 					<br> ARMOUR 2017
 				</b>
 			</h1>
-			<h2 id="home-paragraph">untuk menutup tahun 2017, mahasiswa PPA/PPTI
-				<br> menyelenggarakan kegiatan bakti sosial di Panti
-				<br> Asuhan Cilebut.
-				<a id="article-link">baca selengkapnya...</a>
+			<h2 id="home-paragraph">	Dalam rangka menyambut Tahun Baru 2018,
+				<br> Armour akan mengadakan bakti sosial di Panti  
+				<br> Asuhan Cinta Kasih.
+				<a id="article-link" onclick="changeMenuDir('campaign', 'next')">baca selengkapnya...</a>
 			</h2>
 
 			<p>dana terkumpul:</p>
@@ -97,7 +97,7 @@
 			<h2 id="home-paragraph">
 
 				ikut
-				<a id="join-link">bergabung sebagai fundRacer</a> atau
+				<a id="join-link" onclick="changeMenuDir('login', 'next')">bergabung sebagai fundRacer</a> atau
 				<br>
 				<a id="donate-link">donasi secara anonim ke 4740483389</a>
 
@@ -133,13 +133,17 @@
 				</div>
 				<!-- <button id="btn-login" class="btn btn-action" onclick="loginAuth()">Log In</button> -->
 				<input type="submit" class="btn btn-primary" value="Masuk" id="loginBtn">
+				
 				<!-- <input type="submit" class="btn btn-secondary" value="Sign In Anonymously" id="anonymBtn"> -->
 				<p class="login-link" style="color:white">belum tergabung sebagai FundRacer?
 					<a class="hover-active" style="color:yellow" onclick="changeVal('reg')">daftar sekarang.</a>
 				</p>
-				<p class="login-link" style="color:white">atau
+				<button hidden id="sign-in" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+					<i class="fa fa-google-plus-official" id="icon-google"></i>
+				</button>
+				<!-- <p class="login-link" style="color:white">atau
 					<a href="" style="color:aqua">masuk sebagai penyelenggara campaign.</a>
-				</p>
+				</p> -->
 			</form>
 		</div>
 	</div>
@@ -217,7 +221,10 @@
 					<p>(+62)81316016073</p>
 					<p id="user-email">Loading...</p>
 				</div>
-				<p class="edit">Edit...</p>
+				<!-- <p class="edit">Edit...</p> -->
+				<button hidden id="sign-out" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+					Sign-out
+				</button>
 			</div>
 		</div>
 		<div class="right-user shade">
@@ -249,7 +256,7 @@
 					
 				</div>
 				
-				<div class="download-rec cyan">Unduh riwayat donasi selengkapnya</div>
+				<!-- <div class="download-rec cyan">Unduh riwayat donasi selengkapnya</div> -->
 			</div>
 		</div>
 	</div>
@@ -261,7 +268,7 @@
 				<a class="galery-link hover-active" name="periode">periode &nbsp;&nbsp;|&nbsp;&nbsp; </a>
 				<a class="galery-link hover-active" name="hadiah">hadiah &nbsp;&nbsp;|&nbsp;&nbsp; </a>
 				<a class="galery-link hover-active" name="galery">galeri &nbsp;&nbsp;|&nbsp;&nbsp; </a>
-				<a class="galery-link hover-active">blog</a>
+				<a class="galery-link hover-active" href="www.jagungppti4.com">blog</a>
 			</div>
 			<div class="campaign-placeholder">
 				<div class="tentang container menu menu--on">
@@ -627,18 +634,14 @@
 						<header class="mdl-layout__header mdl-color-text--white mdl-color--light-blue-700">
 							<div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid" id="header-content">
 								<div class="mdl-layout__header-row mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop" id="inner-header-content">
-									<h3>
-										<i class="material-icons" id="chat-icon">chat_bubble_outline</i> Friendly Chat</h3>
+									<h5>
+										<i class="material-icons" id="chat-icon">chat_bubble_outline</i> Friendly Chat</h5>
 								</div>
 								<div id="user-container">
 									<div hidden id="user-pic"></div>
 									<div hidden id="user-name"></div>
-									<button hidden id="sign-out" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
-										Sign-out
-									</button>
-									<button hidden id="sign-in" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
-										<i class="material-icons">account_circle</i>Sign-in with Google
-									</button>
+									
+									
 								</div>
 							</div>
 						</header>
@@ -653,8 +656,8 @@
 										</div>
 										<form id="message-form" action="#">
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="text" id="message">
-												<label class="mdl-textfield__label" for="message">Message...</label>
+												<input class="mdl-textfield__input" type="text" id="message" placeholder="masukkan pesan">
+												<!-- <label class="mdl-textfield__label" for="message">Message...</label> -->
 											</div>
 											<button id="submit" disabled type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
 												Send
@@ -669,10 +672,10 @@
 									</div>
 								</div>
 
-								<div id="must-signin-snackbar" class="mdl-js-snackbar mdl-snackbar">
+								<!-- <div id="must-signin-snackbar" class="mdl-js-snackbar mdl-snackbar">
 									<div class="mdl-snackbar__text"></div>
 									<button class="mdl-snackbar__action" type="button"></button>
-								</div>
+								</div> -->
 
 							</div>
 						</main>
@@ -683,20 +686,20 @@
 					<p class="prize-header">HADIAH PERIODE INI</p>
 					<div class="list-prize">
 						<div class="prize-content">
-							<div class="prize-thumb"></div>
+							<div class="prize-thumb" id="prize-thumb1"></div>
 							<div class="prize-desc">
-								<p>#1 Chitato</p>
+								<p>#1 Parcel 1</p>
 							</div>
 						</div>
 						<div class="prize-content">
-							<div class="prize-thumb"></div>
+							<div class="prize-thumb" id="prize-thumb2"></div>
 							<div class="prize-desc">
-								<p>#2 Nescafe</p>
+								<p>#2 Parcel 2</p>
 							</div>
 						</div>
 						<div class="prize-content">
 							<div class="prize-desc">
-								<p onclick="changeMenuDir('campaign', 'prev')">See More >>></p>
+								<p onclick="changeMenuDir('campaign', 'prev'); changeMenuGalery(hadiah);">See More >>></p>
 							</div>
 						</div>
 					</div>
@@ -758,7 +761,7 @@
     	</div>
     </div>
 
-    <div class="prev-campaign">
+    <div class="prev-campaign" id="prev-campaign">
         <div class="header">
             <h1>Campaign Terdahulu</h1>
             <p>Berikut adalah beberapa campaign yang difasilitasi oleh FundRace berikut hasil dari campaign tersebut</p>
@@ -773,7 +776,7 @@
                     <div class="event-info">
                         <p class="cyan">Periode: 08 Agustus 2017</p>
                         <p class="cyan">Tempat: Edensor Hills, Sentul City</p>
-                        <p class="cyan">Total Donasi Diperoleh:  Rp. 15000.000,00</p>
+                        <p class="cyan">Total Donasi Diperoleh:  Rp. 15.000.000,00</p>
                         <p class="yellow">FundRace dimenangkan oleh: TeamFT1</p>
                     </div>
                 </div>
@@ -803,11 +806,11 @@
 
 			<ul class="nav navbar-nav navbar-right">
 				<div>
-					<a class="link-color">Hubungi kami &nbsp;</a>
+					<a class="link-color" href="#">Hubungi kami &nbsp;</a>
 					<b> | </b>
-					<a class="link-color">&nbsp; Tentang kami &nbsp;</a>
+					<a href="#about-us" class="link-color" >&nbsp; Tentang kami &nbsp;</a>
 					<b> | </b>
-					<a class="link-color">&nbsp; Sosial media &nbsp;</a>
+					<a class="link-color" href="#">&nbsp; Sosial media &nbsp;</a>
 					<b> | </b>
 					<a class="link-color">&nbsp; Ketentuan penggunaan</a>
 				</div>
@@ -837,7 +840,7 @@
 	</div>
 
 
-	<div class="about-us">
+	<div class="about-us" id="about-us">
         <h1>Mengenal FundRace</h1>
         <div class="content shade flex">
             <div class="about-us-text">

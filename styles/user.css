@@ -44,6 +44,10 @@
 	font-size: 10pt;
 }
 
+#sign-out{
+    margin-top: 20px;
+}
+
 .main-desc, .sec-desc, .tri-desc{
 	margin-top: 6px;
 }

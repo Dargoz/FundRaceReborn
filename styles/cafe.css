@@ -103,10 +103,19 @@
 }
 
 .prize-thumb{
-    background-color: red;
     border-radius: 50%;
     height: 70px;
     width: 70px;
+}
+
+#prize-thumb1{
+    background: url("/assets/Parcel1.jpg");
+    background-size: 100%;
+}
+
+#prize-thumb2{
+    background: url("/assets/Parcel2.jpg");
+    background-size: 100%;
 }
 
 .user-dont-have-team{
