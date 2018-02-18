@@ -78,6 +78,17 @@
     margin-left: 0;
 }
 
+.chat-block{
+    height: 65%;
+    z-index: 99999;
+    margin-left: 0;
+    position: absolute;
+    width: 100%;
+    padding-top: 100px;
+    text-align: center;
+    font-size: 50px;
+}
+
 .prize{ 
     position: relative;   
     top: 3%;

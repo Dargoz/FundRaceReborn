@@ -616,7 +616,7 @@ function readData(userEmail, uid, googleDisplayName) {
 					//console.log(readName);
 					document.getElementById("user-name").innerHTML = readName;
 					//document.getElementById("user-lv").innerHTML = "Lv. " + readLvl;
-					document.getElementById("user-tier").innerHTML = "Tier : " + readTier;
+					document.getElementById("user-tier").innerHTML = "Tier &nbsp&nbsp : " + readTier;
 					if(readTeamID == "null"){
 						document.getElementById("user-team").innerHTML = "Team : -";
 					}else{
@@ -848,6 +848,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 	if (user) {
 		// User is signed in.
 		habisLogin = 1;
+		document.getElementById("chatBlock").style.display = "none";
 		var btnCreateTeam = document.getElementById("submitTeam");
 		btnCreateTeam.onclick = function () {
 			createTeam(user.email);
@@ -870,7 +871,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 		document.getElementById("headerDontHaveTeam").style.display = "none";
 		document.getElementById("headerNotQualified").style.display = "none";
 		document.getElementById("headerHaveTeam").style.display = "none";
-
+		document.getElementById("chatBlock").style.display = "";
 		console.log("user ga masuk bos");
 		var count = document.getElementById('riwayat-table').childElementCount;
 		var rTable = document.getElementById('riwayat-table');
