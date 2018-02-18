@@ -85,7 +85,7 @@ function addHistoryTable(readDate, readAmount, readHistExp, readPoint) {
 }
 var baca = 0;
 
-function updateTeam(userId, getTeamName, teamId, getTotalMember, getName, getMemberId, getArchiveCount, getDate, getTime, act, arcName) {
+function updateTeam(userId, getTeamName, teamId, getTotalMember, getName, getArchiveCount, getDate, getTime, act, arcName) {
 	firebase.database().ref('users/' + userId).update({
 		teamID: getTeamName,
 	});
@@ -93,7 +93,7 @@ function updateTeam(userId, getTeamName, teamId, getTotalMember, getName, getMem
 		totalMember: getTotalMember,
 		archiveCount: getArchiveCount
 	});
-	firebase.database().ref('teams/' + teamId + "/member/" + getMemberId).update({
+	firebase.database().ref('teams/' + teamId + "/member/" + userId).update({
 		name: getName
 	});
 	if (act == "join") {
@@ -191,8 +191,8 @@ function listTeam(userId, usrname) {
 						} else {
 							fullDate = date + "-" + month + "-" + year;
 						}
-						var generateMemberId = "userT0" + (readTotalMember + 1);
-						updateTeam(userId, this.value, childKey, updateMember, usrname, generateMemberId, updateArchiveCount, fullDate, fullTime, "join", usrname);
+						//var generateMemberId = "userT0" + (readTotalMember + 1);
+						updateTeam(userId, this.value, childKey, updateMember, usrname, updateArchiveCount, fullDate, fullTime, "join", usrname);
 						//console.log(this.value);
 						toggleState = 1;
 						var modal = document.getElementById('searchModal');
@@ -240,7 +240,7 @@ function writeTeamData(getName, getInputName, getMaxMember, getMinTier, userId) 
 		archiveCount: 0,
 		teamDonationHistoryCount: 0
 	});
-	firebase.database().ref('teams/' + generateTeamID + "/member/" + "userT01").update({
+	firebase.database().ref('teams/' + generateTeamID + "/member/" + userId).update({
 		name: getName
 	});
 	firebase.database().ref('users/' + userId).update({
@@ -778,7 +778,7 @@ function processReward(getPrice) {
 						alert("point tidak cukup");
 					} else {
 						var remainPoint = readPoint - getPrice;
-						updateUserPoint(childKey, readPoint);
+						updateUserPoint(childKey, remainPoint);
 						alert("Reward Anda akan segera dikirim");
 					}
 				}
@@ -874,15 +874,19 @@ function validate() {
 		alert("filled the blank");
 	}
 	else {
-		firebase.auth().createUserWithEmailAndPassword(tempEmail, tempPass).catch(function (error) {
+		firebase.auth().createUserWithEmailAndPassword(tempEmail, tempPass).then(function(user){
+			
+			var uid = user.uid;
+			console.log("uid pas daftar : " + uid);
+			writeUserData(uid, tempUserName, tempPass, tempName, tempEmail);
+		}).catch(function (error) {
 			// Handle Errors here.
 			var errorCode = error.code;
 			var errorMessage = error.message;
 			// ...
 		});
 
-
-		writeUserData(generateID, tempUserName, tempPass, tempName, tempEmail);
+		
 	}
 }
 
@@ -900,6 +904,6 @@ function loginAuth() {
 		console.log(error.message);
 		alert("login failed, try again");
 	});
-	alert("asda");
+	//alert("asda");
 }
 

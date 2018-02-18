@@ -36,7 +36,7 @@
 </head>
 
 <body onload="init()">
-		<!-- <div id="bg-loading"><div class="loader"></div></div> -->
+		<div id="bg-loading"><div class="loader"></div></div>
 	<!-- NAVBAR -->
 
 	<pre id="object"></pre>
@@ -146,7 +146,7 @@
 	<div class="reg menu">
 		<div id="container-register">
 			<h2 class="page-header">Register</h2>
-			<form method="get" name="form" onsubmit="return validate()">
+			<form method="get" name="form" onsubmit="validate();return false">
 				<div class="form-group">
 					<div class="design-form">
 						<div class="icon">
