@@ -566,7 +566,7 @@ function readData(userEmail, uid, googleDisplayName) {
 				var readHistoryCount = snapshot.child('historyCount').val();
 
 				if (userEmail == readEmail) {
-					alert("Ada Cuuuii");
+					//alert("Ada Cuuuii");
 					//console.log("kepanggil");
 					flag = 1;
 					if (read == 1) {
